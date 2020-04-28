@@ -7,8 +7,9 @@ android:background="#e1f9fd">
 
     <ImageView
         android:id="@+id/logo_id"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        android:scaleType="centerInside"/>
 </RelativeLayout>
