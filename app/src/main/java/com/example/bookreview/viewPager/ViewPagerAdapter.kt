@@ -7,22 +7,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
 
-class DemoViewPagerAdapter : RecyclerView.Adapter<DemoViewPagerAdapter.EventViewHolder>() {
-    val eventList = listOf(R.layout.fragment_1, R.layout.fragment_2, R.layout.fragment_3, R.layout.fragment_4)
+class ViewPagerAdapter : RecyclerView.Adapter<ViewPagerAdapter.EventViewHolder>() {
+    private val eventList = listOf(R.layout.fragment_1, R.layout.fragment_2, R.layout.fragment_3, R.layout.fragment_4)
+    private var pos : Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         EventViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.fragment_1,
+                eventList[pos++],
                 parent,
                 false
             )
         )
 
+
+
     override fun getItemCount() = eventList.count()
+
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         (holder.view as? TextView)?.also{
-            //it.text = "Page " + eventList.get(position)
+
         }
     }
 
