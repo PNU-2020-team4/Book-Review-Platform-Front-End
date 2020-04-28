@@ -3,6 +3,8 @@ package com.example.bookreview
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.bookreview.viewModel.MainViewModel
+import com.example.bookreview.viewPager.DemoViewPagerAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -11,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewpager.adapter = DemoViewPagerAdapter()
         viewModel.testLoad()
     }
 }
