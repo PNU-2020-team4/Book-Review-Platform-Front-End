@@ -10,7 +10,6 @@ import com.example.bookreview.repository.NaverOAuthRepository
 import com.example.bookreview.repository.NaverOAuthRepositoryImpl
 import com.example.bookreview.repository.ServerRepository
 import com.example.bookreview.repository.ServerRepositoryImpl
-import com.example.bookreview.utils.CustomInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
