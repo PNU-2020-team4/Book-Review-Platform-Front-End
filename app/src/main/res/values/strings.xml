@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BookReview</string>
     <string name="tap_1">홈</string>
-    <string name="tap_2">베스트셀러</string>
-    <string name="tap_3">리뷰</string>
+    <string name="tap_2">랭킹</string>
+    <string name="tap_3">신간 도서</string>
+    <string name="tap_4">소식</string>
 </resources>
