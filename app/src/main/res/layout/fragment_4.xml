@@ -8,10 +8,44 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
+        <Button
+            android:id="@+id/my_page_button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tap_4" />
+            android:background="#80808080"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="@string/my_page_button1" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#00000000" />
+
+        <Button
+            android:id="@+id/my_page_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#80808080"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="@string/my_page_button2" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#00000000" />
+
+        <Button
+            android:id="@+id/my_page_button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#80808080"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="@string/my_page_button3" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

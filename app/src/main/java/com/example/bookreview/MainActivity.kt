@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
-    private val tabTitles = listOf("홈", "랭킹", "신간 도서", "소식")
+    private val tabTitles = listOf("홈", "랭킹", "신간 도서", "MY")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
