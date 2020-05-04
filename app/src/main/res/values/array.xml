@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_1">
+        <item>주간</item>
+        <item>월간</item>
+        <item>연간</item>
+    </string-array>
+    <string-array name="spinner_2">
+        <item>국내도서</item>
+        <item>해외도서</item>
+    </string-array>
+    <string-array name="spinner_3">
+        <item>소설</item>
+        <item>수필</item>
+        <item>시</item>
+        <item>만화</item>
+        <item>잡지</item>
+        <item>중/고등 참고서</item>
+        <item>기술/공학</item>
+        <item>컴퓨터/IT</item>
+        <item>e-book</item>
+    </string-array>
+</resources>
