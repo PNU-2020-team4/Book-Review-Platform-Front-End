@@ -8,10 +8,65 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tap_1" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/home_recommend"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="#00ff0000"
+                    android:gravity="start"
+                    android:text="@string/home_recommend" />
+
+                <Button
+                    android:id="@+id/button_recommend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00ff0000"
+                    android:drawableStart="@drawable/userbutton"
+                    android:text="@string/app_name" />
+
+                <Button
+                    android:id="@+id/home_hot_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="#00ff0000"
+                    android:gravity="start"
+                    android:text="@string/home_hot_review" />
+
+                <Button
+                    android:id="@+id/button_hot_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00ff0000"
+                    android:drawableStart="@drawable/userbutton"
+                    android:text="@string/app_name" />
+
+                <Button
+                    android:id="@+id/home_today_sentence"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="#00ff0000"
+                    android:gravity="start"
+                    android:text="@string/home_today_sentence" />
+
+                <Button
+                    android:id="@+id/button_today_sentence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00ff0000"
+                    android:drawableStart="@drawable/userbutton"
+                    android:text="@string/app_name" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

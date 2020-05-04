@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">BookReview</string>
-    <string name="tap_1">홈</string>
-    <string name="tap_2">랭킹</string>
-    <string name="tap_3">신간 도서</string>
-    <string name="tap_4">소식</string>
+    <string name="home_recommend">추천 도서</string>
+    <string name="home_hot_review">실시간 핫 리뷰</string>
+    <string name="home_today_sentence">오늘의 문구</string>
+    <string name="my_page_button1">내가 작성한 리뷰</string>
+    <string name="my_page_button2">내가 작성한 댓글</string>
+    <string name="my_page_button3">스크랩</string>
 </resources>

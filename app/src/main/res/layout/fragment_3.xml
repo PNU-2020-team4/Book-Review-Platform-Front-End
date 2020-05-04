@@ -6,12 +6,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView2"
+        <Spinner
+            android:id="@+id/spinner4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tap_3" />
+            android:layout_weight="1"
+            android:entries="@array/spinner_2"/>
+
+        <Spinner
+            android:id="@+id/spinner5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/spinner_3"/>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
