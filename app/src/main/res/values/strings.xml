@@ -3,7 +3,11 @@
     <string name="home_recommend">추천 도서</string>
     <string name="home_hot_review">실시간 핫 리뷰</string>
     <string name="home_today_sentence">오늘의 문구</string>
+    <string name="my_page">마이 페이지</string>
     <string name="my_page_button1">내가 작성한 리뷰</string>
     <string name="my_page_button2">내가 작성한 댓글</string>
     <string name="my_page_button3">스크랩</string>
+    <string name="recent_search">최근 검색어</string>
+    <string name="popular_search">인기 검색어</string>
+    <string name="search_text">검색</string>
 </resources>
