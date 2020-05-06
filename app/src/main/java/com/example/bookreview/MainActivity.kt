@@ -24,19 +24,23 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tab_layout, viewpager) { tab : TabLayout.Tab, position : Int ->
             tab.text = tabTitles[position]
             viewpager.setCurrentItem(tab.position, true)
-            app_name.setOnClickListener(){
+            main_title.setOnClickListener(){
                 viewpager.setCurrentItem(TabLayout.Tab.INVALID_POSITION, true)
             }
         }.attach()
 
-        searchForm.setOnClickListener {
+        main_search.setOnClickListener {
             val nextIntent = Intent(this, SearchActivity::class.java)
             startActivity(nextIntent)
         }
 
-        user_button.setOnClickListener {
+        main_user_button.setOnClickListener {
             val nextIntent = Intent(this, MyPageActivity::class.java)
             startActivity(nextIntent)
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 }
