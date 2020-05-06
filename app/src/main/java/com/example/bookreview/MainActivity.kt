@@ -1,5 +1,6 @@
 package com.example.bookreview
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.bookreview.viewModel.MainViewModel
@@ -23,6 +24,19 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tab_layout, viewpager) { tab : TabLayout.Tab, position : Int ->
             tab.text = tabTitles[position]
             viewpager.setCurrentItem(tab.position, true)
+            app_name.setOnClickListener(){
+                viewpager.setCurrentItem(TabLayout.Tab.INVALID_POSITION, true)
+            }
         }.attach()
+
+        searchForm.setOnClickListener {
+            val nextIntent = Intent(this, SearchActivity::class.java)
+            startActivity(nextIntent)
+        }
+
+        user_button.setOnClickListener {
+            val nextIntent = Intent(this, MyPageActivity::class.java)
+            startActivity(nextIntent)
+        }
     }
 }
