@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //viewModel.testLoad()
-        viewModel.testLogin(this)
         viewpager.adapter = ViewPagerAdapter()
 
         TabLayoutMediator(tab_layout, viewpager) { tab : TabLayout.Tab, position : Int ->

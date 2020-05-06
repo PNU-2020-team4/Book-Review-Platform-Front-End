@@ -3,11 +3,13 @@ package com.example.bookreview.viewModel
 import android.app.Activity
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.bookreview.dto.Response
 import com.example.bookreview.dto.userInfo
 import com.example.bookreview.repository.NaverOAuthRepository
 import com.example.bookreview.repository.ServerRepository
+import com.example.bookreview.utils.SingleLiveEvent
 import com.google.gson.Gson
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,6 +27,9 @@ class MainViewModel(private val serverRepository: ServerRepository,
                     private val naverOAuthRepository: NaverOAuthRepository,
                     private val preferences: SharedPreferences
 ) : ViewModel() {
+    private val _isLoginFinished: SingleLiveEvent<Any> = SingleLiveEvent()
+    val isLoginFinished: LiveData<Any>
+        get() = _isLoginFinished
 
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
@@ -98,6 +103,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
             apiCall(naverOAuthRepository.postUserInfo(params),
             onSuccess = Consumer {
                Log.e("서버 전송 완료",it.string())
+                _isLoginFinished.call()
             })
         },
         onError = Consumer {
