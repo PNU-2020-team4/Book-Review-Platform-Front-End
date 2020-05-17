@@ -28,7 +28,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="BookReviewer" />
+                android:text="@string/app_name" />
             <Button
                 android:id="@+id/main_user_button"
                 android:layout_width="40dp"
@@ -62,8 +62,8 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent">
+        </androidx.viewpager2.widget.ViewPager2>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

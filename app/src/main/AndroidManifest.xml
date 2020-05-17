@@ -23,8 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".SearchActivity"/>
-        <activity android:name=".MyPageActivity"/>
+        <activity android:name=".intent.SearchActivity"/>
+        <activity android:name=".intent.MyPageActivity"/>
+        <activity android:name=".intent.BookActivity"/>
     </application>
 
 </manifest>

@@ -1,7 +1,8 @@
-package com.example.bookreview
+package com.example.bookreview.intent
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bookreview.R
 import kotlinx.android.synthetic.main.search.*
 
 class SearchActivity : AppCompatActivity() {
