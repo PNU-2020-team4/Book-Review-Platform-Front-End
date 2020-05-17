@@ -1,5 +1,6 @@
 package com.example.bookreview.intent
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
@@ -23,6 +24,11 @@ class BookActivity : AppCompatActivity() {
 
         book_back_button.setOnClickListener {
             finish()
+        }
+
+        review_button.setOnClickListener {
+            val nextIntent = Intent(this, ReviewActivity::class.java)
+            startActivity(nextIntent)
         }
     }
 }

@@ -26,6 +26,7 @@
         <activity android:name=".intent.SearchActivity"/>
         <activity android:name=".intent.MyPageActivity"/>
         <activity android:name=".intent.BookActivity"/>
+        <activity android:name=".intent.ReviewActivity"/>
     </application>
 
 </manifest>
