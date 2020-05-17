@@ -23,10 +23,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".intent.SearchActivity"/>
-        <activity android:name=".intent.MyPageActivity"/>
+        <activity android:name=".ui.search.SearchActivity"/>
+        <activity android:name=".MyPageActivity"/>
+        <activity android:name=".ui.myPage.MyPageActivity"/>
         <activity android:name=".intent.BookActivity"/>
-        <activity android:name=".intent.ReviewActivity"/>
+        <activity android:name=".ui.review.ReviewActivity"/>
     </application>
 
 </manifest>

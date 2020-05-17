@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
 import com.example.bookreview.book.Book
-import com.example.bookreview.intent.BookActivity
+import com.example.bookreview.ui.book.BookInformationActivity
 
 class BookAdapter(private val bookList: ArrayList<Book>, private val context: Context) : RecyclerView.Adapter<BookAdapter.BookViewHolder>(){
 
@@ -26,7 +26,7 @@ class BookAdapter(private val bookList: ArrayList<Book>, private val context: Co
         holder.bind(book)
 
         holder.itemView.setOnClickListener {
-            val nextIntent = Intent(context, BookActivity::class.java)
+            val nextIntent = Intent(context, BookInformationActivity::class.java)
             nextIntent.putExtra("bookPhoto", book.image)
             nextIntent.putExtra("bookTitle", book.title)
             nextIntent.putExtra("bookAuthor", book.author)

@@ -1,12 +1,13 @@
-package com.example.bookreview.intent
+package com.example.bookreview.ui.book
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
+import com.example.bookreview.ui.review.ReviewActivity
 import kotlinx.android.synthetic.main.book.*
 
-class BookActivity : AppCompatActivity() {
+class BookInformationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.book)

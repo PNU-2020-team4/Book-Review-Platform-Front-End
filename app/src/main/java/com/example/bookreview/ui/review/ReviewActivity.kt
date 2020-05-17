@@ -1,10 +1,10 @@
-package com.example.bookreview.intent
+package com.example.bookreview.ui.review
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
-import com.example.bookreview.review.ReviewAdapter
-import com.example.bookreview.review.Review
+import com.example.bookreview.ui.review.ReviewAdapter
+import com.example.bookreview.ui.review.Review
 import kotlinx.android.synthetic.main.review.*
 
 class ReviewActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.bookreview.intent
+package com.example.bookreview.ui.myPage
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -8,8 +8,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bookreview.fragment.ResourceStore
-import com.example.bookreview.intent.MyPageActivity
-import com.example.bookreview.intent.SearchActivity
+import com.example.bookreview.ui.myPage.MyPageActivity
+import com.example.bookreview.ui.search.SearchActivity
 import com.example.bookreview.viewModel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*

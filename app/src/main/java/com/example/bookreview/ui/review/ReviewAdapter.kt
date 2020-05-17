@@ -1,4 +1,4 @@
-package com.example.bookreview.review
+package com.example.bookreview.ui.review
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
-import com.example.bookreview.intent.ReviewActivity
 
 class ReviewAdapter(private val context: Context, private val reviewList: ArrayList<Review>) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>(){
 

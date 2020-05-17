@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_item_main_order_card_view"
+    android:layout_width="270dp"
+    android:layout_height="400dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginStart="7dp"
+    android:layout_marginEnd="7dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/shape"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:elevation="5dp"
+    app:cardCornerRadius="4dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/main_recycle_book_cover"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/book_cover"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <ImageView
+            android:id="@+id/book_shadow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/shadow"
+            app:layout_constraintBottom_toBottomOf="@+id/main_recycle_book_cover"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
