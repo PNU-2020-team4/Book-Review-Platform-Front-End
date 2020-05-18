@@ -3,10 +3,7 @@ package com.example.bookreview.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.bookreview.api.BookSearchService
-import com.example.bookreview.api.RefreshService
-import com.example.bookreview.api.ServerService
-import com.example.bookreview.api.UserService
+import com.example.bookreview.api.*
 import com.example.bookreview.repository.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,10 +20,12 @@ val serverModule = module {
     factory { provideUserApi(provideUserRetrofit(get())) }
     factory { provideRefreshApi((provideRefreshTokenRetrofit(get()))) }
     factory { provideBookSearchApi(provideNaverBookSearchRetrofit(get())) }
+    factory { provideJsoupApi(provideJsoupRetrofit(get())) }
 
     single<ServerRepository> { ServerRepositoryImpl(get()) }
     single<NaverOAuthRepository> { NaverOAuthRepositoryImpl(get(), get(), get(), get()) }
     single<NaverBookSearchRepository> { NaverBookSearchRepositoryImpl(get())}
+    single<JsoupRepository> { JsoupRepositoryImpl(get())}
 
     single{ provideSettingsPreferences(androidApplication())}
 }
@@ -35,6 +34,13 @@ fun provideServerApi(retrofit: Retrofit):ServerService = retrofit.create(ServerS
 fun provideUserApi(retrofit: Retrofit):UserService = retrofit.create(UserService::class.java)
 fun provideRefreshApi(retrofit: Retrofit):RefreshService = retrofit.create(RefreshService::class.java)
 fun provideBookSearchApi(retrofit: Retrofit):BookSearchService = retrofit.create(BookSearchService::class.java)
+fun provideJsoupApi(retrofit: Retrofit):JsoupService = retrofit.create(JsoupService::class.java)
+
+fun provideJsoupRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder().baseUrl("http://book.naver.com").client(okHttpClient)
+        .addConverterFactory(ScalarsConverterFactory.create()).addCallAdapterFactory(
+            RxJava2CallAdapterFactory.create()).build()
+}
 
 fun provideNaverBookSearchRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder().baseUrl("https://openapi.naver.com").client(okHttpClient)
@@ -42,6 +48,7 @@ fun provideNaverBookSearchRetrofit(okHttpClient: OkHttpClient): Retrofit {
         .addCallAdapterFactory(
             RxJava2CallAdapterFactory.create()).build()
 }
+
 fun provideServerRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder().baseUrl("https://pnubookreview.herokuapp.com").client(okHttpClient)
         .addConverterFactory(ScalarsConverterFactory.create())

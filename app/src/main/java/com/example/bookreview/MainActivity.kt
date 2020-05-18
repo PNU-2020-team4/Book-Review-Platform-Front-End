@@ -4,8 +4,10 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bookreview.fragment.ResourceStore
 import com.example.bookreview.ui.myPage.MyPageActivity
@@ -15,6 +17,8 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.book.*
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
@@ -43,9 +47,16 @@ class MainActivity : AppCompatActivity() {
             val nextIntent = Intent(this, MyPageActivity::class.java)
             startActivity(nextIntent)
         }
+
+        viewModel.userProfileImage.observe(this, Observer {
+            Log.e("프로필 이미지 리소스", it)
+            Picasso.get().load(it).into(main_user_button)
+        })
+
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         finish()
     }
 

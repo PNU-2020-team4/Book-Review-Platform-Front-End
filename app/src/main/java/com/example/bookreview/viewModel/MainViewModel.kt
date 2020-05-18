@@ -3,6 +3,7 @@ package com.example.bookreview.viewModel
 import android.app.Activity
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.bookreview.dto.Response
@@ -30,6 +31,21 @@ class MainViewModel(private val serverRepository: ServerRepository,
     private val _isLoginFinished: SingleLiveEvent<Any> = SingleLiveEvent()
     val isLoginFinished: LiveData<Any>
         get() = _isLoginFinished
+    private val _startLoadingIndicatorEvent: SingleLiveEvent<Any> = SingleLiveEvent()
+    val startLoadingIndicatorEvent:LiveData<Any>
+        get() = _startLoadingIndicatorEvent
+    private val _stopLoadingIndicatorEvent: SingleLiveEvent<Any> = SingleLiveEvent()
+    val stopLoadingIndicatorEvent:LiveData<Any>
+        get() = _stopLoadingIndicatorEvent
+    private val _isLoginFailed: SingleLiveEvent<Any> = SingleLiveEvent()
+    val isLoginFailed:LiveData<Any>
+        get() = _isLoginFailed
+    private val _userProfileImage: SingleLiveEvent<String> = SingleLiveEvent()
+    val userProfileImage:LiveData<String>
+        get() = _userProfileImage
+
+    var userProfileImageSrc : String? = null
+
 
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
@@ -44,8 +60,8 @@ class MainViewModel(private val serverRepository: ServerRepository,
         addDisposable(single.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .timeout(timeout, TimeUnit.SECONDS)
-//            .doOnSubscribe{ if(indicator)  }
-//            .doAfterTerminate {  }
+            .doOnSubscribe{ if(indicator) startLoadingIndicator()  }
+            .doAfterTerminate { stopLoadingIndicator() }
             .subscribe(onSuccess, onError))
     }
 
@@ -58,13 +74,20 @@ class MainViewModel(private val serverRepository: ServerRepository,
 
 
     fun testLogin(activity: Activity){
+        startLoadingIndicator()
         if(preferences.getString("REFRESH_TOKEN",null) == null){
             apiCall(naverOAuthRepository.getLoginModule(activity),
                 Consumer {
                     Log.e("REFRESH TOKEN 없음 : 재요청 결과 access token",it.accessToken)
                     Log.e("REFRESH TOKEN 없음 : 재요청 결과 refresh token",it.refreshToken)
                     testGetUserInfo(it.accessToken)
-                })
+                },
+            onError = Consumer {
+                stopLoadingIndicator()
+                Log.e("ERROR" , "ERROR : REFRESH ERROR")
+            },
+            indicator = false
+            )
         }
         else{
             apiCall(naverOAuthRepository.refreshAccessToken(preferences.getString("REFRESH_TOKEN",null)!!),
@@ -74,13 +97,15 @@ class MainViewModel(private val serverRepository: ServerRepository,
                     testGetUserInfo(it.access_token)
             },
                 onError = Consumer {
+                    stopLoadingIndicator()
                     apiCall(naverOAuthRepository.getLoginModule(activity),
                         Consumer {
                             Log.e("refresh token 만료 : 결과 access token",it.accessToken)
                             Log.e("refresh token 만료 : 결과 refresh token",it.refreshToken)
                             testGetUserInfo(it.accessToken)
                         })
-                }
+                },
+                indicator = false
             )
         }
     }
@@ -90,6 +115,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
         onSuccess = Consumer { it ->
             Log.e("test user info name",it.response.name)
             Log.e("test user info image",it.response.profile_image)
+            userProfileImageSrc = it.response.profile_image
             Log.e("test user info email",it.response.email)
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
@@ -102,13 +128,21 @@ class MainViewModel(private val serverRepository: ServerRepository,
             params["data"] = Gson().toJson(response)
             apiCall(naverOAuthRepository.postUserInfo(params),
             onSuccess = Consumer {
-               Log.e("서버 전송 완료",it.string())
+                stopLoadingIndicator()
+                Log.e("서버 전송 완료",it.string())
                 _isLoginFinished.call()
-            })
+                _userProfileImage.postValue(userProfileImageSrc)
+            },
+                onError = Consumer {
+                    stopLoadingIndicator()
+                    Log.e("ERROR","ERROR : Post to Server ERROR")
+                    _isLoginFailed.call()
+            }, indicator = false)
         },
         onError = Consumer {
-            Log.e("ERROR","ERROR")
-        })
+            stopLoadingIndicator()
+            Log.e("ERROR","ERROR : Get User Info ERROR")
+        }, indicator = false)
     }
 
     fun verifyAccessToken(accessToken: String) : Boolean{
@@ -118,5 +152,13 @@ class MainViewModel(private val serverRepository: ServerRepository,
             result = it.resultcode == "00"
         })
         return result
+    }
+
+    fun startLoadingIndicator(){
+        _startLoadingIndicatorEvent.call()
+    }
+
+    fun stopLoadingIndicator(){
+        _stopLoadingIndicatorEvent.call()
     }
 }

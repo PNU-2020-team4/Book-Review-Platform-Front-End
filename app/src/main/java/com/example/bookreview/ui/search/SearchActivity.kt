@@ -1,11 +1,13 @@
 package com.example.bookreview.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.bookreview.R
+import com.example.bookreview.ui.book.BookInformationActivity
 import com.example.bookreview.viewModel.SearchViewModel
 import kotlinx.android.synthetic.main.search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,6 +29,15 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel.isBookSearchLoaded.observe(this, Observer {
             adapter.notifyDataSetChanged()
+        })
+
+        viewModel.isBookClicked.observe(this, Observer {
+            startActivity(Intent(this, BookInformationActivity::class.java)
+                .putExtra("bid", viewModel.clickedBid)
+                .putExtra("imageUrl", viewModel.imageUrl)
+                .putExtra("title", viewModel.title)
+                .putExtra("author", viewModel.author)
+                .putExtra("price", viewModel.price))
         })
         search_box_book.let { searchView ->
             searchView.setOnClickListener {

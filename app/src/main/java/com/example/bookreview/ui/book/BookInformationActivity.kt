@@ -1,35 +1,87 @@
 package com.example.bookreview.ui.book
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.bookreview.R
 import com.example.bookreview.ui.review.ReviewActivity
+import com.example.bookreview.utils.LoadingIndicator
+import com.example.bookreview.viewModel.BookInformationViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.book.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookInformationActivity : AppCompatActivity() {
+
+    private val viewModel by viewModel<BookInformationViewModel>()
+    private var mLoadingIndicator: Dialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.book)
+        loadingIndicatorObserving()
 
-        val thisIntent = intent
-        val bookPhoto = thisIntent.getStringExtra("bookPhoto")
-        val bookTitle = thisIntent.getStringExtra("bookTitle")
-        val bookAuthor = thisIntent.getStringExtra("bookAuthor")
-        val bookPrice = thisIntent.getIntExtra("bookPrice", 10000)
+        //status bar 투명하게 처리
+        this.window.apply {
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            statusBarColor = Color.WHITE
+        }
 
-        book_photo_Img.setImageResource(resources.getIdentifier(bookPhoto,"drawable", this.packageName.toString()))
-        book_title.text = bookTitle
-        book_author.text = bookAuthor
-        book_price.text = bookPrice.toString()
+        val bid = intent.extras?.getString("bid")
+        val imageUrl = intent.extras?.getString("imageUrl")
+        val title = intent.extras?.getString("title")
+        val author = intent.extras?.getString("author")
+        val price = intent.extras?.getString("price")
 
-        book_back_button.setOnClickListener {
+        if(bid != null) viewModel.loadHtml(bid)
+
+        viewModel.isParsingFinished.observe(this, Observer {
+            if(title != null) book_information_title.text = title
+            if(author != null) book_information_author.text = author
+            if(price != null) book_information_price.text = price
+            if(imageUrl != null) Picasso.get().load(imageUrl).into(book_information_cover)
+            if(viewModel.desc != null) book_information_about.text = viewModel.desc
+            if(viewModel.star != null){
+                book_information_star_number.text = viewModel.star
+                book_information_star.rating = (viewModel.star!!.toFloat()/2.0).toFloat()
+            }
+            if(viewModel.reviewNUm != null) book_information_review_number.text = viewModel.reviewNUm
+        })
+
+        book_information_back_button.setOnClickListener {
             finish()
         }
 
-        review_button.setOnClickListener {
+        book_information_review_button.setOnClickListener {
             val nextIntent = Intent(this, ReviewActivity::class.java)
             startActivity(nextIntent)
+        }
+
+    }
+    private fun loadingIndicatorObserving() {
+        viewModel.startLoadingIndicatorEvent.observe(this, Observer {
+            startLoadingIndicator()
+        })
+        viewModel.stopLoadingIndicatorEvent.observe(this, Observer {
+            stopLoadingIndicator()
+        })
+    }
+
+    private fun stopLoadingIndicator() {
+        mLoadingIndicator?.let {
+            if (it.isShowing) it.cancel()
+        }
+    }
+
+    private fun startLoadingIndicator() {
+        stopLoadingIndicator()
+        if (!isFinishing) {
+            mLoadingIndicator = LoadingIndicator(this)
+            mLoadingIndicator?.show()
         }
     }
 }

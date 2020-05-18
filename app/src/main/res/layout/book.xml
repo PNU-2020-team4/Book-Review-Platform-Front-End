@@ -1,238 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        tools:context=".ui.book.BookInformationActivity">
+        <Button
+            android:id="@+id/book_information_back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/back_button_2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"/>
+        <Button
+            android:id="@+id/book_information_review_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/review_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"/>
+        <ImageView
+            android:id="@+id/book_information_cover"
+            android:layout_width="180dp"
+            android:layout_height="270dp"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_back_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="10dp"
+            android:background="@color/white"
+            />
+        <TextView
+            android:id="@+id/book_information_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="책 제목"
+            android:textColor="@color/browser_actions_text_color"
+            android:textStyle="bold"
+            android:textSize="23sp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_cover"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="70dp"
+            />
+        <TextView
+            android:id="@+id/book_information_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="글쓴이"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            />
+        <RatingBar
+            android:id="@+id/book_information_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:rating="0"
+            android:progressBackgroundTint="@android:color/black"
+            android:progressTint="@android:color/holo_orange_light"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_author"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            />
+        <TextView
+            android:id="@+id/book_information_star_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3.45"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/book_information_star"
+            app:layout_constraintBottom_toBottomOf="@+id/book_information_star"
+            android:layout_marginStart="5dp"
+            />
+        <TextView
+            android:id="@+id/book_information_review_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="375"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_star"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="30dp"
+            />
+        <TextView
+            android:id="@+id/book_information_review_number_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="reviews"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_star"
+            app:layout_constraintStart_toEndOf="@+id/book_information_review_number"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="5dp"
+            />
+        <TextView
+            android:id="@+id/book_information_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="책 가격"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_author"
+            app:layout_constraintEnd_toStartOf="@+id/book_information_price_indicator"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/book_information_price_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="원"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_author"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/book_information_about_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABOUT"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_review_number"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:id="@+id/book_information_about"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="정의론의 세계적 석학, 마이클 샌델 교수의 생기 넘치는 강의실로 초대합니다!
+『정의란 무엇인가』는 27세에 최연소 하버드대학교 교수가 되었고, 존 롤스의 정의론을 비판한 《자유주의와 정의의 한계》를 발표하면서 세계적 학자로 인정받은 정치 철학가 마이클 샌델의 대표작이다. 샌델 교수가 실제로 하버드에서 강의한 수업 ‘JUSTICE(정의)’를 바탕으로 쓴 책으로, 현재까지도 하버드대학교에서 가장 인기 있고 영향력 있는 강의 중 하나로 손꼽힌다.
+이 책은 구제 금융, 모병제, 대리 출산과 같은 현실 문제를 비롯해 경로를 이탈한 전차, 고통의 대가를 계량하는 시험과 같은 사고 실험을 주제로 삼아, 위대한 사상가들은 ‘정의’에 대해 어떻게 생각했는지 비판적으로 살펴본다. 가령, 저자는 벤담과 밀의 공리주의는 다수에게 도움이 되는 결정을 지지하지만, 인간의 존엄성 문제에는 도덕적 한계를 지니고 있다고 말한다.
+하지만 저자는 이 책에 ‘정의’에 대한 확고한 답을 내리지는 않는다. 외려, 책을 읽는 독자들도 위대한 사상가들과 어깨를 나란히 하며 자신의 논리를 펼쳐나갈 수 있음을 보여줌으로써, 독자들로 하여금 정의에 대한 자신의 견해를 수정하고 바로잡는 기회를 만나는 획기적인 프레임을 선사하고, 나아가 그들 자신이 ‘무엇을’, ‘왜’ 그렇게 생각하는지 알도록 한다."
+            android:textSize="16sp"
+            android:lineSpacingExtra="7dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_information_about_indicator"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/book_back_button"
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/back_button"
-                    android:backgroundTint="#0ABAB5"
-                    android:backgroundTintMode="multiply" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="책 이름"
-                    android:textAlignment="textStart" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/divider6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#B2B2B2" />
-
-            <ImageView
-                android:id="@+id/book_photo_Img"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:contentDescription="bookPhoto"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/book_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="@string/app_name" />
-
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    tools:text="평점" />
-
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:stepSize="0.5" />
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="4.1" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/book_author"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                tools:text="저자" />
-
-            <TextView
-                android:id="@+id/book_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                tools:text="가격 15000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:background="#B2B2B2">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="리뷰" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="123" />
-
-                <View
-                    android:id="@+id/view_review"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/review_button"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/front_button" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <RatingBar
-                            android:id="@+id/ratingBar3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:numStars="5"
-                            android:rating="3.5"
-                            android:stepSize="0.5"/>
-
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:text="아이디" />
-
-                        <TextView
-                            android:id="@+id/textView9"
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="5dp"
-                            android:text="2020.05.17" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다." />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <RatingBar
-                        android:id="@+id/ratingBar4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="0.5"/>
-
-                    <TextView
-                        android:id="@+id/textView12"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:text="아이디" />
-
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:text="2020.05.17" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다.리뷰 작성중입니다." />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

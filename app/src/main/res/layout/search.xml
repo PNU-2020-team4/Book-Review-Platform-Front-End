@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/search_box_book"
         app:layout_constraintBottom_toTopOf="@+id/search_auto_complete"
-        android:layout_margin="6dp"/>
+        android:layout_marginStart="12dp"/>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_box_book"

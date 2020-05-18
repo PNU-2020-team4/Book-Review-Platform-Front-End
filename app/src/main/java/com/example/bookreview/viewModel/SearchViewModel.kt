@@ -25,7 +25,17 @@ class SearchViewModel(private val naverBookSearchRepository: NaverBookSearchRepo
     val isBookSearchLoaded: LiveData<Any>
         get() = _isBookSearchLoaded
 
+    private val _isBookClicked: SingleLiveEvent<Any> = SingleLiveEvent()
+    val isBookClicked: LiveData<Any>
+        get() = _isBookClicked
+
     var bookList: ArrayList<Item> = ArrayList()
+
+    var clickedBid : String? = null
+    var imageUrl : String? = null
+    var title : String? = null
+    var author : String? = null
+    var price : String? = null
 
     fun <T> apiCall(single: Single<T>, onSuccess: Consumer<in T>,
                     onError: Consumer<in Throwable> = Consumer {
@@ -38,6 +48,10 @@ class SearchViewModel(private val naverBookSearchRepository: NaverBookSearchRepo
 //            .doOnSubscribe{ if(indicator)  }
 //            .doAfterTerminate {  }
             .subscribe(onSuccess, onError))
+    }
+
+    fun invokeClick(){
+        _isBookClicked.call()
     }
 
     fun getBookListSize() : Int {
