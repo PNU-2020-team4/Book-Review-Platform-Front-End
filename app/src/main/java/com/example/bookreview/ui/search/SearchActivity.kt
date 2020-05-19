@@ -4,12 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.bookreview.R
 import com.example.bookreview.ui.book.BookInformationActivity
 import com.example.bookreview.viewModel.SearchViewModel
-import kotlinx.android.synthetic.main.my_page.*
 import kotlinx.android.synthetic.main.search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +22,7 @@ class SearchActivity : AppCompatActivity() {
         adapter = SearchBookAdapter(viewModel)
         search_auto_complete.adapter = adapter
 
-        my_page_back_button.setOnClickListener {
+        search_back_button.setOnClickListener {
             finish()
         }
 
