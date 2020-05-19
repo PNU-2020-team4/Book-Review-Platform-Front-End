@@ -4,6 +4,7 @@
     <string name="home_hot_review">실시간 핫 리뷰</string>
     <string name="home_today_sentence">오늘의 문구</string>
     <string name="my_page">마이 페이지</string>
+    <string name="my_page_button">내 정보 수정</string>
     <string name="my_page_button1">내가 작성한 리뷰</string>
     <string name="my_page_button2">내가 작성한 댓글</string>
     <string name="my_page_button3">스크랩</string>
