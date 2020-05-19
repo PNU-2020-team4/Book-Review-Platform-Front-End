@@ -27,6 +27,10 @@
         <activity android:name=".ui.myPage.MyPageActivity"/>
         <activity android:name=".ui.review.ReviewActivity"/>
         <activity android:name=".ui.book.BookInformationActivity"/>
+        <activity android:name=".ui.myPage.MyReviewActivity"/>
+        <activity android:name=".ui.myPage.EditProfileActivity"/>
+        <activity android:name=".ui.myPage.MyCommentActivity"/>
+        <activity android:name=".ui.myPage.ScrapActivity"/>
     </application>
 
 </manifest>
