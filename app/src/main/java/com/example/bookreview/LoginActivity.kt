@@ -16,10 +16,6 @@ import kotlinx.android.synthetic.main.login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import android.content.DialogInterface
 
-
-
-
-
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
     private var mLoadingIndicator: Dialog? = null
@@ -40,10 +36,11 @@ class LoginActivity : AppCompatActivity() {
                     dialog.dismiss()
                     finish()
                 }
+                it.show()
             }
         })
         viewModel.isLoginFinished.observe(this, Observer {
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(applicationContext, MainActivity::class.java).putExtra("profileImage", viewModel.userProfileImageSrc))
             finish()
         })
         this.window.apply {

@@ -19,10 +19,7 @@ class MyPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_page)
 
-        viewModel.userProfileImage.observe(this, Observer {
-            Log.e("프로필 이미지 리소스", it)
-            Picasso.get().load(it).into(user_profile_img)
-        })
+        Picasso.get().load(intent.extras?.getString("profileImage")).into(user_profile_img)
 
         my_page_back_button.setOnClickListener {
             finish()

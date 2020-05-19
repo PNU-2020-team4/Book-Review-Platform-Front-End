@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setViewPager()
         setTab()
-        //viewModel.testLoad()
 
+        val profileImage = intent.extras?.getString("profileImage")
         //status bar 투명하게 처리
         this.window.apply {
             //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -44,15 +44,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         main_user_button.setOnClickListener {
-            val nextIntent = Intent(this, MyPageActivity::class.java)
+            val nextIntent = Intent(this, MyPageActivity::class.java).putExtra("profileImage",profileImage)
             startActivity(nextIntent)
         }
 
-        viewModel.userProfileImage.observe(this, Observer {
-            Log.e("프로필 이미지 리소스", it)
-            Picasso.get().load(it).into(main_user_button)
-        })
-
+        Picasso.get().load(profileImage).into(main_user_button)
     }
 
     override fun onBackPressed() {

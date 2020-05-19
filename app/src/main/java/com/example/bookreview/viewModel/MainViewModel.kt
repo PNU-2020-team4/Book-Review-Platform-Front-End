@@ -40,9 +40,6 @@ class MainViewModel(private val serverRepository: ServerRepository,
     private val _isLoginFailed: SingleLiveEvent<Any> = SingleLiveEvent()
     val isLoginFailed:LiveData<Any>
         get() = _isLoginFailed
-    private val _userProfileImage: SingleLiveEvent<String> = SingleLiveEvent()
-    val userProfileImage:LiveData<String>
-        get() = _userProfileImage
 
     var userProfileImageSrc : String? = null
 
@@ -131,7 +128,6 @@ class MainViewModel(private val serverRepository: ServerRepository,
                 stopLoadingIndicator()
                 Log.e("서버 전송 완료",it.string())
                 _isLoginFinished.call()
-                _userProfileImage.postValue(userProfileImageSrc)
             },
                 onError = Consumer {
                     stopLoadingIndicator()
@@ -141,6 +137,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
         },
         onError = Consumer {
             stopLoadingIndicator()
+            _isLoginFailed.call()
             Log.e("ERROR","ERROR : Get User Info ERROR")
         }, indicator = false)
     }
