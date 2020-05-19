@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.example.bookreview.R
 import com.example.bookreview.ui.book.BookInformationActivity
 import com.example.bookreview.viewModel.SearchViewModel
+import kotlinx.android.synthetic.main.my_page.*
 import kotlinx.android.synthetic.main.search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -22,6 +22,7 @@ class ReviewAdapter(private val context: Context, private val reviewList: ArrayL
         val review : Review = reviewList[position]
         holder.bind(review)
 
+        /*
         holder.itemView.setOnClickListener {
             val nextIntent = Intent(context, ReviewActivity::class.java)
             //nextIntent.putExtra("reviewImg", review.img)
@@ -30,6 +31,8 @@ class ReviewAdapter(private val context: Context, private val reviewList: ArrayL
             nextIntent.putExtra("reviewText", review.review_text)
             context.startActivity(nextIntent)
         }
+        
+         */
     }
 
     override fun getItemCount(): Int = reviewList.size
