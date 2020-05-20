@@ -91,7 +91,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:text="@string/my_page_button" />
+                android:backgroundTint="@color/transparent"
+                android:text="@string/my_page_button"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <View

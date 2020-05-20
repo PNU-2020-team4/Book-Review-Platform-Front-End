@@ -4,4 +4,5 @@ import io.reactivex.Single
 
 interface JsoupRepository {
     fun requestResponse(bid : String) : Single<String>
+    fun requestBestSeller() : Single<String>
 }

@@ -65,7 +65,6 @@ class BookInformationViewModel(private val jsoupRepository: JsoupRepository) : V
             Consumer {
 
                 val doc: Document = Jsoup.parse(it)
-                val elements: Elements = doc.getElementsByTag("meta")
 
                 desc = doc.select("div[id=bookIntroContent] p").text()
                 star = doc.select("a[id=txt_desc_point] strong").text().substringBefore("점 ")

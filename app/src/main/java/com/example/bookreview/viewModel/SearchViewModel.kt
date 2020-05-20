@@ -72,7 +72,8 @@ class SearchViewModel(private val naverBookSearchRepository: NaverBookSearchRepo
             searchListClear()
             if(it != null){
                 for(i in it.items){
-                    bookList.add(Item(i.author, i.description, i.discount, i.image, i.isbn, i.link, i.price, i.pubdate, i.publisher, i.title))
+                    val imageSrc = i.image.replace("m1&udate","m140&udate")
+                    bookList.add(Item(i.author, i.description, i.discount, imageSrc, i.isbn, i.link, i.price, i.pubdate, i.publisher, i.title))
                 }
                 _isBookSearchLoaded.call()
             }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <Button
+    <ImageButton
         android:id="@+id/search_back_button"
         android:layout_width="20dp"
         android:layout_height="20dp"

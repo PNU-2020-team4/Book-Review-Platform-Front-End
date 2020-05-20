@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.bookreview.dto.Response
 import com.example.bookreview.dto.userInfo
+import com.example.bookreview.repository.JsoupRepository
 import com.example.bookreview.repository.NaverOAuthRepository
 import com.example.bookreview.repository.ServerRepository
 import com.example.bookreview.utils.SingleLiveEvent
@@ -22,10 +23,14 @@ import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.select.Elements
 import java.util.concurrent.TimeUnit
 
 class MainViewModel(private val serverRepository: ServerRepository,
                     private val naverOAuthRepository: NaverOAuthRepository,
+                    private val jsoupRepository: JsoupRepository,
                     private val preferences: SharedPreferences
 ) : ViewModel() {
     private val _isLoginFinished: SingleLiveEvent<Any> = SingleLiveEvent()
@@ -140,6 +145,20 @@ class MainViewModel(private val serverRepository: ServerRepository,
             _isLoginFailed.call()
             Log.e("ERROR","ERROR : Get User Info ERROR")
         }, indicator = false)
+    }
+
+    fun loadBestSeller(){
+        apiCall(jsoupRepository.requestBestSeller(),
+            Consumer {
+                val doc: Document = Jsoup.parse(it)
+                val elements: Elements = doc.getElementsByTag("meta")
+
+                //TODO
+            }
+            ,onError = Consumer {
+                Log.e("ERROR", "Parsing HTMl ERROR!")
+            }
+            ,indicator = true)
     }
 
     fun verifyAccessToken(accessToken: String) : Boolean{

@@ -7,4 +7,8 @@ class JsoupRepositoryImpl constructor(private val jsoupService: JsoupService) : 
     override fun requestResponse(bid : String): Single<String> {
         return jsoupService.getResponse(bid)
     }
+
+    override fun requestBestSeller(): Single<String> {
+        return jsoupService.getBestSeller()
+    }
 }
