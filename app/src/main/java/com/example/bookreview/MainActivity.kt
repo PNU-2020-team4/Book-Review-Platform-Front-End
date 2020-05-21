@@ -2,23 +2,20 @@ package com.example.bookreview
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bookreview.fragment.ResourceStore
 import com.example.bookreview.ui.myPage.MyPageActivity
 import com.example.bookreview.ui.search.SearchActivity
 import com.example.bookreview.viewModel.MainViewModel
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.book.*
+import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
@@ -30,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setTab()
 
         val profileImage = intent.extras?.getString("profileImage")
+        val userId = intent.extras?.getString("userId")
         //status bar 투명하게 처리
         this.window.apply {
             //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -44,7 +42,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         main_user_button.setOnClickListener {
-            val nextIntent = Intent(this, MyPageActivity::class.java).putExtra("profileImage",profileImage)
+            val nextIntent = Intent(this, MyPageActivity::class.java)
+                .putExtra("profileImage",profileImage)
+                .putExtra("userId", userId)
             startActivity(nextIntent)
         }
 

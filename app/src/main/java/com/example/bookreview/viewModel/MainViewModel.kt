@@ -3,11 +3,9 @@ package com.example.bookreview.viewModel
 import android.app.Activity
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.bookreview.dto.Response
-import com.example.bookreview.dto.userInfo
 import com.example.bookreview.repository.JsoupRepository
 import com.example.bookreview.repository.NaverOAuthRepository
 import com.example.bookreview.repository.ServerRepository
@@ -19,10 +17,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
@@ -47,6 +41,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
         get() = _isLoginFailed
 
     var userProfileImageSrc : String? = null
+    var userId : String? = null
 
 
     private val compositeDisposable = CompositeDisposable()
@@ -118,6 +113,8 @@ class MainViewModel(private val serverRepository: ServerRepository,
             Log.e("test user info name",it.response.name)
             Log.e("test user info image",it.response.profile_image)
             userProfileImageSrc = it.response.profile_image
+            userId = it.response.id
+
             Log.e("test user info email",it.response.email)
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)

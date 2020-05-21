@@ -19,11 +19,10 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
         return serverService.getReview(params)
     }
 
-    override fun getMyReviewResponse(): Single<ServerResponse> {
+    override fun getMyReviewResponse(userId: String): Single<ServerResponse> {
         Log.d("EE", "getAllReviewResponse()")
         val params = HashMap<String, String>()
-        // TODO :: need to change
-        params["data"] = Gson().toJson(mapOf("writer" to -1))
+        params["data"] = Gson().toJson(mapOf("writer" to userId))
         return serverService.getReview(params)
     }
 }

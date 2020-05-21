@@ -16,7 +16,8 @@ class MyReviewActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_review)
 
-        viewModel.requestMyReviews {
+        val userId = intent.extras?.getString("userId")!!
+        viewModel.requestMyReviews(userId) {
             it.dataList?.let { list ->
                 val numOfReviews = " ( ${list.size()} )"
                 textView4.text = numOfReviews

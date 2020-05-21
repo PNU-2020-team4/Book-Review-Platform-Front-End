@@ -18,8 +18,8 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
         compositeDisposable.add(disposable)
     }
 
-    fun requestMyReviews(success: (ServerResponse) -> Unit) {
-        apiCall(serverRepository.getMyReviewResponse(), Consumer {
+    fun requestMyReviews(userId: String, success: (ServerResponse) -> Unit) {
+        apiCall(serverRepository.getMyReviewResponse(userId), Consumer {
             success(it)
         })
     }

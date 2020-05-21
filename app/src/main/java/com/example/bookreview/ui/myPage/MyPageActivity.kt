@@ -2,15 +2,12 @@ package com.example.bookreview.ui.myPage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.my_page.*
-import kotlinx.android.synthetic.main.search.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
@@ -19,6 +16,8 @@ class MyPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_page)
 
+        var userId = intent.extras?.getString("userId")
+
         Picasso.get().load(intent.extras?.getString("profileImage")).into(user_profile_img)
 
         my_page_back_button.setOnClickListener {
@@ -26,7 +25,7 @@ class MyPageActivity : AppCompatActivity() {
         }
 
         my_review_button.setOnClickListener {
-            startActivity(Intent(this, MyReviewActivity::class.java))
+            startActivity(Intent(this, MyReviewActivity::class.java).putExtra("userId", userId))
         }
 
         edit_profile_button.setOnClickListener {

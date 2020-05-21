@@ -4,9 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -14,7 +12,6 @@ import com.example.bookreview.utils.LoadingIndicator
 import com.example.bookreview.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.login.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import android.content.DialogInterface
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
@@ -40,7 +37,9 @@ class LoginActivity : AppCompatActivity() {
             }
         })
         viewModel.isLoginFinished.observe(this, Observer {
-            startActivity(Intent(applicationContext, MainActivity::class.java).putExtra("profileImage", viewModel.userProfileImageSrc))
+            startActivity(Intent(applicationContext, MainActivity::class.java)
+                .putExtra("profileImage", viewModel.userProfileImageSrc)
+                .putExtra("userId", viewModel.userId))
             finish()
         })
         this.window.apply {
