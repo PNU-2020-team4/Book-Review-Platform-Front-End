@@ -1,9 +1,9 @@
 package com.example.bookreview.ui.review
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
@@ -40,21 +40,25 @@ class ReviewAdapter(private val context: Context, private val reviewList: ArrayL
     class ReviewViewHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(
         R.layout.review_list, parent, false)){
         //private var reviewImg : ImageView? = null
-        private var reviewId : TextView? = null
+        private var reviewBookName : TextView? = null
         private var reviewDate : TextView? = null
-        private var reviewText :TextView? = null
+        private var reviewText : TextView? = null
+        private var reviewRating : RatingBar? = null
 
         init{
-            reviewId = itemView.findViewById(R.id.review_id)
+            reviewBookName = itemView.findViewById(R.id.review_bookName)
             reviewDate = itemView.findViewById(R.id.review_date)
             reviewText = itemView.findViewById(R.id.review_text)
+            reviewRating = itemView.findViewById(R.id.ratingBar)
             //reviewImg = itemView.findViewById(R.id.review_id)
         }
 
         fun bind(review: Review){
-            reviewId?.text = review.id
+            reviewBookName?.text = review.bookName
+            reviewRating?.rating = review.star.toFloat()
+
             reviewDate?.text = review.date
-            reviewText?.text = review.review_text
+            reviewText?.text = review.content
         }
     }
 }

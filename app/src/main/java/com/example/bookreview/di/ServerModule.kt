@@ -4,7 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.bookreview.api.*
+import com.example.bookreview.dto.ServerResponse
 import com.example.bookreview.repository.*
+import com.example.bookreview.utils.ServerResponseDeserializer
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -50,9 +53,12 @@ fun provideNaverBookSearchRetrofit(okHttpClient: OkHttpClient): Retrofit {
 }
 
 fun provideServerRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    val gsonBuilder = GsonBuilder()
+    gsonBuilder.registerTypeAdapter(ServerResponse::class.java, ServerResponseDeserializer())
+    val gson = gsonBuilder.create()
+
     return Retrofit.Builder().baseUrl("https://pnubookreview.herokuapp.com").client(okHttpClient)
-        .addConverterFactory(ScalarsConverterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(
             RxJava2CallAdapterFactory.create()).build()
 }
