@@ -1,5 +1,6 @@
 package com.example.bookreview.ui.review
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
@@ -17,6 +18,10 @@ class ReviewActivity : AppCompatActivity() {
             reviewList
         )
         review_recyclerView.adapter = reviewAdapter
+
+        write_review_button.setOnClickListener {
+            startActivity(Intent(this, WriteReviewActivity::class.java))
+        }
 
 
         /*

@@ -3,12 +3,24 @@
     <string name="home_recommend">추천 도서</string>
     <string name="home_hot_review">실시간 핫 리뷰</string>
     <string name="home_today_sentence">오늘의 문구</string>
+    <string name="best_seller">Best seller</string>
+    <string name="popular">Popular</string>
+    <string name="see_all">See All</string>
+    <string name="daily_quote">Daily quote</string>
     <string name="my_page">마이 페이지</string>
     <string name="my_page_button">내 정보 수정</string>
     <string name="my_page_button1">내가 작성한 리뷰</string>
     <string name="my_page_button2">내가 작성한 댓글</string>
     <string name="my_page_button3">스크랩</string>
     <string name="recent_search">최근 검색어</string>
+    <string name="author">글쓴이</string>
     <string name="popular_search">인기 검색어</string>
-    <string name="search_text">검색</string>
+    <string name="search_text">책 검색</string>
+    <string name="search_query_hint">검색할 책을 입력하세요.</string>
+    <string name="contentDescription">설명</string>
+    <string name="write_review">리뷰 쓰기</string>
+    <string name="post">등록</string>
+    <string name="default_editText_num">0 / 1,000 글자 수</string>
+    <string name="review_user_image_text">사진 첨부</string>
+    <string name="review_user_image_button">찾아보기</string>
 </resources>

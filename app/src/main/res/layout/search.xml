@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/search_box_book"
         app:layout_constraintBottom_toTopOf="@+id/search_auto_complete"
-        android:layout_marginStart="12dp"/>
+        android:layout_marginStart="12dp"
+        android:contentDescription="@string/contentDescription" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_box_book"
@@ -28,17 +29,16 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        android:queryHint="@string/search_text"
         android:clickable="true"
         android:focusable="true"
         android:iconifiedByDefault="false"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/search_back_button"
         app:layout_constraintTop_toBottomOf="@+id/search_auto_complete"
-
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@null"
+        app:queryHint="@string/search_query_hint"
+        app:searchHintIcon="@null" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_auto_complete"
         android:layout_width="0dp"
