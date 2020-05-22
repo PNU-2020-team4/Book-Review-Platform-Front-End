@@ -24,11 +24,13 @@ val serverModule = module {
     factory { provideRefreshApi((provideRefreshTokenRetrofit(get()))) }
     factory { provideBookSearchApi(provideNaverBookSearchRetrofit(get())) }
     factory { provideJsoupApi(provideJsoupRetrofit(get())) }
+    factory { provideKyoboJsoupApi(provideKyoboJsoupRetrofit(get())) }
 
     single<ServerRepository> { ServerRepositoryImpl(get()) }
     single<NaverOAuthRepository> { NaverOAuthRepositoryImpl(get(), get(), get(), get()) }
     single<NaverBookSearchRepository> { NaverBookSearchRepositoryImpl(get())}
     single<JsoupRepository> { JsoupRepositoryImpl(get())}
+    single<KyoboRepository> { KyoboRepositoryImpl(get())}
 
     single{ provideSettingsPreferences(androidApplication())}
 }
@@ -38,9 +40,16 @@ fun provideUserApi(retrofit: Retrofit):UserService = retrofit.create(UserService
 fun provideRefreshApi(retrofit: Retrofit):RefreshService = retrofit.create(RefreshService::class.java)
 fun provideBookSearchApi(retrofit: Retrofit):BookSearchService = retrofit.create(BookSearchService::class.java)
 fun provideJsoupApi(retrofit: Retrofit):JsoupService = retrofit.create(JsoupService::class.java)
+fun provideKyoboJsoupApi(retrofit: Retrofit):KyoboService = retrofit.create(KyoboService::class.java)
 
 fun provideJsoupRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder().baseUrl("http://book.naver.com").client(okHttpClient)
+        .addConverterFactory(ScalarsConverterFactory.create()).addCallAdapterFactory(
+            RxJava2CallAdapterFactory.create()).build()
+}
+
+fun provideKyoboJsoupRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder().baseUrl("https://www.kyobobook.co.kr").client(okHttpClient)
         .addConverterFactory(ScalarsConverterFactory.create()).addCallAdapterFactory(
             RxJava2CallAdapterFactory.create()).build()
 }

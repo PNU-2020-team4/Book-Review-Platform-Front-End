@@ -22,12 +22,16 @@ import kotlinx.android.synthetic.main.book.*
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
+    private lateinit var adapter : MainBestSellerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setViewPager()
         setTab()
+
+        adapter = MainBestSellerAdapter(viewModel)
+        main_popular_recycler.adapter = adapter
 
         val profileImage = intent.extras?.getString("profileImage")
         //status bar 투명하게 처리
@@ -49,6 +53,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         Picasso.get().load(profileImage).into(main_user_button)
+
+        viewModel.loadBestSeller()
+        viewModel.isLoadPopularListFinished.observe(this, Observer {
+            adapter.notifyDataSetChanged()
+        })
     }
 
     override fun onBackPressed() {

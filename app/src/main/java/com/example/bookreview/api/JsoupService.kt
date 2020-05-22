@@ -2,6 +2,7 @@ package com.example.bookreview.api
 
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface JsoupService {
@@ -9,5 +10,8 @@ interface JsoupService {
     fun getResponse(@Query("bid") bid : String): Single<String>
 
     @GET("/bestsell/bestseller_list.nhn")
-    fun getBestSeller(): Single<String>
+    fun getBestSeller(
+        @Header("Accept") accept : String,
+        @Header("Accept-Language") accept_language : String
+    ): Single<String>
 }
