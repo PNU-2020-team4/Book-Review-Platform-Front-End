@@ -65,8 +65,11 @@
                     android:background="@drawable/shape"
                     android:elevation="6dp"
                     android:gravity="fill"
+                    android:textColor="#cccccc"
                     android:text="@string/search_text"
-                    android:drawableEnd="@drawable/ic_search"
+                    android:paddingStart="10dp"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="10dp"
                     app:layout_constraintEnd_toEndOf="@+id/main_user_profile_card"
                     app:layout_constraintStart_toStartOf="@+id/main_title"
                     app:layout_constraintTop_toBottomOf="@+id/main_title" />
@@ -251,8 +254,10 @@
                     android:text="데카르트"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="@+id/main_popular_quote"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/main_best_seller_quote_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
