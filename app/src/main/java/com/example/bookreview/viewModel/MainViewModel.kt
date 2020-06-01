@@ -52,7 +52,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
         get() = _isLoadPopularListFinished
 
     var userProfileImageSrc : String? = null
-
+    var id : String? = null
     var popularBookList = ArrayList<BestSeller>()
 
     private val compositeDisposable = CompositeDisposable()
@@ -123,7 +123,9 @@ class MainViewModel(private val serverRepository: ServerRepository,
         onSuccess = Consumer { it ->
             Log.e("test user info name",it.response.name)
             Log.e("test user info image",it.response.profile_image)
+            Log.e("test user info id", it.response.id)
             userProfileImageSrc = it.response.profile_image
+            id = it.response.id
             Log.e("test user info email",it.response.email)
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
@@ -132,6 +134,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
 //                    "text/plain".toMediaTypeOrNull()
 //                )
             //Log.e("리스폰스 스트링", "\"{\"age\":${it.response.age},\"birthday\":${it.response.birthday},\"email\":${it.response.email},\"gender\":${it.response.gender},\"id\":${it.response.id},\"name\":${it.response.name},\"nickname\":${it.response.nickname},\"profile_image\":${it.response.profile_image}}\"")
+
             val params = HashMap<String, String>()
             params["data"] = Gson().toJson(response)
             apiCall(naverOAuthRepository.postUserInfo(params),
