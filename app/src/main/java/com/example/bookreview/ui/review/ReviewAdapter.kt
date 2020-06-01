@@ -1,6 +1,7 @@
 package com.example.bookreview.ui.review
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.RatingBar
@@ -22,17 +23,10 @@ class ReviewAdapter(private val context: Context, private val reviewList: ArrayL
         val review : Review = reviewList[position]
         holder.bind(review)
 
-        /*
         holder.itemView.setOnClickListener {
-            val nextIntent = Intent(context, ReviewActivity::class.java)
-            //nextIntent.putExtra("reviewImg", review.img)
-            nextIntent.putExtra("reviewId", review.id)
-            nextIntent.putExtra("reviewDate", review.date)
-            nextIntent.putExtra("reviewText", review.review_text)
+            val nextIntent = Intent(context, SelectedReviewActivity::class.java)
             context.startActivity(nextIntent)
         }
-        
-         */
     }
 
     override fun getItemCount(): Int = reviewList.size

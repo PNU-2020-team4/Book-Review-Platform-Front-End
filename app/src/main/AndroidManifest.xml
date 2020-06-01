@@ -32,6 +32,7 @@
         <activity android:name=".ui.myPage.MyCommentActivity"/>
         <activity android:name=".ui.myPage.ScrapActivity"/>
         <activity android:name=".ui.review.WriteReviewActivity"/>
+        <activity android:name=".ui.review.SelectedReviewActivity"/>
     </application>
 
 </manifest>
