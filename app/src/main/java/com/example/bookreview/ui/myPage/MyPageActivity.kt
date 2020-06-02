@@ -15,17 +15,19 @@ class MyPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_page)
-
-        var userId = intent.extras?.getString("userId")
-
         Picasso.get().load(intent.extras?.getString("profileImage")).into(user_profile_img)
+        var id = intent.extras?.getString("id")
+        var profileImage = intent.extras?.getString("profileImage")
 
         my_page_back_button.setOnClickListener {
             finish()
         }
 
         my_review_button.setOnClickListener {
-            startActivity(Intent(this, MyReviewActivity::class.java).putExtra("userId", userId))
+            val nextIntent = Intent(this, MyReviewActivity::class.java)
+            nextIntent.putExtra("id", id)
+            nextIntent.putExtra("profileImage", profileImage)
+            startActivity(nextIntent)
         }
 
         edit_profile_button.setOnClickListener {

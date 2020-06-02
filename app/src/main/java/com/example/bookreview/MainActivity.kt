@@ -19,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
+    private lateinit var adapter : MainBestSellerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +27,13 @@ class MainActivity : AppCompatActivity() {
         setViewPager()
         setTab()
 
+        adapter = MainBestSellerAdapter(viewModel)
+        main_popular_recycler.adapter = adapter
+
         val profileImage = intent.extras?.getString("profileImage")
-        val userId = intent.extras?.getString("userId")
+        val id = intent.extras?.getString("id")
+        Log.e("On create Main , User profile : ", profileImage)
+        Log.e("On create Main, User id : ", id)
         //status bar 투명하게 처리
         this.window.apply {
             //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -42,13 +48,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         main_user_button.setOnClickListener {
-            val nextIntent = Intent(this, MyPageActivity::class.java)
-                .putExtra("profileImage",profileImage)
-                .putExtra("userId", userId)
+            val nextIntent = Intent(this, MyPageActivity::class.java).putExtra("profileImage",profileImage)
+            nextIntent.putExtra("id", id)
             startActivity(nextIntent)
         }
 
         Picasso.get().load(profileImage).into(main_user_button)
+
+        viewModel.loadBestSeller()
+        viewModel.isLoadPopularListFinished.observe(this, Observer {
+            adapter.notifyDataSetChanged()
+        })
     }
 
     override fun onBackPressed() {

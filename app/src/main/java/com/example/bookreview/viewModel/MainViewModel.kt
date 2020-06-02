@@ -5,8 +5,10 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.bookreview.dto.BestSeller
 import com.example.bookreview.dto.Response
 import com.example.bookreview.repository.JsoupRepository
+import com.example.bookreview.repository.KyoboRepository
 import com.example.bookreview.repository.NaverOAuthRepository
 import com.example.bookreview.repository.ServerRepository
 import com.example.bookreview.utils.SingleLiveEvent
@@ -39,10 +41,13 @@ class MainViewModel(private val serverRepository: ServerRepository,
     private val _isLoginFailed: SingleLiveEvent<Any> = SingleLiveEvent()
     val isLoginFailed:LiveData<Any>
         get() = _isLoginFailed
+    private val _isLoadPopularListFinished: SingleLiveEvent<Any> = SingleLiveEvent()
+    val isLoadPopularListFinished:LiveData<Any>
+        get() = _isLoadPopularListFinished
 
     var userProfileImageSrc : String? = null
-    var userId : String? = null
-
+    var id : String? = null
+    var popularBookList = ArrayList<BestSeller>()
 
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
@@ -112,9 +117,9 @@ class MainViewModel(private val serverRepository: ServerRepository,
         onSuccess = Consumer { it ->
             Log.e("test user info name",it.response.name)
             Log.e("test user info image",it.response.profile_image)
+            Log.e("test user info id", it.response.id)
             userProfileImageSrc = it.response.profile_image
-            userId = it.response.id
-
+            id = it.response.id
             Log.e("test user info email",it.response.email)
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
@@ -123,6 +128,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
 //                    "text/plain".toMediaTypeOrNull()
 //                )
             //Log.e("리스폰스 스트링", "\"{\"age\":${it.response.age},\"birthday\":${it.response.birthday},\"email\":${it.response.email},\"gender\":${it.response.gender},\"id\":${it.response.id},\"name\":${it.response.name},\"nickname\":${it.response.nickname},\"profile_image\":${it.response.profile_image}}\"")
+
             val params = HashMap<String, String>()
             params["data"] = Gson().toJson(response)
             apiCall(naverOAuthRepository.postUserInfo(params),
@@ -148,14 +154,28 @@ class MainViewModel(private val serverRepository: ServerRepository,
         apiCall(jsoupRepository.requestBestSeller(),
             Consumer {
                 val doc: Document = Jsoup.parse(it)
-                val elements: Elements = doc.getElementsByTag("meta")
-
-                //TODO
+                val elements: Elements = doc.select("div[id=section_bestseller] ol").select("li")
+                val elemSize = elements.size
+                for(elem in elements){
+                    val imageSrc = elem.select("div[class=thumb_type thumb_type2] a img").attr("src")
+                    val title = elem.select("dt[id=book_title_${popularBookList.size}] a").text()
+                    val author = elem.select("dd[class=txt_block] a[class=txt_name N=a:bel.author]").text()
+                    popularBookList.add(BestSeller(title,author,imageSrc))
+                }
+                _isLoadPopularListFinished.call()
             }
             ,onError = Consumer {
                 Log.e("ERROR", "Parsing HTMl ERROR!")
             }
             ,indicator = true)
+    }
+
+    fun getPopularBookListSize() : Int{
+        return popularBookList.size
+    }
+
+    fun getPopularBookByPosition(position: Int) : BestSeller{
+        return popularBookList[position]
     }
 
     fun verifyAccessToken(accessToken: String) : Boolean{
