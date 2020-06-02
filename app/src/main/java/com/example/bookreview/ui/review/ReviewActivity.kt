@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
+import kotlinx.android.synthetic.main.book_list.*
 import kotlinx.android.synthetic.main.review.*
 
 class ReviewActivity : AppCompatActivity() {
@@ -13,6 +14,9 @@ class ReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.review)
 
+        val id = intent.extras?.getString("id")
+        val bookId = intent.extras?.getString("bookId")
+
         val reviewAdapter = ReviewAdapter(
             applicationContext,
             reviewList
@@ -20,7 +24,10 @@ class ReviewActivity : AppCompatActivity() {
         review_recyclerView.adapter = reviewAdapter
 
         write_review_button.setOnClickListener {
-            startActivity(Intent(this, WriteReviewActivity::class.java))
+            startActivity(Intent(this, WriteReviewActivity::class.java)
+                .putExtra("id", id)
+                .putExtra("bookId", bookId)
+            )
         }
 
 
