@@ -8,6 +8,11 @@ import io.reactivex.Single
 interface ServerRepository {
     fun requestResponse() : Single<testClass>
     fun getAllReviewResponse() : Single<ServerResponse>
+
+    fun getWithdrawalResponse(userId: String) : Single<ServerResponse>
+    fun getMyReviewResponse(userId: String) : Single<ServerResponse>
+
     fun getMyReviewResponse() : Single<ServerResponse>
     fun addHistory(bookTitle:String?, bookAuthor:String?, userID:String?) : Single<ServerResponse>
+
 }

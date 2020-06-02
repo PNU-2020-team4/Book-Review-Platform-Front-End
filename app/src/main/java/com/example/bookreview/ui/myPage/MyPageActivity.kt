@@ -2,15 +2,12 @@ package com.example.bookreview.ui.myPage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.my_page.*
-import kotlinx.android.synthetic.main.search.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()

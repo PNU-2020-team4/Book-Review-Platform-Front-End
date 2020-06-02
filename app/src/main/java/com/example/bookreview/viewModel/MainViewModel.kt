@@ -3,12 +3,10 @@ package com.example.bookreview.viewModel
 import android.app.Activity
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.bookreview.dto.BestSeller
 import com.example.bookreview.dto.Response
-import com.example.bookreview.dto.userInfo
 import com.example.bookreview.repository.JsoupRepository
 import com.example.bookreview.repository.KyoboRepository
 import com.example.bookreview.repository.NaverOAuthRepository
@@ -21,10 +19,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements

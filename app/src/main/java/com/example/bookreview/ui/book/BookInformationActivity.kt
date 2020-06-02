@@ -61,6 +61,21 @@ class BookInformationActivity : AppCompatActivity() {
             startActivity(nextIntent)
         }
 
+        book_information_share_button.setOnClickListener {
+            // TODO :: need to implement sharing feature
+            val link = "https://www.naver.com"
+            val text = "책 제목: {$title} \n저자: {$author} \n링크: {$link}"
+
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, text)
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
     }
     private fun loadingIndicatorObserving() {
         viewModel.startLoadingIndicatorEvent.observe(this, Observer {
