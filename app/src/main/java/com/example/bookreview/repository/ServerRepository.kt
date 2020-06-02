@@ -10,9 +10,11 @@ interface ServerRepository {
     fun getAllReviewResponse() : Single<ServerResponse>
 
     fun getWithdrawalResponse(userId: String) : Single<ServerResponse>
-    fun getMyReviewResponse(userId: String) : Single<ServerResponse>
 
-    fun getMyReviewResponse() : Single<ServerResponse>
+    fun getMyReviewResponse(userId: String) : Single<ServerResponse>
+    fun delMyReviewResponse(idx: Int) : Single<ServerResponse>
+
+//    fun getMyReviewResponse() : Single<ServerResponse>
     fun addHistory(bookTitle:String?, bookAuthor:String?, userID:String?) : Single<ServerResponse>
 
 }

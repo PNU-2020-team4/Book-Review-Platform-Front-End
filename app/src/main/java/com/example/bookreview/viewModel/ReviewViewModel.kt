@@ -24,6 +24,12 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
         })
     }
 
+    fun delMyReview(idx: Int, success: (ServerResponse) -> Unit) {
+        apiCall(serverRepository.delMyReviewResponse(idx), Consumer {
+            success(it)
+        })
+    }
+
     fun requestAllReviews(success: (ServerResponse) -> Unit) {
         apiCall(serverRepository.getAllReviewResponse(), Consumer {
             success(it)
