@@ -24,4 +24,8 @@ interface ServerService {
     @POST("/user/withdrawal")
     @FormUrlEncoded
     fun withdrawalUser(@FieldMap(encoded = true) response: Map<String, String>) : Single<ServerResponse>
+
+    @POST("/hist/insert")
+    @FormUrlEncoded
+    fun addHistory(@FieldMap(encoded = true) response : Map<String, String>) : Single<ServerResponse>
 }
