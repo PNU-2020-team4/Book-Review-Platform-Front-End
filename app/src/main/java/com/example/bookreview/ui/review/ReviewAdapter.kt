@@ -49,7 +49,7 @@ class ReviewAdapter(private val context: Context, private val reviewList: ArrayL
 
         fun bind(review: Review){
             reviewBookName?.text = review.bookName
-            reviewRating?.rating = review.star.toFloat()
+            reviewRating?.rating = review.star!!.toFloat()
 
             reviewDate?.text = review.date
             reviewText?.text = review.content

@@ -59,6 +59,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             startActivity(Intent(this, BookInformationActivity::class.java)
+                .putExtra("uid", userID)
                 .putExtra("bid", viewModel.clickedBid)
                 .putExtra("imageUrl", viewModel.imageUrl)
                 .putExtra("title", viewModel.title)

@@ -10,20 +10,42 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
+import com.example.bookreview.viewModel.ReviewViewModel
 import kotlinx.android.synthetic.main.write_review.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WriteReviewActivity : AppCompatActivity() {
     private val gallery = 1
+    private val viewModel by viewModel<ReviewViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.write_review)
+
+        val id = intent.extras?.getString("id")
+        val bookId = intent.extras?.getString("bookId")
 
         write_review_back_button.setOnClickListener {
             finish()
         }
 
         write_review_post_button.setOnClickListener {
+            val review : Review = Review(
+                "",
+                id,
+                write_review_editText.text.toString(),
+                write_review_star.getNumStars().toString(),
+                "",
+                bookId,
+                "",
+                "",
+                ""
+            )
+            viewModel.writeReview(review){
+                it.resultCode?.let { code ->
+                    Log.d("ResultCode" , code.toString())
+                }
+            }
             finish()
         }
 

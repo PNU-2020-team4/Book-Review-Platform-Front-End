@@ -31,6 +31,8 @@ class BookInformationActivity : AppCompatActivity() {
             statusBarColor = Color.WHITE
         }
 
+        val uid = intent.extras?.getString("uid")
+
         val bid = intent.extras?.getString("bid")
         val imageUrl = intent.extras?.getString("imageUrl")
         val title = intent.extras?.getString("title")
@@ -57,8 +59,10 @@ class BookInformationActivity : AppCompatActivity() {
         }
 
         book_information_review_button.setOnClickListener {
-            val nextIntent = Intent(this, ReviewActivity::class.java)
-            startActivity(nextIntent)
+            startActivity(Intent(this, ReviewActivity::class.java)
+                .putExtra("id",uid)
+                .putExtra("bookId", bid)
+            )
         }
 
         book_information_share_button.setOnClickListener {

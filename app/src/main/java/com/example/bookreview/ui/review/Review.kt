@@ -6,12 +6,13 @@ import java.util.*
 
 class Review(
     var idx : String = "",
-    var writer : String = "",
-    var content : String = "",
-    var star : String = "",
+    var writer : String? = "",
+    var content : String? = "",
+    var star : String? = "",
     var date : String = "",
-    var bookName : String = "",
-    var bookAuthor : String = "",
+    var bookId : String? = "",
+    var bookName : String? = "",
+    var bookAuthor : String? = "",
     var nickname: String = "",
     var bookGenre: String = ""
 ) {
@@ -33,6 +34,9 @@ class Review(
         obj.get("date")?.let {
 
             this.date = simpleDateFormat.format(Date(obj.get("date").asLong))
+        }
+        obj.get("bookId")?.let {
+            this.bookId = obj.get("bookId").asString
         }
         obj.get("bookName")?.let {
             this.bookName = obj.get("bookName").asString
