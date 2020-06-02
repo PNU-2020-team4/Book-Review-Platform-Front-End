@@ -46,12 +46,9 @@ class MainActivity : AppCompatActivity() {
             statusBarColor = Color.WHITE
         }
 
-        if (intent.hasExtra("userId"))
-            userId = intent.getStringExtra("userId")
-
         main_search.setOnClickListener {
             val nextIntent = Intent(this, SearchActivity::class.java)
-            nextIntent.putExtra("ID", userId)
+            nextIntent.putExtra("ID", id)
             startActivity(nextIntent)
         }
 
