@@ -27,6 +27,6 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
     override fun getWithdrawalResponse(userId: String): Single<ServerResponse> {
         val params = HashMap<String, String>()
         params["data"] = Gson().toJson(mapOf("id" to userId))
-        return serverService.getReview(params)
+        return serverService.withdrawalUser(params)
     }
 }
