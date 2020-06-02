@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         main_popular_recycler.adapter = adapter
 
         val profileImage = intent.extras?.getString("profileImage")
+        val id = intent.extras?.getString("id")
+        Log.e("On create Main , User profile : ", profileImage)
+        Log.e("On create Main, User id : ", id)
         //status bar 투명하게 처리
         this.window.apply {
             //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         main_user_button.setOnClickListener {
             val nextIntent = Intent(this, MyPageActivity::class.java).putExtra("profileImage",profileImage)
+            nextIntent.putExtra("id", id)
             startActivity(nextIntent)
         }
 
