@@ -12,34 +12,30 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel() {
+class MypageViewModel(private val serverRepository: ServerRepository): ViewModel() {
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
 
-    fun requestMyReviews(userId: String, success: (ServerResponse) -> Unit) {
-        apiCall(serverRepository.getMyReviewResponse(userId), Consumer {
+    fun requestWithdrawal(userId: String, success: (ServerResponse) -> Unit) {
+        apiCall(serverRepository.getWithdrawalResponse(userId), Consumer {
             success(it)
         })
     }
 
-    fun requestAllReviews(success: (ServerResponse) -> Unit) {
-        apiCall(serverRepository.getAllReviewResponse(), Consumer {
-            success(it)
-        })
-    }
 
     fun <T> apiCall(single: Single<T>, onSuccess: Consumer<in T>,
                     onError: Consumer<in Throwable> = Consumer {
                         Log.e("오류발생",it.message!!)
                     },
                     indicator : Boolean = false, timeout: Long = 5){
-                        addDisposable(single.subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .timeout(timeout, TimeUnit.SECONDS)
+        addDisposable(single.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .timeout(timeout, TimeUnit.SECONDS)
 //                            .doOnSubscribe{ if(indicator) startLoadingIndicator()  }
 //                            .doAfterTerminate { stopLoadingIndicator() }
-                            .subscribe(onSuccess, onError))
+            .subscribe(onSuccess, onError))
     }
+
 }

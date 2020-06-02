@@ -40,7 +40,6 @@ class MyReviewActivity : AppCompatActivity(){
         }
 
 
-
         my_review_back_button.setOnClickListener {
             finish()
         }
