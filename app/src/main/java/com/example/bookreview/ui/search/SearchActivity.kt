@@ -59,12 +59,14 @@ class SearchActivity : AppCompatActivity() {
             }
 
             startActivity(Intent(this, BookInformationActivity::class.java)
+                .putExtra("uid", userID)
                 .putExtra("bid", viewModel.clickedBid)
                 .putExtra("imageUrl", viewModel.imageUrl)
                 .putExtra("title", viewModel.title)
                 .putExtra("author", viewModel.author)
                 .putExtra("price", viewModel.price))
         })
+
         search_box_book.let { searchView ->
             searchView.setOnClickListener {
                 searchView.isIconified = false

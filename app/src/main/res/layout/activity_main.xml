@@ -190,7 +190,7 @@
                     android:text="@string/see_all"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/mainTheme"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/main_best_seller_image"
                     android:layout_marginEnd="20dp"

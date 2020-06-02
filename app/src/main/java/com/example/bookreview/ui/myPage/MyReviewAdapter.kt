@@ -66,7 +66,10 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
 
         fun bind(review: Review){
             reviewBookName?.text = review.bookName
-            reviewRating?.rating = review.star.toFloat()
+
+            reviewRating?.rating = review.star?.toFloat()!!
+
+
             reviewDate?.text = review.date
             reviewText?.text = review.content
             reviewGenre?.text = review.bookGenre

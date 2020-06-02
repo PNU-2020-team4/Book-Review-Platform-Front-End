@@ -29,7 +29,6 @@ class MainBestSellerAdapter (private val viewModel: MainViewModel): RecyclerView
             holder.view.popular_item_title.text = item.title
             holder.view.popular_item_author.text = item.author
             holder.view.setOnClickListener {
-
             }
         }
     }

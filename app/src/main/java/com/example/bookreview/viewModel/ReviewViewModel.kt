@@ -2,8 +2,11 @@ package com.example.bookreview.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+
 import com.example.bookreview.dto.ServerResponse
 import com.example.bookreview.repository.ServerRepository
+import com.example.bookreview.ui.review.Review
+
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -32,6 +35,11 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
 
     fun requestAllReviews(success: (ServerResponse) -> Unit) {
         apiCall(serverRepository.getAllReviewResponse(), Consumer {
+            success(it)
+        })
+    }
+    fun writeReview(review : Review, success: (ServerResponse) -> Unit){
+        apiCall(serverRepository.postMyReviewResponse(review), Consumer {
             success(it)
         })
     }

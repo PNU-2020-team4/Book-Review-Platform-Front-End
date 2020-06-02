@@ -116,19 +116,16 @@ class MainViewModel(private val serverRepository: ServerRepository,
         apiCall(naverOAuthRepository.getUserInfo(accessToken),
         onSuccess = Consumer { it ->
             Log.e("test user info name",it.response.name)
-
+            Log.e("test user info email",it.response.email)
             Log.e("test user info image",it.response.profile_image)
             Log.e("test user info id", it.response.id)
+
             userProfileImageSrc = it.response.profile_image
-
             id = it.response.id
-
-            Log.e("test user info email",it.response.email)
 
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
 
-            Log.e("test user info id",id)
 
             // set USER ID
 //            val body =

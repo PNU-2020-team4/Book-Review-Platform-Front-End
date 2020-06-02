@@ -21,6 +21,10 @@ interface ServerService {
     @FormUrlEncoded
     fun getReview(@FieldMap(encoded = true) response: Map<String,String>) : Single<ServerResponse>
 
+    @POST("/review/insert")
+    @FormUrlEncoded
+    fun postReview(@FieldMap(encoded = true) response: Map<String,String>) : Single<ServerResponse>
+
     @POST("/user/withdrawal")
     @FormUrlEncoded
     fun withdrawalUser(@FieldMap(encoded = true) response: Map<String, String>) : Single<ServerResponse>
@@ -29,7 +33,9 @@ interface ServerService {
     @FormUrlEncoded
     fun addHistory(@FieldMap(encoded = true) response : Map<String, String>) : Single<ServerResponse>
 
+
     @POST("/review/delete")
     @FormUrlEncoded
     fun delReview(@FieldMap(encoded = true) response : Map<String, String>) : Single<ServerResponse>
+
 }
