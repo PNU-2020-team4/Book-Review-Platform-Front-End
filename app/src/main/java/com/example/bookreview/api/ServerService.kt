@@ -20,4 +20,8 @@ interface ServerService {
     @POST("/review/get")
     @FormUrlEncoded
     fun getReview(@FieldMap(encoded = true) response: Map<String,String>) : Single<ServerResponse>
+
+    @POST("/hist/insert")
+    @FormUrlEncoded
+    fun addHistory(@FieldMap(encoded = true) response : Map<String, String>) : Single<ServerResponse>
 }

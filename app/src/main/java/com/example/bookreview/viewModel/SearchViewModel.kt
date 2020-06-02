@@ -79,4 +79,6 @@ class SearchViewModel(private val naverBookSearchRepository: NaverBookSearchRepo
             }
         })
     }
+
+
 }
