@@ -65,6 +65,7 @@ class SearchActivity : AppCompatActivity() {
                 .putExtra("author", viewModel.author)
                 .putExtra("price", viewModel.price))
         })
+
         search_box_book.let { searchView ->
             searchView.setOnClickListener {
                 searchView.isIconified = false

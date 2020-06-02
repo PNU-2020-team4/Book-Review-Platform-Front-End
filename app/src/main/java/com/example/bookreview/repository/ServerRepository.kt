@@ -12,7 +12,6 @@ interface ServerRepository {
     fun getWithdrawalResponse(userId: String) : Single<ServerResponse>
     fun getMyReviewResponse(userId: String) : Single<ServerResponse>
 
-    fun getMyReviewResponse() : Single<ServerResponse>
     fun addHistory(bookTitle:String?, bookAuthor:String?, userID:String?) : Single<ServerResponse>
 
 }

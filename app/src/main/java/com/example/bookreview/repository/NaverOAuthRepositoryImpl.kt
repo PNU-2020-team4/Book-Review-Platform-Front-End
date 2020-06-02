@@ -11,9 +11,7 @@ import com.example.bookreview.dto.*
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import io.reactivex.Single
-import okhttp3.RequestBody
 import okhttp3.ResponseBody
-
 
 class NaverOAuthRepositoryImpl constructor(private val userService: UserService,
                                            private val refreshService: RefreshService,
