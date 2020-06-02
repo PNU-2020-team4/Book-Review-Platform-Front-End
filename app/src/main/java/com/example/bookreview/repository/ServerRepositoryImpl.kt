@@ -17,12 +17,14 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
     /* review */
     override fun getAllReviewResponse(): Single<ServerResponse> {
         val params = HashMap<String, String>()
+        Log.e("all review param : " , params.toString())
         params["data"] = Gson().toJson(mapOf("writer" to -1))
         return serverService.getReview(params)
     }
 
     override fun getMyReviewResponse(userId: String): Single<ServerResponse> {
         val params = HashMap<String, String>()
+        Log.e("param : " , params.toString())
         params["data"] = Gson().toJson(mapOf("writer" to userId))
         return serverService.getReview(params)
     }
@@ -41,6 +43,14 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
                                 "star" to review.star
                                ))
         return serverService.postReview(params)
+      
+    override fun delMyReviewResponse(idx: Int): Single<ServerResponse> {
+        val params = HashMap<String, String>()
+        params["data"] = Gson().toJson(mapOf("idx" to idx))
+        val retMsg = serverService.delReview(params)
+        Log.e("ret msg : ", retMsg.toString())
+        return retMsg
+
     }
 
     override fun getWithdrawalResponse(userId: String): Single<ServerResponse> {

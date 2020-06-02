@@ -126,6 +126,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
 
+
             // set USER ID
 //            val body =
 //                "\"{\\\"age\\\":${it.response.age},\\\"birthday\\\":${it.response.birthday},\\\"email\\\":${it.response.email},\\\"gender\\\":${it.response.gender},\\\"id\\\":${it.response.id},\\\"name\\\":${it.response.name},\\\"nickname\\\":${it.response.nickname},\\\"profile_image\\\":${it.response.profile_image}}\"".toRequestBody(
