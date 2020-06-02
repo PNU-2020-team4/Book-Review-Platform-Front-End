@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/selected_review_back_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/back_button"
+            android:backgroundTint="#0ABAB5"
+            android:backgroundTintMode="multiply"
+            app:layout_constraintBottom_toTopOf="@+id/write_review_star"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/contentDescription" />
+
+        <TextView
+            android:id="@+id/selected_review_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:foregroundGravity="center"
+            android:text="@string/review_title"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/selected_review_modify_button"
+            app:layout_constraintStart_toStartOf="@+id/selected_review_back_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/selected_review_modify_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/review_modify_button"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider14"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#808080"
+            app:layout_constraintTop_toBottomOf="@id/selected_review_title" />
+
+        <RatingBar
+            android:id="@+id/selected_review_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:clickable="false"
+            app:layout_constraintBottom_toTopOf="@+id/selected_review_editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selected_review_back_button" />
+
+        <View
+            android:id="@+id/divider15"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#808080"
+            app:layout_constraintTop_toBottomOf="@id/selected_review_star" />
+
+        <EditText
+            android:id="@+id/selected_review_editText"
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="30dp"
+            android:autofillHints="@string/write_review"
+            android:background="@drawable/border"
+            android:clickable="false"
+            android:inputType="textMultiLine|textNoSuggestions"
+            android:maxLength="1000"
+            android:textCursorDrawable="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selected_review_star" />
+
+        <TextView
+            android:id="@+id/selected_review_text_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/default_editText_num"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/selected_review_editText"
+            app:layout_constraintTop_toBottomOf="@+id/selected_review_editText" />
+
+        <View
+            android:id="@+id/divider16"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#808080"
+            app:layout_constraintBottom_toTopOf="@id/selected_review_user_image_text"
+            app:layout_constraintTop_toBottomOf="@id/selected_review_text_num" />
+
+        <TextView
+            android:id="@+id/selected_review_user_image_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/review_user_image_text"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/selected_review_editText"
+            app:layout_constraintTop_toBottomOf="@id/divider16" />
+
+        <ImageView
+            android:id="@+id/selected_review_image"
+            android:layout_width="232dp"
+            android:layout_height="148dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/contentDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selected_review_image_button"
+            app:srcCompat="@drawable/application_icon" />
+
+        <Button
+            android:id="@+id/selected_review_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/review_user_image_button"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/selected_review_text_num"
+            app:layout_constraintTop_toBottomOf="@id/divider16" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:clickable="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selected_review_image"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
