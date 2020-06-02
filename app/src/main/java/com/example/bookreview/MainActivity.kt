@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.book.*
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
     private lateinit var adapter : MainBestSellerAdapter
+    private var userId : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +43,12 @@ class MainActivity : AppCompatActivity() {
             statusBarColor = Color.WHITE
         }
 
+        if (intent.hasExtra("userId"))
+            userId = intent.getStringExtra("userId")
+
         main_search.setOnClickListener {
             val nextIntent = Intent(this, SearchActivity::class.java)
+            nextIntent.putExtra("ID", userId)
             startActivity(nextIntent)
         }
 

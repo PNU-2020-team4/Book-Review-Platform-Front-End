@@ -51,6 +51,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
     val isLoadPopularListFinished:LiveData<Any>
         get() = _isLoadPopularListFinished
 
+    var userID : String? = null
     var userProfileImageSrc : String? = null
 
     var popularBookList = ArrayList<BestSeller>()
@@ -122,11 +123,18 @@ class MainViewModel(private val serverRepository: ServerRepository,
         apiCall(naverOAuthRepository.getUserInfo(accessToken),
         onSuccess = Consumer { it ->
             Log.e("test user info name",it.response.name)
+
             Log.e("test user info image",it.response.profile_image)
             userProfileImageSrc = it.response.profile_image
+
             Log.e("test user info email",it.response.email)
+
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
+            userID = response.id;
+            Log.e("test user info id",userID)
+
+            // set USER ID
 //            val body =
 //                "\"{\\\"age\\\":${it.response.age},\\\"birthday\\\":${it.response.birthday},\\\"email\\\":${it.response.email},\\\"gender\\\":${it.response.gender},\\\"id\\\":${it.response.id},\\\"name\\\":${it.response.name},\\\"nickname\\\":${it.response.nickname},\\\"profile_image\\\":${it.response.profile_image}}\"".toRequestBody(
 //                    "text/plain".toMediaTypeOrNull()
@@ -152,6 +160,8 @@ class MainViewModel(private val serverRepository: ServerRepository,
             Log.e("ERROR","ERROR : Get User Info ERROR")
         }, indicator = false)
     }
+
+
 
     fun loadBestSeller(){
         apiCall(jsoupRepository.requestBestSeller(),

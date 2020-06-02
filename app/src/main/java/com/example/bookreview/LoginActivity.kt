@@ -40,7 +40,9 @@ class LoginActivity : AppCompatActivity() {
             }
         })
         viewModel.isLoginFinished.observe(this, Observer {
-            startActivity(Intent(applicationContext, MainActivity::class.java).putExtra("profileImage", viewModel.userProfileImageSrc))
+            startActivity(Intent(applicationContext, MainActivity::class.java)
+                .putExtra("profileImage", viewModel.userProfileImageSrc)
+                .putExtra("userId", viewModel.userID))
             finish()
         })
         this.window.apply {
