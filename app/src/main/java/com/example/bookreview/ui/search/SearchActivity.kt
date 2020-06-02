@@ -33,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
             userID = intent.getStringExtra("ID")
 
         } else {
-            Toast.makeText(this, "전달된 사용자 이메일이 없습니다", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "전달된 사용자 아이디가 없습니다", Toast.LENGTH_SHORT).show()
         }
 
         adapter = SearchBookAdapter(viewModel)
