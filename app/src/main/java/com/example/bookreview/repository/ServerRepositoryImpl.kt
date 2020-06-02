@@ -43,7 +43,7 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
                                 "star" to review.star
                                ))
         return serverService.postReview(params)
-      
+    }
     override fun delMyReviewResponse(idx: Int): Single<ServerResponse> {
         val params = HashMap<String, String>()
         params["data"] = Gson().toJson(mapOf("idx" to idx))
