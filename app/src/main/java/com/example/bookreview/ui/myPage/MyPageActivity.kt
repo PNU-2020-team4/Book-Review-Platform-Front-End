@@ -42,6 +42,10 @@ class MyPageActivity : AppCompatActivity() {
             startActivity(Intent(this, ScrapActivity::class.java))
         }
 
-
+        my_page_withdrawal_button.setOnClickListener {
+            val nextIntent = Intent(this, WithdrawalActivity::class.java)
+            nextIntent.putExtra("userId", id)
+            startActivity(nextIntent)
+        }
     }
 }
