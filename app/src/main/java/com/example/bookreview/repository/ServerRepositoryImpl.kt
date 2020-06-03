@@ -61,11 +61,11 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
 
     /* book + history */
 
-    override fun addHistory(bookTitle:String?, bookAuthor:String?, userID:String?): Single<ServerResponse> {
+    override fun addHistory(bookIdx:String?, bookTitle:String?, bookAuthor:String?, userID:String?): Single<ServerResponse> {
         Log.d("EE", "addHistory()")
         val params = HashMap<String, String>()
         // TODO :: need to change
-        params["data"] = Gson().toJson(mapOf("id" to userID, "author" to bookAuthor, "title" to bookTitle))
+        params["data"] = Gson().toJson(mapOf("idx" to bookIdx, "id" to userID, "author" to bookAuthor, "title" to bookTitle))
         return serverService.addHistory(params)
     }
     /* post */

@@ -18,8 +18,8 @@ class HistoryViewModel(private val serverRepository: ServerRepository): ViewMode
         compositeDisposable.add(disposable)
     }
 
-    fun addMyHistory(bookTitle:String?, bookAuthor:String?, userID:String?,success: (ServerResponse) -> Unit) {
-        apiCall(serverRepository.addHistory(bookTitle, bookAuthor, userID), Consumer {
+    fun addMyHistory(bookId : String?, bookTitle:String?, bookAuthor:String?, userID:String?,success: (ServerResponse) -> Unit) {
+        apiCall(serverRepository.addHistory(bookId, bookTitle, bookAuthor, userID), Consumer {
             success(it)
         })
     }

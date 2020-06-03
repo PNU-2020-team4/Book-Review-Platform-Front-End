@@ -14,41 +14,41 @@ class Review(
     var bookName : String? = "",
     var bookAuthor : String? = "",
     var nickname: String = "",
-    var bookGenre: String = ""
+    var bookGenre: String? = ""
 ) {
     val pattern = "yyyy-MM-dd"
     val simpleDateFormat = SimpleDateFormat(pattern, Locale.KOREA)
     fun jsonToObject(obj: JsonObject): Review {
         obj.get("idx")?.let {
-            this.idx = obj.get("idx").asString
+            this.idx = obj.get("idx").toString()
         }
         obj.get("writer")?.let {
-            this.writer = obj.get("writer").asString
+            this.writer = obj.get("writer").toString()
         }
         obj.get("content")?.let {
-            this.content = obj.get("content").asString
+            this.content = obj.get("content").toString()
         }
         obj.get("star")?.let {
-            this.star = obj.get("star").asString
+            this.star = obj.get("star").toString()
         }
         obj.get("date")?.let {
 
             this.date = simpleDateFormat.format(Date(obj.get("date").asLong))
         }
         obj.get("bookId")?.let {
-            this.bookId = obj.get("bookId").asString
+            this.bookId = obj.get("bookId").toString()
         }
         obj.get("bookName")?.let {
-            this.bookName = obj.get("bookName").asString
+            this.bookName = obj.get("bookName").toString()
         }
         obj.get("bookAuthor")?.let {
-            this.bookAuthor = obj.get("bookAuthor").asString
+            this.bookAuthor = obj.get("bookAuthor").toString()
         }
         obj.get("nickname")?.let {
-            this.nickname = obj.get("nickname").asString
+            this.nickname = obj.get("nickname").toString()
         }
         obj.get("bookGenre")?.let {
-            this.bookGenre = obj.get("bookGenre").asString
+            this.bookGenre = obj.get("bookGenre").toString()
         }
         return this
     }

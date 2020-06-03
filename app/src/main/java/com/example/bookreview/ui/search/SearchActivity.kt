@@ -52,7 +52,7 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel.isBookClicked.observe(this, Observer {
 
-            historyViewModel.addMyHistory(viewModel.title, viewModel.author, userID) {
+            historyViewModel.addMyHistory(viewModel.clickedBid, viewModel.title, viewModel.author, userID) {
                 it.resultCode?.let {code->
                     Log.d("Result Code", code.toString())
                 }

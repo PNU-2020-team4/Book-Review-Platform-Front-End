@@ -17,6 +17,6 @@ interface ServerRepository {
 
 
 
-    fun addHistory(bookTitle:String?, bookAuthor:String?, userID:String?) : Single<ServerResponse>
+    fun addHistory(bookIdx:String?, bookTitle:String?, bookAuthor:String?, userID:String?) : Single<ServerResponse>
 
 }
