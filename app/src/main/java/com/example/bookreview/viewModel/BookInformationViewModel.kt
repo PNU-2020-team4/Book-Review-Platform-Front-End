@@ -34,6 +34,7 @@ class BookInformationViewModel(private val jsoupRepository: JsoupRepository) : V
 
     var title:String? = null
     var desc:String? = null
+    var link:String? = null
     var imageSrc:String? = null
     var price:String? = null
     var author:String? = null

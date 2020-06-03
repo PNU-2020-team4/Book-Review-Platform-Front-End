@@ -43,6 +43,7 @@ class SearchBookAdapter(private val viewModel: SearchViewModel) : RecyclerView.A
                     viewModel.title = title
                     viewModel.author = item.author
                     viewModel.price = item.price
+                    viewModel.link = item.link
                     viewModel.invokeClick()
                 }
             }

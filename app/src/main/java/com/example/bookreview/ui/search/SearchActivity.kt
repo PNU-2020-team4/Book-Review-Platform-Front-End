@@ -52,18 +52,20 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel.isBookClicked.observe(this, Observer {
 
-            historyViewModel.addMyHistory(viewModel.title, viewModel.author, userID) {
+            historyViewModel.addMyHistory(viewModel.clickedBid, viewModel.title, viewModel.author, userID) {
                 it.resultCode?.let {code->
                     Log.d("Result Code", code.toString())
                 }
             }
 
             startActivity(Intent(this, BookInformationActivity::class.java)
+                .putExtra("uid", userID)
                 .putExtra("bid", viewModel.clickedBid)
                 .putExtra("imageUrl", viewModel.imageUrl)
                 .putExtra("title", viewModel.title)
                 .putExtra("author", viewModel.author)
-                .putExtra("price", viewModel.price))
+                .putExtra("price", viewModel.price)
+                .putExtra("link", viewModel.link))
         })
 
         search_box_book.let { searchView ->
