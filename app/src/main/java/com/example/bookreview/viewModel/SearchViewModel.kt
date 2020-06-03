@@ -31,6 +31,7 @@ class SearchViewModel(private val naverBookSearchRepository: NaverBookSearchRepo
 
     var bookList: ArrayList<Item> = ArrayList()
 
+    var link : String? = null
     var clickedBid : String? = null
     var imageUrl : String? = null
     var title : String? = null
