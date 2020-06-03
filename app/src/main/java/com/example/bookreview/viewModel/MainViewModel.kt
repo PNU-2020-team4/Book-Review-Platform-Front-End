@@ -34,6 +34,9 @@ class MainViewModel(private val serverRepository: ServerRepository,
     private val _isLoginFinished: SingleLiveEvent<Any> = SingleLiveEvent()
     val isLoginFinished: LiveData<Any>
         get() = _isLoginFinished
+    private val _isPostFinished: SingleLiveEvent<Any> = SingleLiveEvent()
+    val isPostFinished: LiveData<Any>
+        get() = _isPostFinished
     private val _startLoadingIndicatorEvent: SingleLiveEvent<Any> = SingleLiveEvent()
     val startLoadingIndicatorEvent:LiveData<Any>
         get() = _startLoadingIndicatorEvent
@@ -79,52 +82,12 @@ class MainViewModel(private val serverRepository: ServerRepository,
             .subscribe(onSuccess, onError))
     }
 
-    fun testLoad(){
-        apiCall(serverRepository.requestResponse(),
-        Consumer {
-            Log.e("test",it.responseCode)
-        })
-    }
-
     fun testLogin(activity: Activity){
-        startLoadingIndicator()
-        if(preferences.getString("REFRESH_TOKEN",null) == null){
-            apiCall(naverOAuthRepository.getLoginModule(activity),
-                Consumer {
-                    Log.e("REFRESH TOKEN 없음 : 재요청 결과 access token",it.accessToken)
-                    Log.e("REFRESH TOKEN 없음 : 재요청 결과 refresh token",it.refreshToken)
-                    testGetUserInfo(it.accessToken)
-                },
-            onError = Consumer {
-                stopLoadingIndicator()
-                Log.e("ERROR" , "ERROR : REFRESH ERROR")
-            },
-            indicator = false
-            )
-        }
-        else{
-            apiCall(naverOAuthRepository.refreshAccessToken(preferences.getString("REFRESH_TOKEN",null)!!),
-                onSuccess = Consumer {
-                    Log.e("refreshed access token",it.access_token)
-                    preferences.edit().putString("ACCESS_TOKEN", it.access_token).apply()
-                    testGetUserInfo(it.access_token)
-            },
-                onError = Consumer {
-                    stopLoadingIndicator()
-                    apiCall(naverOAuthRepository.getLoginModule(activity),
-                        Consumer {
-                            Log.e("refresh token 만료 : 결과 access token",it.accessToken)
-                            Log.e("refresh token 만료 : 결과 refresh token",it.refreshToken)
-                            testGetUserInfo(it.accessToken)
-                        })
-                },
-                indicator = false
-            )
-        }
+        module.startOauthLoginActivity(activity, LoginHandler(activity, module, preferences))
     }
 
-    fun testGetUserInfo(accessToken : String){
-        apiCall(naverOAuthRepository.getUserInfo(accessToken),
+    fun getUserInfo(){
+        apiCall(naverOAuthRepository.getUserInfo(preferences.getString("ACCESS_TOKEN",null)!!),
         onSuccess = Consumer { it ->
             Log.e("test user info name",it.response.name)
             Log.e("test user info email",it.response.email)
@@ -138,20 +101,13 @@ class MainViewModel(private val serverRepository: ServerRepository,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
 
 
-            // set USER ID
-//            val body =
-//                "\"{\\\"age\\\":${it.response.age},\\\"birthday\\\":${it.response.birthday},\\\"email\\\":${it.response.email},\\\"gender\\\":${it.response.gender},\\\"id\\\":${it.response.id},\\\"name\\\":${it.response.name},\\\"nickname\\\":${it.response.nickname},\\\"profile_image\\\":${it.response.profile_image}}\"".toRequestBody(
-//                    "text/plain".toMediaTypeOrNull()
-//                )
-            //Log.e("리스폰스 스트링", "\"{\"age\":${it.response.age},\"birthday\":${it.response.birthday},\"email\":${it.response.email},\"gender\":${it.response.gender},\"id\":${it.response.id},\"name\":${it.response.name},\"nickname\":${it.response.nickname},\"profile_image\":${it.response.profile_image}}\"")
-
             val params = HashMap<String, String>()
             params["data"] = Gson().toJson(response)
             apiCall(naverOAuthRepository.postUserInfo(params),
             onSuccess = Consumer {
                 stopLoadingIndicator()
                 Log.e("서버 전송 완료",it.string())
-                _isLoginFinished.call()
+                _isPostFinished.call()
             },
                 onError = Consumer {
                     stopLoadingIndicator()
@@ -217,13 +173,28 @@ class MainViewModel(private val serverRepository: ServerRepository,
         return popularBookList[position]
     }
 
-    fun verifyAccessToken(accessToken: String) : Boolean{
-        var result : Boolean = false
-        apiCall(naverOAuthRepository.verifyAccessToken(accessToken),
-        onSuccess = Consumer {
-            result = it.resultcode == "00"
-        })
-        return result
+    inner class LoginHandler(val context: Context, val module : OAuthLogin, val preferences: SharedPreferences) : OAuthLoginHandler() {
+        override fun run(success: Boolean) {
+            if (success) {
+                val accessToken = module.getAccessToken(context)
+                val refreshToken = module.getRefreshToken(context)
+                val expiresAt = module.getExpiresAt(context)
+                Log.e("Access Token", module.getAccessToken(context))
+                Log.e("Refresh Token", module.getRefreshToken(context))
+                Log.e("Expires At", expiresAt.toString())
+                preferences.edit().putString("ACCESS_TOKEN", accessToken).apply()
+                preferences.edit().putString("REFRESH_TOKEN", refreshToken).apply()
+                _isLoginFinished.call()
+            } else {
+                val errorCode: String =
+                    module.getLastErrorCode(context).getCode()
+                val errorDesc: String = module.getLastErrorDesc(context)
+                Toast.makeText(
+                    context, "errorCode:" + errorCode
+                            + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     fun startLoadingIndicator(){
