@@ -1,18 +1,19 @@
 package com.example.bookreview.viewModel
 
 import android.app.Activity
+import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.bookreview.dto.BestSeller
 import com.example.bookreview.dto.Response
-import com.example.bookreview.repository.JsoupRepository
-import com.example.bookreview.repository.KyoboRepository
-import com.example.bookreview.repository.NaverOAuthRepository
-import com.example.bookreview.repository.ServerRepository
+import com.example.bookreview.repository.*
 import com.example.bookreview.utils.SingleLiveEvent
 import com.google.gson.Gson
+import com.nhn.android.naverlogin.OAuthLogin
+import com.nhn.android.naverlogin.OAuthLoginHandler
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit
 class MainViewModel(private val serverRepository: ServerRepository,
                     private val naverOAuthRepository: NaverOAuthRepository,
                     private val jsoupRepository: JsoupRepository,
+                    private val module : OAuthLogin,
                     private val preferences: SharedPreferences
 ) : ViewModel() {
     private val _isLoginFinished: SingleLiveEvent<Any> = SingleLiveEvent()
@@ -44,10 +46,20 @@ class MainViewModel(private val serverRepository: ServerRepository,
     private val _isLoadPopularListFinished: SingleLiveEvent<Any> = SingleLiveEvent()
     val isLoadPopularListFinished:LiveData<Any>
         get() = _isLoadPopularListFinished
+    private val _isLoadBestSellerFinished: SingleLiveEvent<Any> = SingleLiveEvent()
+    val isLoadBestSellerFinished:LiveData<Any>
+        get() = _isLoadBestSellerFinished
+
 
     var userProfileImageSrc : String? = null
     var id : String? = null
     var popularBookList = ArrayList<BestSeller>()
+
+    var bestTitle : String? = null
+    var bestAuthor : String? = null
+    var bestStar : String? = null
+    var bestReviews : String? = null
+    var bestImage : String? = null
 
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
@@ -73,7 +85,6 @@ class MainViewModel(private val serverRepository: ServerRepository,
             Log.e("test",it.responseCode)
         })
     }
-
 
     fun testLogin(activity: Activity){
         startLoadingIndicator()
@@ -155,7 +166,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
 
 
 
-    fun loadBestSeller(){
+    fun loadPopularList(){
         apiCall(jsoupRepository.requestBestSeller(),
             Consumer {
                 val doc: Document = Jsoup.parse(it)
@@ -168,6 +179,27 @@ class MainViewModel(private val serverRepository: ServerRepository,
                     popularBookList.add(BestSeller(title,author,imageSrc))
                 }
                 _isLoadPopularListFinished.call()
+            }
+            ,onError = Consumer {
+                Log.e("ERROR", "Parsing HTMl ERROR!")
+            }
+            ,indicator = true)
+    }
+
+    fun loadBestSeller(bid : String){
+        apiCall(jsoupRepository.requestResponse(bid),
+            Consumer {
+
+                val doc: Document = Jsoup.parse(it)
+                val ele : Elements = doc.select("div[class=book_info_inner] div")
+                bestAuthor = ele[2].text().substringBefore("|").substringAfter("저자 ")
+                bestImage = doc.select("div[class=thumb_type] a img").attr("src")
+                var tempText = doc.select("div[class=book_info] h2 a").text()
+                var tempTextInSpan = doc.select("div[class=book_info] h2 a span").text()
+                bestTitle = tempText.replace(tempTextInSpan, "")
+                bestStar = doc.select("a[id=txt_desc_point] strong").text().substringBefore("점 ")
+                bestReviews = doc.select("a[id=txt_desc_point] strong").text().substringAfter("점 ")
+                _isLoadBestSellerFinished.call()
             }
             ,onError = Consumer {
                 Log.e("ERROR", "Parsing HTMl ERROR!")

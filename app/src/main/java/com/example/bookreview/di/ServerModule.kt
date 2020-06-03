@@ -8,6 +8,8 @@ import com.example.bookreview.dto.ServerResponse
 import com.example.bookreview.repository.*
 import com.example.bookreview.utils.ServerResponseDeserializer
 import com.google.gson.GsonBuilder
+import com.nhn.android.naverlogin.OAuthLogin
+import com.nhn.android.naverlogin.OAuthLoginHandler
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -31,6 +33,8 @@ val serverModule = module {
     single<NaverBookSearchRepository> { NaverBookSearchRepositoryImpl(get())}
     single<JsoupRepository> { JsoupRepositoryImpl(get())}
     single<KyoboRepository> { KyoboRepositoryImpl(get())}
+    //single<OAuthLoginHandler> { LoginHandler(get()) }
+    single { provideOAuthModule(get()) }
 
     single{ provideSettingsPreferences(androidApplication())}
 }
@@ -99,3 +103,13 @@ private const val PREFERENCES_FILE_KEY = "book_shared_preferences"
 
 private fun provideSettingsPreferences(app: Application): SharedPreferences =
     app.getSharedPreferences(PREFERENCES_FILE_KEY, Context.MODE_PRIVATE)
+
+private fun provideOAuthModule(context : Context) : OAuthLogin {
+    val module : OAuthLogin  = OAuthLogin.getInstance()
+    module.init(context, "cQe05FZLRimt6zrnOU14", "X4_MYg00nR", "BookReview")
+    return module
+}
+
+
+
+

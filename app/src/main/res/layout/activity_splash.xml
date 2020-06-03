@@ -4,14 +4,20 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/splash_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"/>
     <ImageView
         android:id="@+id/splash_icon"
         android:layout_width="144dp"
         android:layout_height="218dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toBottomOf="@+id/splash_guide"
+        android:layout_marginTop="50dp"
         android:src="@drawable/application_icon"/>
     <TextView
         android:id="@+id/splash_title"

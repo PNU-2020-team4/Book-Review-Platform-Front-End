@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel{
-        MainViewModel(get(),get(),get(),get())
+        MainViewModel(get(),get(),get(),get(), get())
     }
     viewModel {
         SearchViewModel(get())
@@ -19,5 +19,8 @@ val viewModelModule = module {
     }
     viewModel {
         HistoryViewModel(get())
+    }
+    viewModel {
+        SplashViewModel(get(), get(), get(), get())
     }
 }

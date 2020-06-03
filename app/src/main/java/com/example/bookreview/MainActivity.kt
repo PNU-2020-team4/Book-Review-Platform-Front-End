@@ -17,6 +17,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.book.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -59,7 +60,16 @@ class MainActivity : AppCompatActivity() {
 
         Picasso.get().load(profileImage).into(main_user_button)
 
-        viewModel.loadBestSeller()
+        viewModel.loadBestSeller("16329560")
+        viewModel.isLoadBestSellerFinished.observe(this, Observer {
+            Picasso.get().load(viewModel.bestImage).into(main_best_seller_image)
+            main_best_seller_author.text = viewModel.bestAuthor
+            main_best_seller_title.text = viewModel.bestTitle
+            main_best_seller_star.rating = (viewModel.bestStar!!.toFloat()/2.0).toFloat()
+            main_best_seller_review_number.text = viewModel.bestReviews
+        })
+
+        viewModel.loadPopularList()
         viewModel.isLoadPopularListFinished.observe(this, Observer {
             adapter.notifyDataSetChanged()
         })
