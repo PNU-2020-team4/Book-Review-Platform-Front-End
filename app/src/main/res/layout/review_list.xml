@@ -18,8 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Book Name"
+        android:maxLines="1"
+        android:maxLength="34"
         android:textStyle="bold"
         android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,14 +91,12 @@
         android:id="@+id/delBtn"
         android:layout_width="60dp"
         android:layout_height="35dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="48dp"
         android:background="@drawable/shadow"
         android:text="삭제"
         android:textColor="@color/ic_launcher_background"
         android:textSize="8sp"
         app:iconTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

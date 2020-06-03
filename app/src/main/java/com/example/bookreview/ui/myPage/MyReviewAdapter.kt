@@ -65,15 +65,16 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
         }
 
         fun bind(review: Review){
-            reviewBookName?.text = review.bookName
+            var bn = review.bookName!!
+            if (bn.length > 29) {
+                bn = review.bookName!!.substring(0, 30) + "..."
+            }
+            reviewBookName?.text = bn
 
             reviewRating?.rating = review.star?.toFloat()!!
-
-
             reviewDate?.text = review.date
             reviewText?.text = review.content
             reviewGenre?.text = review.bookGenre
-
 
             delBtn?.setOnClickListener {
                 val idx = review.idx

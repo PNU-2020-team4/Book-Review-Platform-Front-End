@@ -32,7 +32,6 @@ class Review(
             this.star = obj.get("star").toString()
         }
         obj.get("date")?.let {
-
             this.date = simpleDateFormat.format(Date(obj.get("date").asLong))
         }
         obj.get("bookId")?.let {
