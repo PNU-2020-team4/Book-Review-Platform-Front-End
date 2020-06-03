@@ -8,9 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import com.example.bookreview.R
-import com.example.bookreview.book.Book
-import com.example.bookreview.repository.ServerRepository
-import com.example.bookreview.repository.ServerRepositoryImpl
 import com.example.bookreview.ui.book.BookInformationActivity
 import com.example.bookreview.viewModel.HistoryViewModel
 import com.example.bookreview.viewModel.SearchViewModel
