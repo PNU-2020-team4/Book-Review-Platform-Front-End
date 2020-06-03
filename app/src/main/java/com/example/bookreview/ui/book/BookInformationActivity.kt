@@ -32,7 +32,7 @@ class BookInformationActivity : AppCompatActivity() {
         }
 
         val uid = intent.extras?.getString("uid")
-
+        val link = intent.extras?.getString("link")
         val bid = intent.extras?.getString("bid")
         val imageUrl = intent.extras?.getString("imageUrl")
         val title = intent.extras?.getString("title")
@@ -66,10 +66,9 @@ class BookInformationActivity : AppCompatActivity() {
         }
 
         book_information_share_button.setOnClickListener {
-            // TODO :: need to implement sharing feature
-            val link = "https://www.naver.com"
-            val text = "책 제목: {$title} \n저자: {$author} \n링크: {$link}"
-
+            val text = "책 제목: $title \n저자: $author \n링크: $link"
+            text.replace("<b>", "")
+            text.replace("</b>", "")
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, text)

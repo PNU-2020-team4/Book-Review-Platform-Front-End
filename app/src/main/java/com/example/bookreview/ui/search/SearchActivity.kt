@@ -64,7 +64,8 @@ class SearchActivity : AppCompatActivity() {
                 .putExtra("imageUrl", viewModel.imageUrl)
                 .putExtra("title", viewModel.title)
                 .putExtra("author", viewModel.author)
-                .putExtra("price", viewModel.price))
+                .putExtra("price", viewModel.price)
+                .putExtra("link", viewModel.link))
         })
 
         search_box_book.let { searchView ->
