@@ -66,8 +66,8 @@ fun provideServerRetrofit(okHttpClient: OkHttpClient): Retrofit {
     gsonBuilder.registerTypeAdapter(ServerResponse::class.java, ServerResponseDeserializer())
     val gson = gsonBuilder.create()
 
-//    return Retrofit.Builder().baseUrl("https://pnubookreview.herokuapp.com").client(okHttpClient)
-            return Retrofit.Builder().baseUrl("http://192.168.56.1:8080").client(okHttpClient)
+    return Retrofit.Builder().baseUrl("https://pnubookreview.herokuapp.com").client(okHttpClient)
+//            return Retrofit.Builder().baseUrl("http://192.168.56.1:8080").client(okHttpClient)
 
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(
