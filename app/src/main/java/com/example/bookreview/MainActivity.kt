@@ -28,14 +28,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setViewPager()
-        setTab()
 
         adapter = MainBestSellerAdapter(viewModel)
         main_popular_recycler.adapter = adapter
 
         val profileImage = intent.extras?.getString("profileImage")
         val id = intent.extras?.getString("id")
+        val email = intent.extras?.getString("mail")
+        val name = intent.extras?.getString("nickname")
+
         Log.e("On create Main , User profile : ", profileImage)
         Log.e("On create Main, User id : ", id)
         //status bar 투명하게 처리
@@ -53,8 +54,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         main_user_button.setOnClickListener {
-            val nextIntent = Intent(this, MyPageActivity::class.java).putExtra("profileImage",profileImage)
-            nextIntent.putExtra("id", id)
+            val nextIntent = Intent(this, MyPageActivity::class.java)
+                .putExtra("profileImage",profileImage)
+                .putExtra("id", id)
+                .putExtra("mail", email)
+                .putExtra("nickname", name)
             startActivity(nextIntent)
         }
 
@@ -80,25 +84,25 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun setViewPager() {
-        viewpager.adapter = object : FragmentStateAdapter(this) {
-
-            override fun createFragment(position: Int): Fragment {
-                return ResourceStore.pagerFragments[position]
-            }
-
-            override fun getItemCount(): Int {
-                return ResourceStore.tabList.size
-            }
-        }
-    }
-
-    private fun setTab() {
-        TabLayoutMediator(tab_layout, viewpager) { tab : TabLayout.Tab, position ->
-            tab.text = ResourceStore.tabList[position]
-            main_title.setOnClickListener(){
-                viewpager.setCurrentItem(TabLayout.Tab.INVALID_POSITION, true)
-            }
-        }.attach()
-    }
+//    private fun setViewPager() {
+//        viewpager.adapter = object : FragmentStateAdapter(this) {
+//
+//            override fun createFragment(position: Int): Fragment {
+//                return ResourceStore.pagerFragments[position]
+//            }
+//
+//            override fun getItemCount(): Int {
+//                return ResourceStore.tabList.size
+//            }
+//        }
+//    }
+//
+//    private fun setTab() {
+//        TabLayoutMediator(tab_layout, viewpager) { tab : TabLayout.Tab, position ->
+//            tab.text = ResourceStore.tabList[position]
+//            main_title.setOnClickListener(){
+//                viewpager.setCurrentItem(TabLayout.Tab.INVALID_POSITION, true)
+//            }
+//        }.attach()
+//    }
 }

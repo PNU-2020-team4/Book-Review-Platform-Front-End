@@ -7,6 +7,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="transparent">#00ffffff</color>
+    <color name="grey_trans">#BFBFBF</color>
+    <color name="grey_trans_2">#77D1D1D1</color>
     <color name="shadow"><gradient android:startColor="#dddddd" android:endColor="#000000"/></color>
 
 </resources>

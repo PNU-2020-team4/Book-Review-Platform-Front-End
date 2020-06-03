@@ -33,7 +33,12 @@ class SplashActivity : AppCompatActivity() {
         })
 
         viewModel.isPostFinished.observe(this, Observer {
-            startActivity(Intent(applicationContext, MainActivity::class.java).putExtra("profileImage", viewModel.userProfileImageSrc).putExtra("id", viewModel.id))
+            startActivity(Intent(applicationContext, MainActivity::class.java)
+                .putExtra("profileImage", viewModel.userProfileImageSrc)
+                .putExtra("id", viewModel.id)
+                .putExtra("mail", viewModel.mail)
+                .putExtra("nickname", viewModel.name))
+
 
             finish()
         })

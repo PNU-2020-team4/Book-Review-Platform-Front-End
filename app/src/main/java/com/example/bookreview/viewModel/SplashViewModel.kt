@@ -43,6 +43,8 @@ class SplashViewModel(private val serverRepository: ServerRepository,
 
     var userProfileImageSrc : String? = null
     var id : String? = null
+    var mail : String? = null
+    var name : String? = null
 
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
@@ -81,9 +83,12 @@ class SplashViewModel(private val serverRepository: ServerRepository,
                 Log.e("test user info email",it.response.email)
                 Log.e("test user info image",it.response.profile_image)
                 Log.e("test user info id", it.response.id)
+                Log.e("test user info nickname", it.response.nickname)
 
                 userProfileImageSrc = it.response.profile_image
                 id = it.response.id
+                mail = it.response.email
+                name = it.response.nickname
 
                 val response =  Response(it.response.age,it.response.birthday,it.response.email,
                     it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)

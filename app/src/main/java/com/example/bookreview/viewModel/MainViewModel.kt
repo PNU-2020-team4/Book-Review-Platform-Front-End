@@ -56,6 +56,8 @@ class MainViewModel(private val serverRepository: ServerRepository,
 
     var userProfileImageSrc : String? = null
     var id : String? = null
+    var mail : String? = null
+    var name : String? = null
     var popularBookList = ArrayList<BestSeller>()
 
     var bestTitle : String? = null
@@ -96,6 +98,8 @@ class MainViewModel(private val serverRepository: ServerRepository,
 
             userProfileImageSrc = it.response.profile_image
             id = it.response.id
+            mail = it.response.email
+            name = it.response.nickname
 
             val response =  Response(it.response.age,it.response.birthday,it.response.email,
                 it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
