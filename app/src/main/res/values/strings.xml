@@ -25,4 +25,8 @@
     <string name="write_review">리뷰 쓰기</string>
     <string name="post">등록</string>
     <string name="default_editText_num">0 / 1,000 글자 수</string>
+    <string name="my_account_text">내 계정</string>
+    <string name="change_nickname">닉네임 변경</string>
+    <string name="withdrawal_text"> 회원 탈퇴</string>
+    <string name="my_activity_text">내 활동</string>
 </resources>
