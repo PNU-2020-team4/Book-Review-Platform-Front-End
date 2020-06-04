@@ -3,6 +3,7 @@ package com.example.bookreview.ui.myPage
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
@@ -37,7 +38,8 @@ class MyReviewActivity : AppCompatActivity(){
                 val myReviewAdapter = MyReviewAdapter(
                     applicationContext,
                     myReviewList,
-                    viewModel
+                    viewModel,
+                    this
                 )
                 my_review_recyclerView.adapter = myReviewAdapter
             }
