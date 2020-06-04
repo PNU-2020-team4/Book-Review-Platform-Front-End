@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
 import com.example.bookreview.api.ServerService
@@ -19,8 +22,7 @@ import kotlinx.android.synthetic.main.review_list.view.*
 import okhttp3.internal.notify
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MyReviewAdapter(private val context: Context, private val myReviewList: ArrayList<Review>, private val viewModel: ReviewViewModel) : RecyclerView.Adapter<MyReviewAdapter.MyReviewViewHolder>(){
-    var appcom = AppCompatActivity()
+class MyReviewAdapter(private val context: Context, private val myReviewList: ArrayList<Review>, private val viewModel: ReviewViewModel, private val ctx:Context) : RecyclerView.Adapter<MyReviewAdapter.MyReviewViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyReviewViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return MyReviewViewHolder(
@@ -77,13 +79,35 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
             reviewGenre?.text = review.bookGenre
 
             delBtn?.setOnClickListener {
+                showSettingPopup(review)
+
+            }
+        }
+        fun showSettingPopup(review: Review) {
+
+            val builder = AlertDialog.Builder(ctx)
+
+            builder.setTitle("삭제 확인")
+            builder.setMessage("정말 삭제 하시겠습니까?")
+            builder.setPositiveButton("삭제") {dialog, which ->
+                Toast.makeText(context, "삭제되었습니다", Toast.LENGTH_LONG).show()
                 val idx = review.idx
                 viewModel.delMyReview(idx.toInt()){}
                 myReviewList.removeAt(absoluteAdapterPosition)
                 notifyDataSetChanged()
-
             }
+            
+            builder.setNegativeButton("취소") {dialog, which ->
+                Toast.makeText(context, "취소하였습니다", Toast.LENGTH_LONG).show()
+            }
+
+            val dialog:AlertDialog = builder.create()
+
+            dialog.show()
+
         }
+
+
 
     }
 }
