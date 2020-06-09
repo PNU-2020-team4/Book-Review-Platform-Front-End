@@ -8,95 +8,101 @@
     android:layout_marginTop="2dp"
     android:layout_marginEnd="4dp"
     android:layout_marginBottom="2dp"
+    android:background="@drawable/item"
     android:padding="8dp"
     android:paddingTop="12dp"
-    android:paddingBottom="12dp"
-    android:background="@drawable/item">
+    android:paddingBottom="12dp">
 
     <TextView
         android:id="@+id/review_bookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Book Name"
-        android:maxLines="1"
         android:maxLength="34"
-        android:textStyle="bold"
+        android:maxLines="1"
+        android:text="Book Name"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RatingBar
         android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:isIndicator="true"
+        android:max="5"
         android:numStars="5"
         android:rating="3.5"
         android:stepSize="0.5"
         android:transformPivotX="0dp"
         android:transformPivotY="0dp"
-        android:isIndicator="true"
-        android:max="5"
-        style="?android:attr/ratingBarStyleSmall"
-        app:layout_constraintTop_toBottomOf="@id/review_bookName"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/review_bookName" />
+
     <View
         android:id="@+id/review_seperator"
         android:layout_width="1dp"
         android:layout_height="15dp"
         android:layout_marginStart="10dp"
         android:background="#955A5A5A"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/review_bookName"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/review_genre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:textSize="13sp"
         android:text="장르"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@id/review_seperator"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/review_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="2020.05.17"
         android:textSize="12sp"
-        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ratingBar"/>
+        app:layout_constraintTop_toBottomOf="@id/ratingBar" />
 
     <TextView
         android:id="@+id/review_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:text="리뷰 작성중입니다"
-        android:textSize="14sp"
         android:maxLength="90"
-        app:layout_constraintTop_toBottomOf="@id/review_date"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="리뷰 작성중입니다"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_date" />
 
-    <Button
+    <ImageButton
         android:id="@+id/delBtn"
-        android:layout_width="60dp"
-        android:layout_height="35dp"
-        android:background="@drawable/shadow"
-        android:text="삭제"
-        android:textColor="@color/ic_launcher_background"
-        android:textSize="8sp"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/delete_icon"
         app:iconTint="#FFFFFF"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/my_comment_share_button"
+        android:layout_width="32dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="316dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/ic_share_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

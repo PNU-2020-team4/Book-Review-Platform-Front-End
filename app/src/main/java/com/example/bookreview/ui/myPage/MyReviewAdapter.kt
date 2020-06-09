@@ -2,25 +2,20 @@ package com.example.bookreview.ui.myPage
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RatingBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
-import com.example.bookreview.api.ServerService
-import com.example.bookreview.repository.ServerRepositoryImpl
+
 import com.example.bookreview.ui.review.Review
 import com.example.bookreview.viewModel.ReviewViewModel
-import kotlinx.android.synthetic.main.review_list.view.*
-import okhttp3.internal.notify
-import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MyReviewAdapter(private val context: Context, private val myReviewList: ArrayList<Review>, private val viewModel: ReviewViewModel, private val ctx:Context) : RecyclerView.Adapter<MyReviewAdapter.MyReviewViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyReviewViewHolder {
@@ -52,7 +47,8 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
         private var reviewText : TextView? = null
         private var reviewRating : RatingBar? = null
         private var reviewGenre : TextView? = null
-        private var delBtn : Button? = null
+        private var delBtn : ImageButton? = null
+        private var shareBtn : ImageButton? = null
 
         init{
             reviewBookName = itemView.findViewById(R.id.review_bookName)
@@ -61,6 +57,7 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
             reviewRating = itemView.findViewById(R.id.ratingBar)
             reviewGenre = itemView.findViewById(R.id.review_genre)
             delBtn = itemView.findViewById(R.id.delBtn)
+            shareBtn = itemView.findViewById(R.id.my_comment_share_button)
 
             //reviewImg = itemView.findViewById(R.id.review_id)
 
@@ -80,7 +77,22 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
 
             delBtn?.setOnClickListener {
                 showSettingPopup(review)
+            }
 
+            shareBtn?.setOnClickListener {
+                val text = "책 이름 : ${review.bookName} \n 장르 : ${review.bookGenre} \n 내용 : ${review.content}"
+                text.replace("<b>", "")
+                text.replace("</b>", "")
+
+                val sendIntent:Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, text)
+                    type = "text/plain"
+                }
+                Log.e("In comment share : ", "after make sendIntent")
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                Log.e("In comment share : ", "after make shareIntent")
+                context.startActivity(shareIntent.addFlags(FLAG_ACTIVITY_NEW_TASK))
             }
         }
         fun showSettingPopup(review: Review) {
@@ -96,7 +108,7 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
                 myReviewList.removeAt(absoluteAdapterPosition)
                 notifyDataSetChanged()
             }
-            
+
             builder.setNegativeButton("취소") {dialog, which ->
                 Toast.makeText(context, "취소하였습니다", Toast.LENGTH_LONG).show()
             }
