@@ -1,60 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="2dp"
+    android:padding="8dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:background="@drawable/item">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/review_bookName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book Name"
+        android:maxLines="1"
+        android:maxLength="34"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:numStars="5"
+        android:rating="3.5"
+        android:stepSize="0.5"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
+        android:isIndicator="true"
+        android:max="5"
+        style="?android:attr/ratingBarStyleSmall"
+        app:layout_constraintTop_toBottomOf="@id/review_bookName"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <View
+        android:id="@+id/review_seperator"
+        android:layout_width="1dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="10dp"
+        android:background="#955A5A5A"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/review_bookName"
+        />
+
+    <TextView
+        android:id="@+id/review_genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textSize="13sp"
+        android:text="장르"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/review_seperator"
+        />
+
+    <TextView
+        android:id="@+id/review_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2020.05.17"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ratingBar"/>
+
+    <TextView
+        android:id="@+id/review_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:text="리뷰 작성중입니다"
+        android:textSize="14sp"
+        android:maxLength="90"
+        app:layout_constraintTop_toBottomOf="@id/review_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:orientation="horizontal">
+    <Button
+        android:id="@+id/delBtn"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:background="@drawable/shadow"
+        android:text="삭제"
+        android:textColor="@color/ic_launcher_background"
+        android:textSize="8sp"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
-            <ImageView
-                android:id="@+id/my_review_back_button"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/back_button_2" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="fill"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:text="@string/my_page_button1" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:gravity="fill"
-                />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divider5"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#B2B2B2" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_review_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

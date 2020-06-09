@@ -18,7 +18,7 @@ import com.example.bookreview.api.ServerService
 import com.example.bookreview.repository.ServerRepositoryImpl
 import com.example.bookreview.ui.review.Review
 import com.example.bookreview.viewModel.ReviewViewModel
-import kotlinx.android.synthetic.main.review_list.view.*
+import kotlinx.android.synthetic.main.my_review.view.*
 import okhttp3.internal.notify
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,7 +45,7 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
     }
 
     inner class MyReviewViewHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(
-        R.layout.review_list, parent, false)){
+        R.layout.my_review, parent, false)){
         //private var reviewImg : ImageView? = null
         private var reviewBookName : TextView? = null
         private var reviewDate : TextView? = null

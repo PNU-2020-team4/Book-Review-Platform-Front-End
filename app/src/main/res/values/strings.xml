@@ -29,4 +29,5 @@
     <string name="change_nickname">닉네임 변경</string>
     <string name="withdrawal_text"> 회원 탈퇴</string>
     <string name="my_activity_text">내 활동</string>
+    <string name="date">날짜</string>
 </resources>
