@@ -1,8 +1,10 @@
 package com.example.bookreview.ui.review
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
@@ -21,7 +23,7 @@ class ReviewActivity : AppCompatActivity() {
         var id = intent.extras?.getString("id")
         var bookId = intent.extras?.getString("bookId")
         var rv = findViewById<RecyclerView>(R.id.review_recyclerView)
-        viewModel.requestAllReviews() {
+        viewModel.requestAllReviews {
             it.dataList?.let { list ->
                 val numOfReviews = " ( ${list.size()} )"
 //                textView4.text = numOfReviews
@@ -65,8 +67,14 @@ class ReviewActivity : AppCompatActivity() {
         review_date.text = reviewDate
         review_text.text = reviewText
 */
-        review_back_button.setOnClickListener {
+        book_review_back_button.setOnClickListener {
             finish()
+        }
+        this.window.apply {
+            //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            //addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            statusBarColor = Color.WHITE
         }
     }
 }

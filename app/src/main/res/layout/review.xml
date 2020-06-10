@@ -1,110 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginBottom="5dp"
-    android:background="@drawable/frame">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="20dp"
+    android:elevation="15dp"
+    android:layout_marginVertical="20dp"
+    android:layout_marginHorizontal="10dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/frame">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/review_profile_photo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape_rect"
-        android:elevation="7dp"
-        app:cardCornerRadius="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/review_user_image"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/review_profile_photo"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_rect"
+            android:elevation="7dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/review_user_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/contentDescription"
+                android:src="@drawable/ic_user" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/review_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/author"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/review_profile_photo"
+            app:layout_constraintTop_toTopOf="@+id/review_profile_photo" />
+
+        <TextView
+            android:id="@+id/review_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/date"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/review_user_name"
+            app:layout_constraintTop_toTopOf="@id/review_profile_photo" />
+
+        <RatingBar
+            android:id="@+id/review_ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:rating="0"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            android:progressBackgroundTint="@android:color/black"
+            android:progressTint="@android:color/holo_orange_light"
+            app:layout_constraintStart_toStartOf="@id/review_user_name"
+            app:layout_constraintTop_toBottomOf="@id/review_user_name" />
+
+        <TextView
+            android:id="@+id/review_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="리뷰내용"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/review_like_button"
+            app:layout_constraintStart_toEndOf="@id/review_profile_photo"
+            app:layout_constraintTop_toBottomOf="@id/review_profile_photo" />
+
+        <ImageButton
+            android:id="@+id/review_like_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/transparent"
             android:contentDescription="@string/contentDescription"
-            android:src="@drawable/ic_user" />
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_like"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/review_profile_photo"
+            app:layout_constraintTop_toBottomOf="@+id/review_text" />
 
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/review_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/author"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/review_profile_photo"
-        app:layout_constraintTop_toTopOf="@id/review_profile_photo" />
-
-    <TextView
-        android:id="@+id/review_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/date"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/review_user_name"
-        app:layout_constraintTop_toTopOf="@id/review_profile_photo" />
-
-    <RatingBar
-        android:id="@+id/review_ratingBar"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:isIndicator="true"
-        android:max="5"
-        android:numStars="5"
-        android:rating="3.5"
-        android:stepSize="0.5"
-        android:transformPivotX="0dp"
-        android:transformPivotY="0dp"
-        app:layout_constraintStart_toStartOf="@id/review_user_name"
-        app:layout_constraintTop_toBottomOf="@id/review_user_name" />
-
-    <TextView
-        android:id="@+id/review_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/review_like_button"
-        app:layout_constraintStart_toEndOf="@id/review_profile_photo"
-        app:layout_constraintTop_toBottomOf="@id/review_profile_photo" />
-
-    <ImageButton
-        android:id="@+id/review_like_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/transparent"
-        android:contentDescription="@string/contentDescription"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_like"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/review_profile_photo"
-        app:layout_constraintTop_toBottomOf="@+id/review_text" />
-
-    <ImageButton
-        android:id="@+id/review_share_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/review_like_button"
-        app:srcCompat="@drawable/ic_share_24dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/review_share_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/review_like_button"
+            app:srcCompat="@drawable/ic_share_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

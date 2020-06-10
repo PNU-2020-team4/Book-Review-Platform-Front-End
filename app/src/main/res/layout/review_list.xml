@@ -1,70 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:background="@color/white"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageButton
+        android:id="@+id/book_review_back_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/back_button_2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"/>
+    <ImageView
+        android:id="@+id/book_review_star_image"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/star_full"
+        app:layout_constraintStart_toStartOf="@+id/book_review_back_button"
+        app:layout_constraintTop_toBottomOf="@+id/book_review_back_button"
+        android:layout_marginTop="40dp"
+        />
+    <TextView
+        android:id="@+id/book_review_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.95"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/book_review_star_image"
+        app:layout_constraintTop_toTopOf="@+id/book_review_star_image"
+        android:layout_marginStart="10dp"
+        />
+    <TextView
+        android:id="@+id/book_review_rating_cont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="점"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/book_review_rating"
+        app:layout_constraintBottom_toBottomOf="@+id/book_review_rating"
+        />
+    <TextView
+        android:id="@+id/book_review_review_cont_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(리뷰"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/book_review_rating_cont"
+        app:layout_constraintBottom_toBottomOf="@+id/book_review_rating_cont"
+        />
+    <TextView
+        android:id="@+id/book_review_review_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/book_review_review_cont_1"
+        app:layout_constraintBottom_toBottomOf="@+id/book_review_review_cont_1"
+        android:layout_marginStart="3dp"
+        />
+    <TextView
+        android:id="@+id/book_review_review_cont_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="개)"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/book_review_review_number"
+        app:layout_constraintBottom_toBottomOf="@+id/book_review_review_cont_1"
+        />
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/book_review_chip_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/book_review_star_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_review_star_image"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        >
+        <com.google.android.material.chip.Chip
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="15dp">
-
-            <ImageView
-                android:id="@+id/review_back_button"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/back_button_2"
-                android:contentDescription="@string/contentDescription"/>
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="리뷰"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:text="123"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/divider5"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#B2B2B2" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/review_recyclerView"
-            android:layout_width="match_parent"
+            android:text="웹 리뷰"
+            android:textAlignment="center"
+            app:chipCornerRadius="13dp"
+            app:rippleColor="@color/mainTheme"
+            />
+        <com.google.android.material.chip.Chip
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:text="앱 리뷰"
 
-    </LinearLayout>
+            android:textAlignment="center"
+            app:chipCornerRadius="13dp"
+            app:rippleColor="@color/mainTheme"
+            />
+    </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/write_review_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_margin="30dp"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-</RelativeLayout>
+        android:backgroundTint="@color/mainThemeLight"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        android:focusable="true"
+        app:borderWidth="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/review_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/book_review_chip_group"
+        android:layout_marginTop="10dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="15dp">-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/review_back_button"-->
+<!--                android:layout_width="35dp"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:background="@drawable/back_button_2"-->
+<!--                android:contentDescription="@string/contentDescription"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:text="리뷰"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="123"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <View-->
+<!--            android:id="@+id/divider5"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#B2B2B2" />-->
+
+<!--    </LinearLayout>-->
+
+
+<!--</RelativeLayout>-->
