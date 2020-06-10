@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -17,18 +17,18 @@
             android:padding="15dp">
 
             <ImageView
-                android:id="@+id/review_back_button"
+                android:id="@+id/my_review_back_button"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="@drawable/back_button_2"
-                android:contentDescription="@string/contentDescription"/>
+                android:background="@drawable/back_button_2" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="리뷰"
+                android:gravity="fill"
+                android:text="@string/my_page_button1"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -39,9 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:text="123"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:gravity="fill" />
 
         </LinearLayout>
 
@@ -52,19 +50,10 @@
             android:background="#B2B2B2" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/review_recyclerView"
+            android:id="@+id/my_review_recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/write_review_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="30dp"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,14 +2,12 @@ package com.example.bookreview.ui.myPage
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
 import com.example.bookreview.ui.review.Review
 import com.example.bookreview.viewModel.ReviewViewModel
-import kotlinx.android.synthetic.main.my_review.*
+import kotlinx.android.synthetic.main.my_review_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyReviewActivity : AppCompatActivity(){
@@ -20,7 +18,7 @@ class MyReviewActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.my_review)
+        setContentView(R.layout.my_review_list)
 
         var id = intent.extras?.getString("id")
         var profileImage = intent.extras?.getString("profileImage")
