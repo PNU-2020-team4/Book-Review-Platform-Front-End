@@ -66,21 +66,28 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
         fun bind(review: Review){
             var bn = review.bookName!!
             if (bn.length > 29) {
-                bn = review.bookName!!.substring(0, 30) + "..."
+                bn = review.bookName!!.substring(0, 15) + "..."
             }
             reviewBookName?.text = bn
 
             reviewRating?.rating = review.star?.toFloat()!!
             reviewDate?.text = review.date
             reviewText?.text = review.content
-            reviewGenre?.text = review.bookGenre
+            reviewGenre?.text = ""
+            if (review.bookGenre != null) {
+                reviewGenre?.text = review.bookGenre
+            }
 
             delBtn?.setOnClickListener {
                 showSettingPopup(review)
             }
 
             shareBtn?.setOnClickListener {
-                val text = "책 이름 : ${review.bookName} \n 장르 : ${review.bookGenre} \n 내용 : ${review.content}"
+                var text = "제목 : ${review.bookName}\n"
+                if (review.bookGenre != null) {
+                    text += "장르 : ${review.bookGenre}\n"
+                }
+                text += review.content
                 text.replace("<b>", "")
                 text.replace("</b>", "")
 

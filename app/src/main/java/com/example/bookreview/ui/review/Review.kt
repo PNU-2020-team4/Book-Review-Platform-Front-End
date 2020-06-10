@@ -26,7 +26,7 @@ class Review(
             this.writer = obj.get("writer").toString()
         }
         obj.get("content")?.let {
-            this.content = obj.get("content").toString()
+            this.content = obj.get("content").toString().replace("\\n","").replace("\"", "")
         }
         obj.get("star")?.let {
             this.star = obj.get("star").toString()
@@ -38,16 +38,19 @@ class Review(
             this.bookId = obj.get("bookId").toString()
         }
         obj.get("bookName")?.let {
-            this.bookName = obj.get("bookName").toString()
+            this.bookName = obj.get("bookName").toString().replace("\n","").replace("\"", "")
         }
         obj.get("bookAuthor")?.let {
-            this.bookAuthor = obj.get("bookAuthor").toString()
+            this.bookAuthor = obj.get("bookAuthor").toString().replace("\n","").replace("\"", "")
         }
         obj.get("nickname")?.let {
             this.nickname = obj.get("nickname").toString()
         }
         obj.get("bookGenre")?.let {
             this.bookGenre = obj.get("bookGenre").toString()
+            if (obj.get("bookGenre").toString() == "null") {
+                this.bookGenre = ""
+            }
         }
         return this
     }

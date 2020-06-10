@@ -23,10 +23,12 @@ class MyReviewActivity : AppCompatActivity(){
         var id = intent.extras?.getString("id")
         var profileImage = intent.extras?.getString("profileImage")
         var rv = findViewById<RecyclerView>(R.id.my_review_recyclerView)
+        textView4.text = " ( 0 )"
+
         viewModel.requestMyReviews(id!!) {
             it.dataList?.let { list ->
                 val numOfReviews = " ( ${list.size()} )"
-//                textView4.text = numOfReviews
+                textView4.text = numOfReviews
 
                 for (i in 0 until list.size()) {
                     val obj = list[i].asJsonObject
@@ -43,7 +45,6 @@ class MyReviewActivity : AppCompatActivity(){
             }
         }
         rv.setOnClickListener {
-            Log.e("abcd : " , "SAdff")
             rv.adapter!!.notifyDataSetChanged()
         }
 
