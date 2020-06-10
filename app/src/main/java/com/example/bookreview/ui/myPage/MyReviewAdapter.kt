@@ -40,7 +40,7 @@ class MyReviewAdapter(private val context: Context, private val myReviewList: Ar
     }
 
     inner class MyReviewViewHolder(inflater: LayoutInflater, parent: ViewGroup): RecyclerView.ViewHolder(inflater.inflate(
-        R.layout.review_list, parent, false)){
+        R.layout.my_review, parent, false)){
         //private var reviewImg : ImageView? = null
         private var reviewBookName : TextView? = null
         private var reviewDate : TextView? = null
