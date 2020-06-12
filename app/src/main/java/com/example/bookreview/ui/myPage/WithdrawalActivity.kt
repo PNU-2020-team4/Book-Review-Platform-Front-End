@@ -35,6 +35,7 @@ class WithdrawalActivity : AppCompatActivity() {
             finish()
         }
     }
+
     fun requestWithdrawal(userId: String, success:() -> Unit) {
         viewModel.requestWithdrawal(userId) {
             it.dataObject?.let { json ->
