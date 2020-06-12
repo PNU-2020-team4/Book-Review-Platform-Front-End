@@ -1,9 +1,11 @@
 package com.example.bookreview.ui.myPage
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.MainViewModel
@@ -43,7 +45,6 @@ class MyPageActivity : AppCompatActivity() {
             nextIntent.putExtra("profileImage", profileImage)
             startActivity(nextIntent)
         }
-//
 //        edit_profile_button.setOnClickListener {
 //            startActivity(Intent(this, EditProfileActivity::class.java))
 //        }
@@ -57,6 +58,21 @@ class MyPageActivity : AppCompatActivity() {
         }
 
         my_page_logout.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("로그아웃")
+            builder.setMessage("앱에서 로그아웃 하시겠습니까?")
+            builder.setPositiveButton("로그아웃") { dialog, which ->
+                dialog.dismiss()
+                // TODO :: LOGOUT
+            }
+            builder.setNegativeButton("취소") { dialog, which ->
+                dialog.cancel()
+            }
+            builder.show()
+
+        }
+
+        my_page_withdrawal.setOnClickListener {
             val nextIntent = Intent(this, WithdrawalActivity::class.java)
             nextIntent.putExtra("userId", id)
             startActivity(nextIntent)
