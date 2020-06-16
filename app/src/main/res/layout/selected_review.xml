@@ -11,24 +11,22 @@
 
         <ImageButton
             android:id="@+id/selected_review_back_button"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/back_button"
-            android:backgroundTint="#0ABAB5"
+            android:background="@drawable/back_button_2"
             android:backgroundTintMode="multiply"
-            app:layout_constraintBottom_toTopOf="@+id/write_review_star"
+            android:contentDescription="@string/contentDescription"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/contentDescription" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/selected_review_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:foregroundGravity="center"
             android:text="@string/review_title"
             android:textColor="@color/black"
@@ -56,26 +54,26 @@
             android:id="@+id/divider14"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="#808080"
-            app:layout_constraintTop_toBottomOf="@id/selected_review_title" />
+            app:layout_constraintTop_toBottomOf="@id/selected_review_back_button" />
 
         <RatingBar
             android:id="@+id/selected_review_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:isIndicator="true"
-            app:layout_constraintBottom_toTopOf="@+id/selected_review_editText"
+            app:layout_constraintBottom_toTopOf="@id/divider15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_review_back_button" />
+            app:layout_constraintTop_toBottomOf="@id/divider14" />
 
         <View
             android:id="@+id/divider15"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:background="#808080"
             app:layout_constraintTop_toBottomOf="@id/selected_review_star" />
 
@@ -83,21 +81,22 @@
             android:id="@+id/selected_review_editText"
             android:layout_width="350dp"
             android:layout_height="300dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:autofillHints="@string/write_review"
-            android:background="@drawable/border"
-            android:inputType="textMultiLine|textNoSuggestions"
+            android:background="@drawable/edit_frame"
+            android:inputType="textMultiLine|textNoSuggestions|textVisiblePassword"
             android:maxLength="1000"
             android:textCursorDrawable="@color/black"
+            android:gravity="top|start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selected_review_star" />
+            app:layout_constraintTop_toBottomOf="@+id/divider15" />
 
         <TextView
             android:id="@+id/selected_review_text_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
             android:text="@string/default_editText_num"
             android:textColor="@color/black"
@@ -108,7 +107,7 @@
             android:id="@+id/divider16"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="#808080"
             app:layout_constraintBottom_toTopOf="@id/selected_review_user_image_text"
             app:layout_constraintTop_toBottomOf="@id/selected_review_text_num" />
@@ -128,7 +127,7 @@
             android:id="@+id/selected_review_image"
             android:layout_width="232dp"
             android:layout_height="148dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:contentDescription="@string/contentDescription"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
-            android:clickable="true"
+            android:focusable="true"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/selected_review_image"
