@@ -5,7 +5,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.ReviewViewModel
@@ -15,58 +18,49 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ReviewActivity : AppCompatActivity() {
     private val viewModel by viewModel<ReviewViewModel>()
     private val reviewList: ArrayList<Review> = ArrayList()
-
+    private lateinit var adapter: ReviewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.review_list)
+
 
         var id = intent.extras?.getString("id")
         var bookId = intent.extras?.getString("bookId")
         var rv = findViewById<RecyclerView>(R.id.review_recyclerView)
         viewModel.requestAllReviews {
+            Log.e("data list : ", it.toString())
             it.dataList?.let { list ->
                 val numOfReviews = " ( ${list.size()} )"
-//                textView4.text = numOfReviews
-
+                //textView4.text = numOfReviews
                 for (i in 0 until list.size()) {
                     val obj = list[i].asJsonObject
-                    Log.e("obj string : " , obj.toString())
+                    Log.e("obj string : ", obj.toString())
                     reviewList.add(Review().jsonToObject(obj))
                 }
                 val reviewAdapter = ReviewAdapter(
                     applicationContext,
                     reviewList,
                     viewModel,
+                    id,
                     this
                 )
                 review_recyclerView.adapter = reviewAdapter
             }
         }
         rv.setOnClickListener {
-            Log.e("abcd : " , "SAdff")
+            Log.e("abcd : ", "SAdff")
             rv.adapter!!.notifyDataSetChanged()
         }
 
         write_review_button.setOnClickListener {
-            startActivity(Intent(this, WriteReviewActivity::class.java)
-                .putExtra("id", id)
-                .putExtra("bookId", bookId)
+            startActivity(
+                Intent(this, WriteReviewActivity::class.java)
+                    .putExtra("id", id)
+                    .putExtra("bookId", bookId)
             )
         }
 
 
-        /*
-        val thisIntent = intent
-        //val reviewImg = thisIntent.getStringExtra("bookPhoto")
-        val reviewId = thisIntent.getStringExtra("reviewId")
-        val reviewDate = thisIntent.getStringExtra("reviewDate")
-        val reviewText = thisIntent.getStringExtra("reviewText")
-
-        //review_img.setImageResource(resources.getIdentifier(bookPhoto,"drawable", this.packageName.toString()))
-        review_id.text = reviewId
-        review_date.text = reviewDate
-        review_text.text = reviewText
-*/
         book_review_back_button.setOnClickListener {
             finish()
         }
