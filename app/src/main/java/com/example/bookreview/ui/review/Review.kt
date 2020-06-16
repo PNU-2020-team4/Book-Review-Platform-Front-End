@@ -1,5 +1,6 @@
 package com.example.bookreview.ui.review
 
+import android.util.Log
 import com.google.gson.JsonObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -53,5 +54,10 @@ class Review(
             }
         }
         return this
+    }
+    override fun toString(): String{
+       var message : String = "idx : String = " + idx  +
+        " star : String? = " + star;
+    return message;
     }
 }
