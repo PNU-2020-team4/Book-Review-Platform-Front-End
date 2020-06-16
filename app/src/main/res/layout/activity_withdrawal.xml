@@ -7,23 +7,20 @@
     tools:context=".ui.myPage.WithdrawalActivity">
 
     <LinearLayout
-        android:id="@+id/toolbar"
+        android:id="@+id/activity_withdrawal_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:gravity="start|center_vertical"
+        android:padding="@dimen/toolbar_padding"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/withdrawal_back_button"
             android:layout_width="35dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="35dp"
             android:background="@drawable/back_button_2" />
 
         <TextView
@@ -31,20 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:textSize="16sp"
             android:textColor="@color/black"
+            android:textSize="@dimen/toolbar_textSize"
+            android:textStyle="bold"
             android:text="회원탈퇴" />
     </LinearLayout>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#B2B2B2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -53,7 +42,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintTop_toBottomOf="@id/activity_withdrawal_toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
         <TextView
             android:layout_width="wrap_content"
