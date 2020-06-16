@@ -2,7 +2,6 @@ package com.example.bookreview.repository
 
 import android.util.Log
 import com.example.bookreview.api.ServerService
-import com.example.bookreview.book.Book
 import com.example.bookreview.dto.ServerResponse
 import com.example.bookreview.dto.testClass
 import com.example.bookreview.ui.review.Review
@@ -37,7 +36,7 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
         val params = HashMap<String, String>()
         params["data"] = Gson().toJson(
                             mapOf(
-                                "book" to review.bookId,
+                                "book" to review.book,
                                 "writer" to review.writer,
                                 "content" to review.content,
                                 "star" to review.star

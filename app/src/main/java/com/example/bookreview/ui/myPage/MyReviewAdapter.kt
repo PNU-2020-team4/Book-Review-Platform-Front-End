@@ -1,15 +1,9 @@
 package com.example.bookreview.ui.myPage
 
-import android.content.Context
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.startActivity
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
@@ -17,7 +11,6 @@ import com.example.bookreview.R
 import com.example.bookreview.ui.review.Review
 import com.example.bookreview.viewModel.ReviewViewModel
 import kotlinx.android.synthetic.main.my_review.view.*
-import kotlinx.android.synthetic.main.review.view.*
 
 
 class MyReviewAdapter(private val viewModel: ReviewViewModel) : RecyclerView.Adapter<MyReviewAdapter.MyReviewViewHolder>(){
@@ -43,7 +36,7 @@ class MyReviewAdapter(private val viewModel: ReviewViewModel) : RecyclerView.Ada
 
             holder.view.myreview_delBtn.setOnClickListener {
                 viewModel.delPosition = position
-                viewModel.delID = review.bookId
+                viewModel.delID = review.idx
                 viewModel.invokeDeleteButtonClick()
             }
 
