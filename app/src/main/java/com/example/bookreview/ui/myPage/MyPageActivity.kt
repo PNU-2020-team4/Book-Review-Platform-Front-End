@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bookreview.LoginActivity
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.MainViewModel
 import com.squareup.picasso.Picasso
@@ -64,6 +65,9 @@ class MyPageActivity : AppCompatActivity() {
             builder.setPositiveButton("로그아웃") { dialog, which ->
                 dialog.dismiss()
                 // TODO :: LOGOUT
+                val nextIntent = Intent(this, LoginActivity::class.java);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(nextIntent)
             }
             builder.setNegativeButton("취소") { dialog, which ->
                 dialog.cancel()
