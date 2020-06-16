@@ -23,4 +23,7 @@ val viewModelModule = module {
     viewModel {
         SplashViewModel(get(), get(), get(), get())
     }
+    viewModel {
+        MypageViewModel(get())
+    }
 }
