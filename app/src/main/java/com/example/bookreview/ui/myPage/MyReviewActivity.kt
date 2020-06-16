@@ -53,10 +53,17 @@ class MyReviewActivity : AppCompatActivity(){
             builder.setTitle("삭제 확인")
             builder.setMessage("정말 삭제 하시겠습니까?")
             builder.setPositiveButton("삭제") {dialog, which ->
-                Toast.makeText(this, "삭제되었습니다", Toast.LENGTH_LONG).show()
                 val idx = viewModel.delID
-                viewModel.delMyReview(idx!!.toInt()){}
-                adapter.notifyItemRemoved(viewModel.delPosition!!)
+                viewModel.delMyReview(idx!!.toInt()){
+                    it.resultCode.let { code ->
+                        if (code == 100) {
+                            adapter.notifyItemRemoved(viewModel.delPosition!!)
+                            Toast.makeText(this, "삭제되었습니다", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this, "리뷰를 삭제하는데 실패했습니다\n잠시 후 다시 시도해주세요", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
             }
 
             builder.setNegativeButton("취소") {dialog, which ->

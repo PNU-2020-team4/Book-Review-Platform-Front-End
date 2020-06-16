@@ -11,7 +11,7 @@ class Review(
     var content : String? = "",
     var star : String? = "",
     var date : String = "",
-    var bookId : String? = "",
+    var book : String? = "",
     var bookName : String? = "",
     var bookAuthor : String? = "",
     var nickname: String = "",
@@ -35,8 +35,8 @@ class Review(
         obj.get("date")?.let {
             this.date = simpleDateFormat.format(Date(obj.get("date").asLong))
         }
-        obj.get("bookId")?.let {
-            this.bookId = obj.get("bookId").toString()
+        obj.get("book")?.let {
+            this.book = obj.get("book").toString()
         }
         obj.get("bookName")?.let {
             this.bookName = obj.get("bookName").toString().replace("\n","").replace("\"", "")
