@@ -26,6 +26,7 @@ class WithdrawalActivity : AppCompatActivity() {
             builder.setPositiveButton("탈퇴", DialogInterface.OnClickListener { dialog, which ->
                 requestWithdrawal(userId) {
                     dialog.dismiss()
+
                 }
             })
             builder.show()
@@ -38,16 +39,25 @@ class WithdrawalActivity : AppCompatActivity() {
 
     fun requestWithdrawal(userId: String, success:() -> Unit) {
         viewModel.requestWithdrawal(userId) {
-            it.dataObject?.let { json ->
-                val responseId = json.get("userId").toString()
-                if (responseId == userId) {
-                    success()
-                    Toast.makeText(this@WithdrawalActivity, "회원 탈퇴에 성공했습니다\n앱을 종료합니다", Toast.LENGTH_SHORT).show()
-                } else {
-                    // 회원 탈퇴 실패
-                    Toast.makeText(this@WithdrawalActivity, "회원 탈퇴에 실패했습니다\n잠시 후 다시 시도해주세요", Toast.LENGTH_SHORT).show()
+            if (it.resultCode != 0) {
+                it.dataObject?.let { json ->
+                    val responseId = json.get("id").toString()
+                    if (responseId == userId) {
+                        success()
+                        Toast.makeText(
+                            this@WithdrawalActivity,
+                            "회원 탈퇴에 성공했습니다\n앱을 종료합니다",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-
+            } else {
+                // 회원 탈퇴 실패
+                Toast.makeText(
+                    this@WithdrawalActivity,
+                    "회원 탈퇴에 실패했습니다\n잠시 후 다시 시도해주세요",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
