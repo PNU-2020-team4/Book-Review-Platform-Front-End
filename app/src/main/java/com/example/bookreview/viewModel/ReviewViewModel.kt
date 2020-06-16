@@ -73,11 +73,37 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
         })
     }
 
+    fun delReview(idx: Int, success: (ServerResponse) -> Unit) {
+        apiCall(serverRepository.delMyReviewResponse(idx), Consumer {
+            success(it)
+        })
+    }
+
     fun requestAllReviews(success: (ServerResponse) -> Unit) {
         apiCall(serverRepository.getAllReviewResponse(), Consumer {
             success(it)
         })
     }
+
+    fun requestAllReviews() {
+        myReviewList.clear()
+        apiCall(serverRepository.getAllReviewResponse(), onSuccess = Consumer {
+            Log.e("data list in viewModel : ", it.dataList.toString())
+            it.dataList?.let { list ->
+                for (i in 0 until list.size()) {
+                    val obj = list[i].asJsonObject
+                    myReviewList.add(Review().jsonToObject(obj))
+                }
+                Log.e("data list in Review List : ", myReviewList.toString())
+                _isReviewLoaded.call()
+            }
+        },
+            onError = Consumer {
+                myReviewList.clear()
+                Log.e("ERROR","ERROR : Post to Server ERROR")
+            })
+    }
+
     fun writeReview(review : Review, success: (ServerResponse) -> Unit){
         apiCall(serverRepository.postMyReviewResponse(review), Consumer {
             success(it)
