@@ -34,13 +34,14 @@ class WriteReviewActivity : AppCompatActivity() {
                 "",
                 id,
                 write_review_editText.text.toString(),
-                write_review_star.getNumStars().toString(),
+                write_review_star.rating.toString(),
                 "",
                 bookId,
                 "",
                 "",
                 ""
             )
+            Log.d("Review Made" , review.toString())
             viewModel.writeReview(review){
                 it.resultCode?.let { code ->
                     Log.d("ResultCode" , code.toString())
