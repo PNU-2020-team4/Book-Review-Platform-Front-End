@@ -1,6 +1,5 @@
 package com.example.bookreview.ui.review
 
-import android.util.Log
 import com.google.gson.JsonObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,7 +14,8 @@ class Review(
     var bookName : String? = "",
     var bookAuthor : String? = "",
     var nickname: String = "",
-    var bookGenre: String? = ""
+    var bookGenre: String? = "",
+    var profile_image: String? = ""
 ) {
     val pattern = "yyyy-MM-dd"
     val simpleDateFormat = SimpleDateFormat(pattern, Locale.KOREA)
@@ -45,13 +45,16 @@ class Review(
             this.bookAuthor = obj.get("bookAuthor").toString().replace("\n","").replace("\"", "")
         }
         obj.get("nickname")?.let {
-            this.nickname = obj.get("nickname").toString()
+            this.nickname = obj.get("nickname").toString().replace("\"", "")
         }
         obj.get("bookGenre")?.let {
             this.bookGenre = obj.get("bookGenre").toString()
             if (obj.get("bookGenre").toString() == "null") {
                 this.bookGenre = ""
             }
+        }
+        obj.get("img")?.let {
+            this.profile_image = obj.get("img").toString().replace("\"", "")
         }
         return this
     }
