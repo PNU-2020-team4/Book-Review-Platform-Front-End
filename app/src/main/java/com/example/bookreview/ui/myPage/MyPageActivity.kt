@@ -1,6 +1,5 @@
 package com.example.bookreview.ui.myPage
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -9,11 +8,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.LoginActivity
 import com.example.bookreview.R
-import com.example.bookreview.viewModel.MainViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_my_page.*
-import kotlinx.android.synthetic.main.my_page.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyPageActivity : AppCompatActivity() {
 
@@ -64,9 +60,8 @@ class MyPageActivity : AppCompatActivity() {
             builder.setMessage("앱에서 로그아웃 하시겠습니까?")
             builder.setPositiveButton("로그아웃") { dialog, which ->
                 dialog.dismiss()
-                // TODO :: LOGOUT
-                val nextIntent = Intent(this, LoginActivity::class.java);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                val nextIntent = Intent(applicationContext, LoginActivity::class.java);
+                nextIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(nextIntent)
             }
             builder.setNegativeButton("취소") { dialog, which ->

@@ -1,10 +1,12 @@
 package com.example.bookreview.ui.myPage
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.example.bookreview.LoginActivity
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.MypageViewModel
 import kotlinx.android.synthetic.main.activity_withdrawal.*
@@ -23,12 +25,14 @@ class WithdrawalActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("회원탈퇴")
             builder.setMessage("확인 버튼을 누르면 회원 탈퇴가 왼료됩니다.\n회원탈퇴를 진행 하시겠습니까?")
-            builder.setPositiveButton("탈퇴", DialogInterface.OnClickListener { dialog, which ->
+            builder.setPositiveButton("탈퇴") { dialog, which ->
                 requestWithdrawal(userId) {
                     dialog.dismiss()
-
+                    val nextIntent = Intent(applicationContext, LoginActivity::class.java);
+                    nextIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(nextIntent)
                 }
-            })
+            }
             builder.show()
         }
 
@@ -46,7 +50,7 @@ class WithdrawalActivity : AppCompatActivity() {
                         success()
                         Toast.makeText(
                             this@WithdrawalActivity,
-                            "회원 탈퇴에 성공했습니다\n앱을 종료합니다",
+                            "회원 탈퇴에 성공했습니다",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
