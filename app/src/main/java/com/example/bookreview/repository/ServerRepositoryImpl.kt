@@ -32,6 +32,13 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
         TODO("Not yet implemented")
     }
 
+    override fun getBookReviewResponse(id: Int): Single<ServerResponse> {
+        val params = HashMap<String, String>()
+        Log.d("param : ", params.toString())
+        params["data"] = Gson().toJson(mapOf("bookID" to id))
+        return serverService.getReviewByBook(params)
+    }
+
     override fun postMyReviewResponse(review: Review): Single<ServerResponse> {
         val params = HashMap<String, String>()
         params["data"] = Gson().toJson(

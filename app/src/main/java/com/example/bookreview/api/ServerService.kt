@@ -21,6 +21,10 @@ interface ServerService {
     @FormUrlEncoded
     fun getReview(@FieldMap(encoded = true) response: Map<String,String>) : Single<ServerResponse>
 
+    @POST("/book/review/get")
+    @FormUrlEncoded
+    fun getReviewByBook(@FieldMap(encoded = true) response: Map<String, String>) : Single<ServerResponse>
+
     @POST("/review/insert")
     @FormUrlEncoded
     fun postReview(@FieldMap(encoded = true) response: Map<String,String>) : Single<ServerResponse>

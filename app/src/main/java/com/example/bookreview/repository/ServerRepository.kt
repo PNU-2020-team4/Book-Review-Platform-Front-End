@@ -14,7 +14,7 @@ interface ServerRepository {
     fun getMyReviewResponse(userId: String) : Single<ServerResponse>
     fun getMyReviewResponse() : Single<ServerResponse>
     fun postMyReviewResponse(review: Review) : Single<ServerResponse>
-
+    fun getBookReviewResponse(id: Int) : Single<ServerResponse>
 
 
     fun addHistory(bookIdx:String?, bookTitle:String?, bookAuthor:String?, userID:String?) : Single<ServerResponse>

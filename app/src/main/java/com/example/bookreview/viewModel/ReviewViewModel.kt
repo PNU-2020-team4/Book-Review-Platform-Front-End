@@ -37,6 +37,7 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
 
     var delID: String? = null
     var delPosition: Int? = null
+    var delReviewWriter: String? = null
 
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
@@ -60,6 +61,7 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
         })
     }
 
+
     fun requestMyReviews(userId: String, success: (ServerResponse) -> Unit) {
         apiCall(serverRepository.getMyReviewResponse(userId), Consumer {
             success(it)
@@ -82,6 +84,23 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
     fun requestAllReviews(success: (ServerResponse) -> Unit) {
         apiCall(serverRepository.getAllReviewResponse(), Consumer {
             success(it)
+        })
+    }
+
+    fun requestReviewByBook(bookID: Int) {
+        myReviewList.clear()
+        apiCall(serverRepository.getBookReviewResponse(bookID), Consumer {
+            it.dataList?.let { list ->
+                for (i in 0 until list.size()) {
+                    val obj = list[i].asJsonObject
+                    myReviewList.add(Review().jsonToObject(obj))
+                }
+                _isReviewLoaded.call()
+            }
+        },
+        onError = Consumer {
+            myReviewList.clear()
+            Log.e("ERROR","ERROR : Post to Server ERROR")
         })
     }
 
