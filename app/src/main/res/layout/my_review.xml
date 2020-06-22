@@ -1,96 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="2dp"
-    android:background="@drawable/item"
-    android:padding="8dp"
-    android:paddingTop="12dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="12dp">
+    android:elevation="15dp"
+    app:cardCornerRadius="20dp"
+    android:layout_marginVertical="20dp"
+    android:layout_marginHorizontal="10dp">
 
-    <TextView
-        android:id="@+id/myreview_bookName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLength="34"
-        android:maxLines="1"
-        android:text="Book Name"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RatingBar
-        android:id="@+id/myreview_ratingBar"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:isIndicator="true"
-        android:max="5"
-        android:numStars="5"
-        android:rating="3.5"
-        android:stepSize="0.5"
-        android:transformPivotX="0dp"
-        android:transformPivotY="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myreview_bookName" />
-
-    <TextView
-        android:id="@+id/myreview_genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="장르"
-        android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@id/myreview_bookName"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/myreview_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="2020.05.17"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myreview_ratingBar" />
-
-    <TextView
-        android:id="@+id/myreview_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:maxLength="90"
-        android:text="리뷰 작성중입니다"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myreview_date" />
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/frame">
 
-    <ImageButton
-        android:id="@+id/myreview_delBtn"
-        android:layout_width="27dp"
-        android:layout_height="27dp"
-        android:background="@drawable/ic_delete_black_24dp"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/myreview_bookName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="34"
+            android:maxLines="1"
+            android:text="Book Name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/myreview_share_button"
-        android:layout_width="27dp"
-        android:layout_height="27dp"
-        android:background="@drawable/ic_share_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <RatingBar
+            android:id="@+id/myreview_ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:isIndicator="true"
+            android:max="5"
+            android:numStars="5"
+            android:rating="3.5"
+            android:stepSize="0.5"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myreview_bookName" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/myreview_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="장르"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/myreview_bookName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/myreview_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="2020.05.17"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myreview_ratingBar" />
+
+        <TextView
+            android:id="@+id/myreview_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLength="90"
+            android:text="리뷰 작성중입니다"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myreview_date" />
+
+        <ImageButton
+            android:id="@+id/myreview_delBtn"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:background="@drawable/ic_delete_black_24dp"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/myreview_share_button"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/ic_share_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myreview_delBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
