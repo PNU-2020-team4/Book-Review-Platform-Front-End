@@ -1,8 +1,11 @@
 package com.example.bookreview.ui.search
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -71,7 +74,8 @@ class SearchActivity : AppCompatActivity() {
             }
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    TODO("Not yet implemented")
+                    search_box_book.hideKeyboard()
+                    return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
@@ -84,5 +88,10 @@ class SearchActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 }
