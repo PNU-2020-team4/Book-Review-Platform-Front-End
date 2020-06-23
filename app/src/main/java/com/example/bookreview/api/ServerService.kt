@@ -17,15 +17,15 @@ interface ServerService {
     @FormUrlEncoded
     fun postUserInfo(@FieldMap(encoded = true) response: Map<String,String>) : Single<ResponseBody>
 
-    @POST("/review/get")
+    @POST("/review_item_web/get")
     @FormUrlEncoded
     fun getReview(@FieldMap(encoded = true) response: Map<String,String>) : Single<ServerResponse>
 
-    @POST("/book/review/get")
+    @POST("/book/review_item_web/get")
     @FormUrlEncoded
     fun getReviewByBook(@FieldMap(encoded = true) response: Map<String, String>) : Single<ServerResponse>
 
-    @POST("/review/insert")
+    @POST("/review_item_web/insert")
     @FormUrlEncoded
     fun postReview(@FieldMap(encoded = true) response: Map<String,String>) : Single<ServerResponse>
 
@@ -37,7 +37,7 @@ interface ServerService {
     @FormUrlEncoded
     fun addHistory(@FieldMap(encoded = true) response : Map<String, String>) : Single<ServerResponse>
 
-    @POST("/review/delete")
+    @POST("/review_item_web/delete")
     @FormUrlEncoded
     fun delReview(@FieldMap(encoded = true) response : Map<String, String>) : Single<ServerResponse>
 

@@ -15,4 +15,9 @@ interface JsoupService {
         @Header("Accept-Language") accept_language : String
     ): Single<String>
 
+    @GET("/bookdb/review.nhn")
+    fun getReview(
+        @Query("bid") bid: String,
+        @Query("page") page : String
+    ): Single<String>
 }

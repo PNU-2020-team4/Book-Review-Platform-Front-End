@@ -151,7 +151,6 @@ class MainViewModel(private val serverRepository: ServerRepository,
     fun loadBestSeller(bid : String){
         apiCall(jsoupRepository.requestResponse(bid),
             Consumer {
-
                 val doc: Document = Jsoup.parse(it)
                 val ele : Elements = doc.select("div[class=book_info_inner] div")
                 bestAuthor = ele[2].text().substringBefore("|").substringAfter("저자 ")

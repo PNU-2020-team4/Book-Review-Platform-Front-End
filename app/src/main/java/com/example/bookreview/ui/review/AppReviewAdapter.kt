@@ -1,27 +1,21 @@
 package com.example.bookreview.ui.review
 
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.ReviewViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.review.view.*
+import kotlinx.android.synthetic.main.review_item_app.view.*
 
-class ReviewAdapter(private val viewModel: ReviewViewModel, private val userid: String) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
+class AppReviewAdapter(private val viewModel: ReviewViewModel, private val userid: String) : RecyclerView.Adapter<AppReviewAdapter.ReviewViewHolder>() {
     class ReviewViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         return ReviewViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.review, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.review_item_app, parent, false)
         )
     }
 
@@ -59,8 +53,8 @@ class ReviewAdapter(private val viewModel: ReviewViewModel, private val userid: 
 
 //        holder.itemView.setOnClickListener {
 //            val nextIntent = Intent(context, SelectedReviewActivity()::class.java)
-//                .putExtra("reviewStar", review.star)
-//                .putExtra("reviewText", review.content)
+//                .putExtra("reviewStar", review_item_web.star)
+//                .putExtra("reviewText", review_item_web.content)
 //            context.startActivity(nextIntent.addFlags(FLAG_ACTIVITY_NEW_TASK))
 //        }
     }

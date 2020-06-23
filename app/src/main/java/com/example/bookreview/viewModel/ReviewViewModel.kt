@@ -1,32 +1,36 @@
 package com.example.bookreview.viewModel
 
-import android.content.Context
-import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-
+import com.example.bookreview.dto.BestSeller
+import com.example.bookreview.dto.ReviewFromWeb
 import com.example.bookreview.dto.ServerResponse
+import com.example.bookreview.repository.JsoupRepository
 import com.example.bookreview.repository.ServerRepository
-import com.example.bookreview.ui.myPage.MyReviewAdapter
 import com.example.bookreview.ui.review.Review
 import com.example.bookreview.utils.SingleLiveEvent
-
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.my_review_list.*
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.select.Elements
 import java.util.concurrent.TimeUnit
 
-class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel() {
+class ReviewViewModel(private val serverRepository: ServerRepository,
+                        private val jsoupRepository: JsoupRepository): ViewModel() {
     private val _isReviewLoaded: SingleLiveEvent<Any> = SingleLiveEvent()
+    private val _isAppReviewLoaded: SingleLiveEvent<Any> = SingleLiveEvent()
     private val _isShareTextGenerated: SingleLiveEvent<Any> = SingleLiveEvent()
     private val _isReviewDeleteBtnClicked: SingleLiveEvent<Any> = SingleLiveEvent()
     val isReviewLoaded: LiveData<Any>
         get() = _isReviewLoaded
+    val isAppReviewLoaded: LiveData<Any>
+        get() = _isAppReviewLoaded
     val isShareTextGenerated: LiveData<Any>
         get() = _isShareTextGenerated
     val isReviewDeleteBtnClicked: LiveData<Any>
@@ -34,14 +38,57 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
 
     var shareText:String? = null
     var myReviewList = ArrayList<Review>()
+    val webReviewList = ArrayList<ReviewFromWeb>()
 
     var delID: String? = null
     var delPosition: Int? = null
     var delReviewWriter: String? = null
 
+    var bookRating : String? = null
+    var reviewNum : String? = null
+
+
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
+    }
+
+    fun requestWebReviews(bid: String, page: String) {
+        apiCall(jsoupRepository.requestReview(bid, page),
+        Consumer {
+            val doc: Document = Jsoup.parse(it)
+            val elements: Elements = doc.select("ul[id=reviewList]").select("li")
+
+            bookRating = doc.select("div[class=book_info_inner] div[class=txt_desc] a strong").text().split("점")[0]
+            reviewNum = doc.select("div[class=book_info_inner] div[class=txt_desc] a").text().split("네티즌리뷰")[1]
+
+            for(elem in elements){
+                val ratingDate : Elements = elem.select("dl dd[class=txt_inline]")
+                Log.e("사이즈", ratingDate.size.toString())
+                var date : String? = null
+                var rating : String? = null
+                val title = elem.select("dl dt").text()
+                if(ratingDate.size == 2){
+                    rating = ratingDate[0].text()
+                    date = ratingDate[1].text()
+                }
+                else if(ratingDate.size == 1){
+                    date = elem.select("dl dd[class=txt_inline]").text()
+                }
+                val url = elem.select("dl dd[id=review_author_${webReviewList.size+1}]").select("a").text()
+                val tempArr = elem.select("dl dd[id=review_author_${webReviewList.size+1}]").text().split(" : ")
+                val user = tempArr[tempArr.lastIndex]
+                val thumb = elem.select("div[class=thumb] a img").attr("src")
+                val text = elem.select("dl dd[id=review_text_${webReviewList.size+1}]").text()
+                webReviewList.add(ReviewFromWeb(user, title, text , thumb, url, rating, date!!))
+            }
+            _isReviewLoaded.call()
+            Log.e("리뷰 파싱 완료","완료")
+        }
+        ,onError = Consumer {
+            Log.e("ERROR", "Parsing HTMl ERROR!")
+        }
+        ,indicator = true)
     }
 
     fun requestMyReviews(userId: String) {
@@ -52,7 +99,7 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
                     val obj = list[i].asJsonObject
                     myReviewList.add(Review().jsonToObject(obj))
                 }
-                _isReviewLoaded.call()
+                _isAppReviewLoaded.call()
             }
         },
         onError = Consumer {
@@ -127,6 +174,14 @@ class ReviewViewModel(private val serverRepository: ServerRepository): ViewModel
         apiCall(serverRepository.postMyReviewResponse(review), Consumer {
             success(it)
         })
+    }
+
+    fun getWebReviewListSize(): Int {
+        return webReviewList.size
+    }
+
+    fun getWebReviewByPosition(position: Int) : ReviewFromWeb{
+        return webReviewList[position]
     }
 
     fun getMyReviewListSize(): Int {

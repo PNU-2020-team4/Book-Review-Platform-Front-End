@@ -13,10 +13,10 @@ class ServerRepositoryImpl constructor(private val serverService: ServerService)
         return serverService.getResponse()
     }
 
-    /* review */
+    /* review_item_web */
     override fun getAllReviewResponse(): Single<ServerResponse> {
         val params = HashMap<String, String>()
-        Log.e("all review param : " , params.toString())
+        Log.e("all review_item_web param : " , params.toString())
         params["data"] = Gson().toJson(mapOf("writer" to -1))
         return serverService.getReview(params)
     }

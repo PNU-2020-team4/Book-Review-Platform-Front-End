@@ -12,4 +12,8 @@ class JsoupRepositoryImpl constructor(private val jsoupService: JsoupService) : 
         return jsoupService.getBestSeller(accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             accept_language = "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5")
     }
+
+    override fun requestReview(bid: String, page: String): Single<String> {
+        return jsoupService.getReview(bid, page)
+    }
 }

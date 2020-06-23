@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import coil.api.load
 import com.example.bookreview.R
 import com.example.bookreview.ui.review.ReviewActivity
 import com.example.bookreview.utils.LoadingIndicator
@@ -53,7 +54,6 @@ class BookInformationActivity : AppCompatActivity() {
             }
             if(viewModel.reviewNUm != null) book_information_review_number.text = viewModel.reviewNUm
         })
-
         book_information_back_button.setOnClickListener {
             finish()
         }

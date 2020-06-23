@@ -53,6 +53,7 @@ class BookInformationViewModel(private val jsoupRepository: JsoupRepository) : V
             .doAfterTerminate { stopLoadingIndicator() }
             .subscribe(onSuccess, onError))
     }
+
     fun startLoadingIndicator(){
         _startLoadingIndicatorEvent.call()
     }

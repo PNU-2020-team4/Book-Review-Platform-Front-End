@@ -15,7 +15,7 @@ val viewModelModule = module {
         BookInformationViewModel(get())
     }
     viewModel {
-        ReviewViewModel(get())
+        ReviewViewModel(get(), get())
     }
     viewModel {
         HistoryViewModel(get())

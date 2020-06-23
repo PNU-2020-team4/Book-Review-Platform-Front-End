@@ -12,11 +12,13 @@ import androidx.lifecycle.Observer
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.ReviewViewModel
 import kotlinx.android.synthetic.main.review_list.*
+import kotlinx.android.synthetic.main.selected_review.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReviewActivity : AppCompatActivity() {
     private val viewModel by viewModel<ReviewViewModel>()
-    private lateinit var adapter: ReviewAdapter
+    private lateinit var adapterApp: AppReviewAdapter
+    private lateinit var adapterWeb: WebReviewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.review_list)
@@ -24,13 +26,23 @@ class ReviewActivity : AppCompatActivity() {
         val id = intent.extras?.getString("id")
         val bookId = intent.extras?.getString("bookId")
 
-        adapter = ReviewAdapter(viewModel, id!!)
-        review_recyclerView.adapter = adapter
+        adapterApp = AppReviewAdapter(viewModel, id!!)
+        adapterWeb = WebReviewAdapter(viewModel)
+        review_recyclerView_web.adapter = adapterWeb
+        review_recyclerView_app.adapter = adapterApp
+        viewModel.requestWebReviews(bookId!!,"1")
+        viewModel.requestReviewByBook(bookId.toInt())
 
         viewModel.isReviewLoaded.observe(this, Observer {
-            adapter.notifyDataSetChanged()
+            book_review_rating.text = (viewModel.bookRating!!.toFloat()/2.0).toFloat().toString()
+            book_review_review_number.text = viewModel.reviewNum!!
+            adapterWeb.notifyDataSetChanged()
         })
-        viewModel.requestReviewByBook(bookId!!.toInt())
+
+        viewModel.isAppReviewLoaded.observe(this, Observer {
+            adapterApp.notifyDataSetChanged()
+        })
+
 
         viewModel.isReviewDeleteBtnClicked.observe(this, Observer {
             val builder = AlertDialog.Builder(this)
@@ -43,7 +55,7 @@ class ReviewActivity : AppCompatActivity() {
                     viewModel.delMyReview(idx!!.toInt()) {
                         it.resultCode.let { code ->
                             if (code == 100) {
-                                adapter.notifyItemRemoved(viewModel.delPosition!!)
+                                adapterApp.notifyItemRemoved(viewModel.delPosition!!)
                                 Toast.makeText(this, "삭제되었습니다", Toast.LENGTH_LONG).show()
                             } else {
                                 Toast.makeText(
@@ -93,9 +105,20 @@ class ReviewActivity : AppCompatActivity() {
             )
         }
 
+        chip_web.setOnClickListener {
+            review_recyclerView_web.visibility = View.VISIBLE
+            review_recyclerView_app.visibility = View.GONE
+        }
+        chip_app.setOnClickListener {
+            review_recyclerView_web.visibility = View.GONE
+            review_recyclerView_app.visibility = View.VISIBLE
+        }
+
+
         book_review_back_button.setOnClickListener {
             finish()
         }
+
         this.window.apply {
             //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             //addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

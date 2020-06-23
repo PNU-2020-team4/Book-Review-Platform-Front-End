@@ -45,6 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/my_page_guideline_hor_1">
+
         <ImageView
             android:id="@+id/my_page_user_image"
             android:layout_width="133dp"
