@@ -30,6 +30,7 @@
         <activity android:name=".ui.myPage.ScrapActivity"/>
         <activity android:name=".ui.review.WriteReviewActivity"/>
         <activity android:name=".ui.review.SelectedReviewActivity"/>
+        <activity android:name=".ui.review.ReviewWebViewActivity"/>
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

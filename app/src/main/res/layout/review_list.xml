@@ -101,7 +101,6 @@
             android:textAlignment="center"
             app:chipCornerRadius="13dp"
             app:rippleColor="@color/mainTheme"
-            app:chipBackgroundColor="@color/mainThemeLight"
             android:textColor="@color/mainTheme"
             android:checked="true"
             />
@@ -114,7 +113,6 @@
             android:textAlignment="center"
             app:chipCornerRadius="13dp"
             app:rippleColor="@color/mainTheme"
-            app:chipBackgroundColor="@color/mainThemeLight"
             android:textColor="@color/mainTheme"
             />
     </com.google.android.material.chip.ChipGroup>

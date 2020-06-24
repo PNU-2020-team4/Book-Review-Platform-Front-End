@@ -1,5 +1,7 @@
 package com.example.bookreview.ui.review
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +14,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.review_item_web.view.*
 
-class WebReviewAdapter(private val viewModel: ReviewViewModel) : RecyclerView.Adapter<WebReviewAdapter.ReviewViewHolder>() {
+class WebReviewAdapter(val context: Context, private val viewModel: ReviewViewModel) : RecyclerView.Adapter<WebReviewAdapter.ReviewViewHolder>() {
     class ReviewViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
+    lateinit var url : String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         return ReviewViewHolder(
@@ -55,6 +58,7 @@ class WebReviewAdapter(private val viewModel: ReviewViewModel) : RecyclerView.Ad
             }
             holder.view.review_text.text = item.text
             holder.view.review_title.text = item.title
+            url = item.url
             Log.e("리뷰 타이틀", item.title)
             if(item.thumb != null && item.thumb.trim().isNotEmpty()){
                 holder.view.review_thumb.visibility = View.VISIBLE
@@ -63,14 +67,13 @@ class WebReviewAdapter(private val viewModel: ReviewViewModel) : RecyclerView.Ad
             else{
                 holder.view.review_thumb.visibility = View.GONE
             }
+            holder.view.setOnClickListener {
+                val nextIntent = Intent(context, ReviewWebViewActivity::class.java)
+                    .putExtra("url", url)
+                context.startActivity(nextIntent)
+            }
         }
 
-//        holder.itemView.setOnClickListener {
-//            val nextIntent = Intent(context, SelectedReviewActivity()::class.java)
-//                .putExtra("reviewStar", review_item_web.star)
-//                .putExtra("reviewText", review_item_web.content)
-//            context.startActivity(nextIntent.addFlags(FLAG_ACTIVITY_NEW_TASK))
-//        }
     }
 
     override fun getItemCount(): Int {

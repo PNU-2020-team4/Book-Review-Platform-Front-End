@@ -27,7 +27,7 @@ class ReviewActivity : AppCompatActivity() {
         val bookId = intent.extras?.getString("bookId")
 
         adapterApp = AppReviewAdapter(viewModel, id!!)
-        adapterWeb = WebReviewAdapter(viewModel)
+        adapterWeb = WebReviewAdapter(this, viewModel)
         review_recyclerView_web.adapter = adapterWeb
         review_recyclerView_app.adapter = adapterApp
         viewModel.requestWebReviews(bookId!!,"1")
@@ -108,10 +108,12 @@ class ReviewActivity : AppCompatActivity() {
         chip_web.setOnClickListener {
             review_recyclerView_web.visibility = View.VISIBLE
             review_recyclerView_app.visibility = View.GONE
+            chip_web.isChecked = true
         }
         chip_app.setOnClickListener {
             review_recyclerView_web.visibility = View.GONE
             review_recyclerView_app.visibility = View.VISIBLE
+            chip_app.isChecked = true
         }
 
 

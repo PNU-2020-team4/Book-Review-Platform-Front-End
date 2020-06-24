@@ -64,7 +64,6 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
 
             for(elem in elements){
                 val ratingDate : Elements = elem.select("dl dd[class=txt_inline]")
-                Log.e("사이즈", ratingDate.size.toString())
                 var date : String? = null
                 var rating : String? = null
                 val title = elem.select("dl dt").text()
@@ -75,7 +74,7 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
                 else if(ratingDate.size == 1){
                     date = elem.select("dl dd[class=txt_inline]").text()
                 }
-                val url = elem.select("dl dd[id=review_author_${webReviewList.size+1}]").select("a").text()
+                val url = elem.select("dl dt a").attr("href")
                 val tempArr = elem.select("dl dd[id=review_author_${webReviewList.size+1}]").text().split(" : ")
                 val user = tempArr[tempArr.lastIndex]
                 val thumb = elem.select("div[class=thumb] a img").attr("src")
@@ -83,7 +82,6 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
                 webReviewList.add(ReviewFromWeb(user, title, text , thumb, url, rating, date!!))
             }
             _isReviewLoaded.call()
-            Log.e("리뷰 파싱 완료","완료")
         }
         ,onError = Consumer {
             Log.e("ERROR", "Parsing HTMl ERROR!")
