@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.review_item_web.view.*
 class WebReviewAdapter(val context: Context, private val viewModel: ReviewViewModel) : RecyclerView.Adapter<WebReviewAdapter.ReviewViewHolder>() {
     class ReviewViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    lateinit var url : String
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
         return ReviewViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.review_item_web, parent, false)
@@ -58,7 +56,7 @@ class WebReviewAdapter(val context: Context, private val viewModel: ReviewViewMo
             }
             holder.view.review_text.text = item.text
             holder.view.review_title.text = item.title
-            url = item.url
+            val url = item.url
             Log.e("리뷰 타이틀", item.title)
             if(item.thumb != null && item.thumb.trim().isNotEmpty()){
                 holder.view.review_thumb.visibility = View.VISIBLE
