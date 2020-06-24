@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.bookreview.fragment.ResourceStore
+import com.example.bookreview.ui.book.BookInformationActivity
 import com.example.bookreview.ui.myPage.MyPageActivity
 import com.example.bookreview.ui.search.SearchActivity
 import com.example.bookreview.viewModel.MainViewModel
@@ -29,13 +30,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = MainBestSellerAdapter(viewModel)
-        main_popular_recycler.adapter = adapter
-
         val profileImage = intent.extras?.getString("profileImage")
         val id = intent.extras?.getString("id")
         val email = intent.extras?.getString("mail")
         val name = intent.extras?.getString("nickname")
+
+        adapter = MainBestSellerAdapter(viewModel, this, id!!)
+        main_popular_recycler.adapter = adapter
 
         Log.e("On create Main , User profile : ", profileImage)
         Log.e("On create Main, User id : ", id)
@@ -62,8 +63,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(nextIntent)
         }
 
+        //TODO : CURATION
+        main_best_seller_image.setOnClickListener {
+            val nextIntent = Intent(this, BookInformationActivity::class.java)
+                .putExtra("uid", id)
+                .putExtra("bid", "16329560")
+                .putExtra("link", viewModel.bestLink)
+            startActivity(nextIntent)
+        }
+
         Picasso.get().load(profileImage).into(main_user_button)
 
+        //TODO : CURATION
         viewModel.loadBestSeller("16329560")
         viewModel.isLoadBestSellerFinished.observe(this, Observer {
             Picasso.get().load(viewModel.bestImage).into(main_best_seller_image)

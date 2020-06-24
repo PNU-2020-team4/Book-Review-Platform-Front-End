@@ -67,10 +67,16 @@ class BookInformationViewModel(private val jsoupRepository: JsoupRepository) : V
             Consumer {
 
                 val doc: Document = Jsoup.parse(it)
-
+                val ele : Elements = doc.select("div[class=book_info_inner] div")
+                var tempText = doc.select("div[class=book_info] h2 a").text()
+                var tempTextInSpan = doc.select("div[class=book_info] h2 a span").text()
+                author = ele[2].text().substringBefore("|").substringAfter("저자 ")
+                title = tempText.replace(tempTextInSpan, "")
+                imageSrc = doc.select("div[class=thumb_type] a img").attr("src")
                 desc = doc.select("div[id=bookIntroContent] p").text()
                 star = doc.select("a[id=txt_desc_point] strong").text().substringBefore("점 ")
                 reviewNUm = doc.select("a[id=txt_desc_point] strong").text().substringAfter("점 ")
+                price = doc.select("div[class=price_area] div[class=lowest] strong").text().substringBefore("원")
                 _isParsingFinished.call()
             }
             ,onError = Consumer {

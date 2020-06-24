@@ -91,7 +91,8 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
 
     fun requestMyReviews(userId: String) {
         myReviewList.clear()
-        apiCall(serverRepository.getMyReviewResponse(userId), onSuccess = Consumer {
+        apiCall(serverRepository.getMyReviewResponse(userId),
+            onSuccess = Consumer {
             it.dataList?.let { list ->
                 for (i in 0 until list.size()) {
                     val obj = list[i].asJsonObject

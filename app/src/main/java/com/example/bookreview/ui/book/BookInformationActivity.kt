@@ -35,18 +35,14 @@ class BookInformationActivity : AppCompatActivity() {
         val uid = intent.extras?.getString("uid")
         val link = intent.extras?.getString("link")
         val bid = intent.extras?.getString("bid")
-        val imageUrl = intent.extras?.getString("imageUrl")
-        val title = intent.extras?.getString("title")
-        val author = intent.extras?.getString("author")
-        val price = intent.extras?.getString("price")
 
         if(bid != null) viewModel.loadHtml(bid)
 
         viewModel.isParsingFinished.observe(this, Observer {
-            if(title != null) book_information_title.text = title
-            if(author != null) book_information_author.text = author
-            if(price != null) book_information_price.text = price
-            if(imageUrl != null) Picasso.get().load(imageUrl).into(book_information_cover)
+            if(viewModel.title != null) book_information_title.text = viewModel.title
+            if(viewModel.author != null) book_information_author.text = viewModel.author
+            if(viewModel.price != null) book_information_price.text = viewModel.price
+            if(viewModel.imageSrc != null) Picasso.get().load(viewModel.imageSrc).into(book_information_cover)
             if(viewModel.desc != null) book_information_about.text = viewModel.desc
             if(viewModel.star != null){
                 book_information_star_number.text = viewModel.star
@@ -66,7 +62,7 @@ class BookInformationActivity : AppCompatActivity() {
         }
 
         book_information_share_button.setOnClickListener {
-            val text = "책 제목: $title \n저자: $author \n링크: $link"
+            val text = "책 제목: ${viewModel.title} \n저자: ${viewModel.author} \n링크: $link"
             text.replace("<b>", "")
             text.replace("</b>", "")
             val sendIntent: Intent = Intent().apply {

@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.ReviewViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.review_item_web.view.*
 
 class WebReviewAdapter(val context: Context, private val viewModel: ReviewViewModel) : RecyclerView.Adapter<WebReviewAdapter.ReviewViewHolder>() {

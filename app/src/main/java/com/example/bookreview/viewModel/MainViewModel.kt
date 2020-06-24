@@ -65,6 +65,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
     var bestStar : String? = null
     var bestReviews : String? = null
     var bestImage : String? = null
+    var bestLink : String? = null
 
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
@@ -138,7 +139,8 @@ class MainViewModel(private val serverRepository: ServerRepository,
                     val imageSrc = elem.select("div[class=thumb_type thumb_type2] a img").attr("src")
                     val title = elem.select("dt[id=book_title_${popularBookList.size}] a").text()
                     val author = elem.select("dd[class=txt_block] a[class=txt_name N=a:bel.author]").text()
-                    popularBookList.add(BestSeller(title,author,imageSrc))
+                    val link = elem.select("dl dt[id=book_title_${popularBookList.size}] a").attr("href")
+                    popularBookList.add(BestSeller(title,author,imageSrc, link))
                 }
                 _isLoadPopularListFinished.call()
             }
@@ -160,6 +162,7 @@ class MainViewModel(private val serverRepository: ServerRepository,
                 bestTitle = tempText.replace(tempTextInSpan, "")
                 bestStar = doc.select("a[id=txt_desc_point] strong").text().substringBefore("점 ")
                 bestReviews = doc.select("a[id=txt_desc_point] strong").text().substringAfter("점 ")
+                bestLink = "https://book.naver.com/bookdb/book_detail.nhn?bid=$bid"
                 _isLoadBestSellerFinished.call()
             }
             ,onError = Consumer {
