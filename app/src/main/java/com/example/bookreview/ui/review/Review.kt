@@ -58,9 +58,9 @@ class Review(
         }
         return this
     }
-    override fun toString(): String{
-       var message : String = "idx : String = " + idx  +
-        " star : String? = " + star;
-    return message;
+
+    override fun toString(): String {
+        return "Review(idx='$idx', writer=$writer, content=$content, star=$star, date='$date', book=$book, bookName=$bookName, bookAuthor=$bookAuthor, nickname='$nickname', bookGenre=$bookGenre, profile_image=$profile_image, pattern='$pattern', simpleDateFormat=$simpleDateFormat)"
     }
+
 }

@@ -30,7 +30,7 @@ class MyReviewActivity : AppCompatActivity(){
         my_review_recyclerView.adapter = adapter
 
         viewModel.requestMyReviews(id!!)
-        viewModel.isReviewLoaded.observe(this, Observer {
+        viewModel.isAppReviewLoaded.observe(this, Observer {
             textView4.text = " ( ${viewModel.getMyReviewListSize()} )"
             adapter.notifyDataSetChanged()
         })
