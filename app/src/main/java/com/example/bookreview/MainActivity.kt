@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import coil.api.load
 import com.example.bookreview.fragment.ResourceStore
 import com.example.bookreview.ui.book.BookInformationActivity
 import com.example.bookreview.ui.myPage.MyPageActivity
@@ -72,12 +73,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(nextIntent)
         }
 
-        Picasso.get().load(profileImage).into(main_user_button)
+        //Picasso.get().load(profileImage).into(main_user_button)
+        main_user_button.load(profileImage)
 
         //TODO : CURATION
         viewModel.loadBestSeller("16329560")
         viewModel.isLoadBestSellerFinished.observe(this, Observer {
-            Picasso.get().load(viewModel.bestImage).into(main_best_seller_image)
+            //Picasso.get().load(viewModel.bestImage).into(main_best_seller_image)
+            main_best_seller_image.load(viewModel.bestImage)
             main_best_seller_author.text = viewModel.bestAuthor
             main_best_seller_title.text = viewModel.bestTitle
             main_best_seller_star.rating = (viewModel.bestStar!!.toFloat()/2.0).toFloat()

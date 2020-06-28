@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.example.bookreview.ui.book.BookInformationActivity
 import com.example.bookreview.ui.review.ReviewWebViewActivity
 import com.example.bookreview.viewModel.MainViewModel
@@ -29,7 +30,8 @@ class MainBestSellerAdapter (private val viewModel: MainViewModel, private val c
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         viewModel.getPopularBookByPosition(position).let {item ->
             if(item.image != ""){
-                Picasso.get().load(item.image).into(holder.view.popular_item_image)
+                //Picasso.get().load(item.image).into(holder.view.popular_item_image)
+                holder.view.popular_item_image.load(item.image)
             }
             holder.view.popular_item_title.text = item.title
             holder.view.popular_item_author.text = item.author
