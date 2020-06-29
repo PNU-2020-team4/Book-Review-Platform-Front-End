@@ -35,6 +35,12 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
         get() = _isShareTextGenerated
     val isReviewDeleteBtnClicked: LiveData<Any>
         get() = _isReviewDeleteBtnClicked
+    private val _startLoadingIndicatorEvent: SingleLiveEvent<Any> = SingleLiveEvent()
+    val startLoadingIndicatorEvent: LiveData<Any>
+        get() = _startLoadingIndicatorEvent
+    private val _stopLoadingIndicatorEvent: SingleLiveEvent<Any> = SingleLiveEvent()
+    val stopLoadingIndicatorEvent: LiveData<Any>
+        get() = _stopLoadingIndicatorEvent
 
     var shareText:String? = null
     var myReviewList = ArrayList<Review>()
@@ -51,6 +57,14 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
     private val compositeDisposable = CompositeDisposable()
     private fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
+    }
+
+    fun startLoadingIndicator(){
+        _startLoadingIndicatorEvent.call()
+    }
+
+    fun stopLoadingIndicator(){
+        _stopLoadingIndicatorEvent.call()
     }
 
     fun requestWebReviews(bid: String, page: String) {
@@ -104,7 +118,8 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
         onError = Consumer {
             myReviewList.clear()
             Log.e("ERROR","ERROR : Post to Server ERROR")
-        })
+        },
+        indicator = true)
     }
 
 
@@ -214,11 +229,11 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
                         Log.e("오류발생",it.message!!)
                     },
                     indicator : Boolean = false, timeout: Long = 5){
-                        addDisposable(single.subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .timeout(timeout, TimeUnit.SECONDS)
-//                            .doOnSubscribe{ if(indicator) startLoadingIndicator()  }
-//                            .doAfterTerminate { stopLoadingIndicator() }
-                            .subscribe(onSuccess, onError))
+        addDisposable(single.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .timeout(timeout, TimeUnit.SECONDS)
+            .doOnSubscribe{ if(indicator) startLoadingIndicator()  }
+            .doAfterTerminate { stopLoadingIndicator() }
+            .subscribe(onSuccess, onError))
     }
 }

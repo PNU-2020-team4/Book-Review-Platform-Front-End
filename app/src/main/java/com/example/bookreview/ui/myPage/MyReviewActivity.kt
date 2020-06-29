@@ -1,5 +1,6 @@
 package com.example.bookreview.ui.myPage
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookreview.R
 import com.example.bookreview.ui.review.Review
+import com.example.bookreview.utils.LoadingIndicator
 import com.example.bookreview.viewModel.ReviewViewModel
 import kotlinx.android.synthetic.main.my_review_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,10 +20,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MyReviewActivity : AppCompatActivity(){
     private val viewModel by viewModel<ReviewViewModel>()
     private lateinit var adapter: MyReviewAdapter
+    private var mLoadingIndicator: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_review_list)
+        loadingIndicatorObserving()
 
         var id = intent.extras?.getString("id")
         var profileImage = intent.extras?.getString("profileImage")
@@ -81,5 +85,27 @@ class MyReviewActivity : AppCompatActivity(){
             finish()
         }
 
+    }
+    private fun loadingIndicatorObserving() {
+        viewModel.startLoadingIndicatorEvent.observe(this, Observer {
+            startLoadingIndicator()
+        })
+        viewModel.stopLoadingIndicatorEvent.observe(this, Observer {
+            stopLoadingIndicator()
+        })
+    }
+
+    private fun stopLoadingIndicator() {
+        mLoadingIndicator?.let {
+            if (it.isShowing) it.cancel()
+        }
+    }
+
+    private fun startLoadingIndicator() {
+        stopLoadingIndicator()
+        if (!isFinishing) {
+            mLoadingIndicator = LoadingIndicator(this)
+            mLoadingIndicator?.show()
+        }
     }
 }
