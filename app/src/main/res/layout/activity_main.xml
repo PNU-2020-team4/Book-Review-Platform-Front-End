@@ -63,7 +63,7 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/shape"
+                    android:background="@drawable/ripple_effect_with_shape"
                     android:elevation="6dp"
                     android:gravity="fill"
                     android:textColor="#cccccc"
