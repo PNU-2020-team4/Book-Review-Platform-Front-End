@@ -52,6 +52,8 @@ class WriteReviewActivity : AppCompatActivity() {
                     Log.d("ResultCode" , code.toString())
                 }
             }
+            val intent = Intent()
+            setResult(RESULT_OK, intent)
             finish()
         }
 

@@ -1,8 +1,12 @@
 package com.example.bookreview.ui.review
 
+import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -10,7 +14,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.bookreview.R
+import com.example.bookreview.utils.LoadingIndicator
 import com.example.bookreview.viewModel.ReviewViewModel
+import kotlinx.android.synthetic.main.activity_write_review.*
 import kotlinx.android.synthetic.main.review_list.*
 import kotlinx.android.synthetic.main.selected_review.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,12 +25,18 @@ class ReviewActivity : AppCompatActivity() {
     private val viewModel by viewModel<ReviewViewModel>()
     private lateinit var adapterApp: AppReviewAdapter
     private lateinit var adapterWeb: WebReviewAdapter
+    private var mLoadingIndicator: Dialog? = null
+    private lateinit var bookId: String
+    private var writeReview = 100
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.review_list)
+        loadingIndicatorObserving()
 
         val id = intent.extras?.getString("id")
-        val bookId = intent.extras?.getString("bookId")
+        bookId = intent.extras?.getString("bookId")!!
         val title = intent.extras?.getString("title")
 
         adapterApp = AppReviewAdapter(viewModel, id!!)
@@ -99,21 +111,23 @@ class ReviewActivity : AppCompatActivity() {
         })
 
         write_review_button.setOnClickListener {
-            startActivity(
+            startActivityForResult(
                 Intent(this, WriteReviewActivity::class.java)
                     .putExtra("id", id)
                     .putExtra("bookId", bookId)
-                    .putExtra("title", title)
+                    .putExtra("title", title),
+                writeReview
             )
         }
 
         chip_web.setOnClickListener {
             review_recyclerView_web.visibility = View.VISIBLE
-            review_recyclerView_app.visibility = View.GONE
+            review_recyclerView_app.visibility = View.INVISIBLE
             chip_web.isChecked = true
         }
+
         chip_app.setOnClickListener {
-            review_recyclerView_web.visibility = View.GONE
+            review_recyclerView_web.visibility = View.INVISIBLE
             review_recyclerView_app.visibility = View.VISIBLE
             chip_app.isChecked = true
         }
@@ -128,6 +142,43 @@ class ReviewActivity : AppCompatActivity() {
             //addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             statusBarColor = Color.WHITE
+        }
+
+    }
+
+    private fun loadingIndicatorObserving() {
+        viewModel.startLoadingIndicatorEvent.observe(this, Observer {
+            startLoadingIndicator()
+        })
+        viewModel.stopLoadingIndicatorEvent.observe(this, Observer {
+            stopLoadingIndicator()
+        })
+    }
+
+    private fun stopLoadingIndicator() {
+        mLoadingIndicator?.let {
+            if (it.isShowing) it.cancel()
+        }
+    }
+
+    private fun startLoadingIndicator() {
+        stopLoadingIndicator()
+        if (!isFinishing) {
+            mLoadingIndicator = LoadingIndicator(this)
+            mLoadingIndicator?.show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == writeReview){
+                viewModel.requestReviewByBook(bookId.toInt())
+                Log.e("리뷰 작성", "리뷰 작성")
+            }
+        } else{
+
         }
     }
 }

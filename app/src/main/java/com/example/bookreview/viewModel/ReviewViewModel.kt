@@ -112,6 +112,7 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
                     val obj = list[i].asJsonObject
                     myReviewList.add(Review().jsonToObject(obj))
                 }
+                Log.e("앱 리뷰 로딩 완료", "앱 리뷰")
                 _isAppReviewLoaded.call()
             }
         },
@@ -156,7 +157,8 @@ class ReviewViewModel(private val serverRepository: ServerRepository,
                     val obj = list[i].asJsonObject
                     myReviewList.add(Review().jsonToObject(obj))
                 }
-                _isReviewLoaded.call()
+                Log.e("앱 리뷰 로딩 완료", "앱 리뷰")
+                _isAppReviewLoaded.call()
             }
         },
         onError = Consumer {

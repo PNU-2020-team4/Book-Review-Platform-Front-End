@@ -145,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/book_review_chip_group"
         tools:listitem="@layout/review_item_app"
         android:layout_marginTop="10dp"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
 <!--    android:layout_width="match_parent"-->
