@@ -10,7 +10,8 @@
     android:layout_marginVertical="10dp"
     android:layout_marginHorizontal="15dp"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:background="@drawable/ripple_effect">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

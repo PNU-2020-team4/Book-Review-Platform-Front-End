@@ -58,6 +58,7 @@ class BookInformationActivity : AppCompatActivity() {
             startActivity(Intent(this, ReviewActivity::class.java)
                 .putExtra("id",uid)
                 .putExtra("bookId", bid)
+                .putExtra("title", viewModel.title)
             )
         }
 

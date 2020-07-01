@@ -2,16 +2,18 @@ package com.example.bookreview.ui.review
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bookreview.R
 import com.example.bookreview.viewModel.ReviewViewModel
-import kotlinx.android.synthetic.main.write_review.*
+import kotlinx.android.synthetic.main.activity_write_review.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WriteReviewActivity : AppCompatActivity() {
@@ -20,10 +22,13 @@ class WriteReviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.write_review)
+        setContentView(R.layout.activity_write_review)
 
         val id = intent.extras?.getString("id")
         val bookId = intent.extras?.getString("bookId")
+        val title = intent.extras?.getString("title")
+
+        write_review_book_title.text = title
 
         write_review_back_button.setOnClickListener {
             finish()
@@ -33,7 +38,7 @@ class WriteReviewActivity : AppCompatActivity() {
             val review : Review = Review(
                 "",
                 id,
-                write_review_editText.text.toString(),
+                write_review_edit_review.text.toString(),
                 write_review_star.rating.toString(),
                 "",
                 bookId,
@@ -50,7 +55,7 @@ class WriteReviewActivity : AppCompatActivity() {
             finish()
         }
 
-        write_review_editText.addTextChangedListener(object : TextWatcher{
+        write_review_edit_review.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -58,13 +63,23 @@ class WriteReviewActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val input : Int = write_review_editText.length()
-                editText_num.text = "$input / 1,000 글자 수"
+                if (count > write_review_editText.counterMaxLength) {
+                    write_review_editText.error = "리뷰는 1000자 이내로 작성해 주세요!"
+                } else {
+                    write_review_editText.isErrorEnabled = false
+                }
             }
         })
 
         review_image_button.setOnClickListener {
             openGallery()
+        }
+
+        this.window.apply {
+            //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            //addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            statusBarColor = Color.WHITE
         }
     }
 
@@ -92,4 +107,5 @@ class WriteReviewActivity : AppCompatActivity() {
         intent.setType("image/*")
         startActivityForResult(intent, gallery)
     }
+
 }

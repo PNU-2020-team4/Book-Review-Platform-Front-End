@@ -25,6 +25,7 @@ class ReviewActivity : AppCompatActivity() {
 
         val id = intent.extras?.getString("id")
         val bookId = intent.extras?.getString("bookId")
+        val title = intent.extras?.getString("title")
 
         adapterApp = AppReviewAdapter(viewModel, id!!)
         adapterWeb = WebReviewAdapter(this, viewModel)
@@ -102,6 +103,7 @@ class ReviewActivity : AppCompatActivity() {
                 Intent(this, WriteReviewActivity::class.java)
                     .putExtra("id", id)
                     .putExtra("bookId", bookId)
+                    .putExtra("title", title)
             )
         }
 
