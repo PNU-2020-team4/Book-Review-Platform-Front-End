@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bookreview">
+    package="com.team4.bookreview">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".Application"
+        android:name="com.team4.bookreview.Application"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,24 +14,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.myPage.WithdrawalActivity" />
+        <activity android:name="com.team4.bookreview.ui.myPage.WithdrawalActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.team4.bookreview.LoginActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".ui.search.SearchActivity"/>
-        <activity android:name=".ui.myPage.MyPageActivity"/>
-        <activity android:name=".ui.review.ReviewActivity"/>
-        <activity android:name=".ui.book.BookInformationActivity"/>
-        <activity android:name=".ui.myPage.MyReviewActivity"/>
-        <activity android:name=".ui.myPage.EditProfileActivity"/>
-        <activity android:name=".ui.myPage.MyCommentActivity"/>
-        <activity android:name=".ui.myPage.ScrapActivity"/>
-        <activity android:name=".ui.review.WriteReviewActivity"/>
-        <activity android:name=".ui.review.SelectedReviewActivity"/>
-        <activity android:name=".ui.review.ReviewWebViewActivity"/>
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity android:name="com.team4.bookreview.MainActivity"/>
+        <activity android:name="com.team4.bookreview.ui.search.SearchActivity"/>
+        <activity android:name="com.team4.bookreview.ui.myPage.MyPageActivity"/>
+        <activity android:name="com.team4.bookreview.ui.review.ReviewActivity"/>
+        <activity android:name="com.team4.bookreview.ui.book.BookInformationActivity"/>
+        <activity android:name="com.team4.bookreview.ui.myPage.MyReviewActivity"/>
+        <activity android:name="com.team4.bookreview.ui.myPage.EditProfileActivity"/>
+        <activity android:name="com.team4.bookreview.ui.myPage.MyCommentActivity"/>
+        <activity android:name="com.team4.bookreview.ui.myPage.ScrapActivity"/>
+        <activity android:name="com.team4.bookreview.ui.review.WriteReviewActivity"/>
+        <activity android:name="com.team4.bookreview.ui.review.SelectedReviewActivity"/>
+        <activity android:name="com.team4.bookreview.ui.review.ReviewWebViewActivity"/>
+        <activity android:name="com.team4.bookreview.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
