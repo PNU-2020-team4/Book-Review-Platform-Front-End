@@ -82,15 +82,14 @@ class SplashViewModel(private val serverRepository: ServerRepository,
                 Log.e("test user info email",it.response.email)
                 Log.e("test user info image",it.response.profile_image)
                 Log.e("test user info id", it.response.id)
-                Log.e("test user info nickname", it.response.nickname)
 
                 userProfileImageSrc = it.response.profile_image
                 id = it.response.id
                 mail = it.response.email
-                name = it.response.nickname
+                name = it.response.name
 
-                val response =  Response(it.response.age,it.response.birthday,it.response.email,
-                    it.response.gender,it.response.id,it.response.name,it.response.nickname,it.response.profile_image)
+                val response =  Response("20-29","12-31",it.response.email,
+                    "M",it.response.id,it.response.name,"null",it.response.profile_image)
 
                 val params = HashMap<String, String>()
                 params["data"] = Gson().toJson(response)
